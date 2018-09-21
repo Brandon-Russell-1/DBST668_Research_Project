@@ -1,0 +1,111 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="0AA03A12-27B9-5607-41DB-B67742637963" name="INSTR CLASSES">
+<createdBy>Bwiz</createdBy>
+<createdTime>2015-10-01 23:27:57 UTC</createdTime>
+<generatorID>7B0D6388-30E0-6E26-BBEF-370CA84455FD</generatorID>
+<ownerDesignName>ER Model Data Modeler</ownerDesignName>
+<engineerTo>
+<item key="8CBE0E24-A0F0-4658-5D6A-7130998EC189" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="INSTR NUM" id="BF6BDBED-440F-F0E7-CAFB-4E662E890E9A">
+<createdBy>Bwiz</createdBy>
+<createdTime>2015-10-01 23:27:57 UTC</createdTime>
+<generatorID>BD5A63FC-DC39-316F-B5DF-AD7B540D3A30</generatorID>
+<ownerDesignName>ER Model Data Modeler</ownerDesignName>
+<engineerTo>
+<item key="8CBE0E24-A0F0-4658-5D6A-7130998EC189" value="true"/>
+</engineerTo>
+<referedAttribute>51B5DCCF-CEF8-C6F6-7A63-19A04F182FF0</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>*</dataTypePrecision>
+<ownDataTypeParameters>,*,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="SCHED NUM" id="718ABB86-FD67-E3C5-1BB1-ADD9D86C1064">
+<createdBy>Bwiz</createdBy>
+<createdTime>2015-10-01 23:27:57 UTC</createdTime>
+<generatorID>6B9B2372-652B-C7A8-8707-318F591D9BE3</generatorID>
+<ownerDesignName>ER Model Data Modeler</ownerDesignName>
+<engineerTo>
+<item key="8CBE0E24-A0F0-4658-5D6A-7130998EC189" value="true"/>
+</engineerTo>
+<referedAttribute>03353991-6832-E1E6-6760-5CE134DACD61</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>*</dataTypePrecision>
+<ownDataTypeParameters>,*,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="COURSE NUM" id="3473FCFC-7F94-4BCF-FA8E-1E5726C72B3E">
+<createdBy>Bwiz</createdBy>
+<createdTime>2015-10-01 23:27:57 UTC</createdTime>
+<generatorID>E34A223E-D776-C59D-6CA7-FE01B84B3634</generatorID>
+<ownerDesignName>ER Model Data Modeler</ownerDesignName>
+<engineerTo>
+<item key="8CBE0E24-A0F0-4658-5D6A-7130998EC189" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>*</dataTypePrecision>
+<dataTypeScale>0</dataTypeScale>
+<ownDataTypeParameters>,*,0</ownDataTypeParameters>
+</Attribute>
+<Attribute name="INSTR NOTES" id="55B9605E-EB79-F669-5A9E-A083160A4BB3">
+<createdBy>Bwiz</createdBy>
+<createdTime>2015-10-01 23:27:57 UTC</createdTime>
+<generatorID>87AC1D14-5218-6B8B-4EBC-84C77E01F45A</generatorID>
+<ownerDesignName>ER Model Data Modeler</ownerDesignName>
+<engineerTo>
+<item key="8CBE0E24-A0F0-4658-5D6A-7130998EC189" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>1000 BYTE</dataTypeSize>
+<ownDataTypeParameters>1000 BYTE,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="CLASS ROOM" id="88F035F3-6D80-F338-C3FE-0919F63B4C11">
+<createdBy>Bwiz</createdBy>
+<createdTime>2015-10-01 23:27:57 UTC</createdTime>
+<generatorID>4A1140D9-7ABF-2C9A-7086-6F67F62BFAE1</generatorID>
+<ownerDesignName>ER Model Data Modeler</ownerDesignName>
+<engineerTo>
+<item key="8CBE0E24-A0F0-4658-5D6A-7130998EC189" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>5 BYTE</dataTypeSize>
+<ownDataTypeParameters>5 BYTE,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="379EF1CB-0B27-1530-1DC9-436867D6B470" name="PK CLASS">
+<createdBy>Bwiz</createdBy>
+<createdTime>2015-10-01 23:27:57 UTC</createdTime>
+<generatorID>2CF952C4-FA7C-D5B4-D844-5B3934116E98</generatorID>
+<ownerDesignName>ER Model Data Modeler</ownerDesignName>
+<engineerTo>
+<item key="8CBE0E24-A0F0-4658-5D6A-7130998EC189" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>BF6BDBED-440F-F0E7-CAFB-4E662E890E9A</attributeRef>
+<attributeRef>718ABB86-FD67-E3C5-1BB1-ADD9D86C1064</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

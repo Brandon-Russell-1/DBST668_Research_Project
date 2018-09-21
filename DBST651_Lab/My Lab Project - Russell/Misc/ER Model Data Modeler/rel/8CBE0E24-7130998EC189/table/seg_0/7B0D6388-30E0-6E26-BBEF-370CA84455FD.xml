@@ -1,0 +1,146 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="7B0D6388-30E0-6E26-BBEF-370CA84455FD" schemaObject="23FEBBCB-D85E-1168-E9C6-699BF7D6DB3D" name="INSTR_CLASSES">
+<sourceConnName>dbst651</sourceConnName>
+<sourceObjSchema>RBRANDON87</sourceObjSchema>
+<sourceObjName>INSTR_CLASSES</sourceObjName>
+<createdBy>Bwiz</createdBy>
+<createdTime>2015-10-01 23:27:15 UTC</createdTime>
+<ownerDesignName>ER Model Data Modeler</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="INSTR_NUM" id="90BB4CE8-F80A-FF39-C46E-A18878A930C2">
+<sourceConnName>dbst651</sourceConnName>
+<sourceObjSchema>INSTR_CLASSES</sourceObjSchema>
+<sourceObjName>INSTR_NUM</sourceObjName>
+<createdBy>Bwiz</createdBy>
+<createdTime>2015-10-01 23:27:15 UTC</createdTime>
+<ownerDesignName>ER Model Data Modeler</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>*</dataTypePrecision>
+<dataTypeScale>0</dataTypeScale>
+<ownDataTypeParameters>,*,0</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="845D2F85-A912-957C-CCB6-272C2F890482" referredColumn="B85B404F-F4F9-5B8B-BD79-96651816E663"/>
+</associations>
+</Column>
+<Column name="SCHED_NUM" id="0C63AFE7-CADF-A966-0DB5-1E6CB3129C6B">
+<sourceConnName>dbst651</sourceConnName>
+<sourceObjSchema>INSTR_CLASSES</sourceObjSchema>
+<sourceObjName>SCHED_NUM</sourceObjName>
+<createdBy>Bwiz</createdBy>
+<createdTime>2015-10-01 23:27:15 UTC</createdTime>
+<ownerDesignName>ER Model Data Modeler</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>*</dataTypePrecision>
+<dataTypeScale>0</dataTypeScale>
+<ownDataTypeParameters>,*,0</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="62732ED1-0BDA-FCF6-34B9-E01BDE561366" referredColumn="177D4612-343D-F760-56D9-0ADD5D2F8E9D"/>
+</associations>
+</Column>
+<Column name="COURSE_NUM" id="E34A223E-D776-C59D-6CA7-FE01B84B3634">
+<sourceConnName>dbst651</sourceConnName>
+<sourceObjSchema>INSTR_CLASSES</sourceObjSchema>
+<sourceObjName>COURSE_NUM</sourceObjName>
+<createdBy>Bwiz</createdBy>
+<createdTime>2015-10-01 23:27:15 UTC</createdTime>
+<ownerDesignName>ER Model Data Modeler</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>*</dataTypePrecision>
+<dataTypeScale>0</dataTypeScale>
+<ownDataTypeParameters>,*,0</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="INSTR_NOTES" id="87AC1D14-5218-6B8B-4EBC-84C77E01F45A">
+<sourceConnName>dbst651</sourceConnName>
+<sourceObjSchema>INSTR_CLASSES</sourceObjSchema>
+<sourceObjName>INSTR_NOTES</sourceObjName>
+<createdBy>Bwiz</createdBy>
+<createdTime>2015-10-01 23:27:15 UTC</createdTime>
+<ownerDesignName>ER Model Data Modeler</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>1000 BYTE</dataTypeSize>
+<ownDataTypeParameters>1000 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="CLASS_ROOM" id="4A1140D9-7ABF-2C9A-7086-6F67F62BFAE1">
+<sourceConnName>dbst651</sourceConnName>
+<sourceObjSchema>INSTR_CLASSES</sourceObjSchema>
+<sourceObjName>CLASS_ROOM</sourceObjName>
+<createdBy>Bwiz</createdBy>
+<createdTime>2015-10-01 23:27:15 UTC</createdTime>
+<ownerDesignName>ER Model Data Modeler</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>5 BYTE</dataTypeSize>
+<ownDataTypeParameters>5 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="2CF952C4-FA7C-D5B4-D844-5B3934116E98" name="PK_CLASS">
+<sourceConnName>dbst651</sourceConnName>
+<sourceObjSchema>RBRANDON87</sourceObjSchema>
+<sourceObjName>PK_CLASS</sourceObjName>
+<createdBy>Bwiz</createdBy>
+<createdTime>2015-10-01 23:27:16 UTC</createdTime>
+<ownerDesignName>ER Model Data Modeler</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="90BB4CE8-F80A-FF39-C46E-A18878A930C2"/>
+<colUsage columnID="0C63AFE7-CADF-A966-0DB5-1E6CB3129C6B"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="128E4D8F-55F6-7483-92AB-42F982657E1F" schemaObject="23FEBBCB-D85E-1168-E9C6-699BF7D6DB3D" name="PK_CLASS">
+<sourceConnName>dbst651</sourceConnName>
+<sourceObjSchema>RBRANDON87</sourceObjSchema>
+<sourceObjName>PK_CLASS</sourceObjName>
+<createdBy>Bwiz</createdBy>
+<createdTime>2015-10-01 23:27:15 UTC</createdTime>
+<ownerDesignName>ER Model Data Modeler</ownerDesignName>
+<indexState>Unique Plain Index</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="90BB4CE8-F80A-FF39-C46E-A18878A930C2"/>
+<colUsage columnID="0C63AFE7-CADF-A966-0DB5-1E6CB3129C6B"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="059D19F4-71D2-AE51-8E82-4742E4CE89CA" name="FK_INSTR">
+<createdBy>Bwiz</createdBy>
+<createdTime>2015-10-01 23:27:16 UTC</createdTime>
+<ownerDesignName>ER Model Data Modeler</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="90BB4CE8-F80A-FF39-C46E-A18878A930C2"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="12832817-268F-819F-233D-314AE404AD83" name="FK_SCHED">
+<createdBy>Bwiz</createdBy>
+<createdTime>2015-10-01 23:27:16 UTC</createdTime>
+<ownerDesignName>ER Model Data Modeler</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="0C63AFE7-CADF-A966-0DB5-1E6CB3129C6B"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

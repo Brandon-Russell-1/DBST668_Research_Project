@@ -1,0 +1,142 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="976C706C-7045-D05E-4506-1AF43AFBF370" name="INSTR INFO">
+<createdBy>Bwiz</createdBy>
+<createdTime>2015-10-01 23:27:57 UTC</createdTime>
+<generatorID>318F1A37-DCB0-3BB7-6250-AF822B262AC6</generatorID>
+<ownerDesignName>ER Model Data Modeler</ownerDesignName>
+<engineerTo>
+<item key="8CBE0E24-A0F0-4658-5D6A-7130998EC189" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="INSTR NUM" id="51B5DCCF-CEF8-C6F6-7A63-19A04F182FF0">
+<createdBy>Bwiz</createdBy>
+<createdTime>2015-10-01 23:27:57 UTC</createdTime>
+<generatorID>B85B404F-F4F9-5B8B-BD79-96651816E663</generatorID>
+<ownerDesignName>ER Model Data Modeler</ownerDesignName>
+<engineerTo>
+<item key="8CBE0E24-A0F0-4658-5D6A-7130998EC189" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>*</dataTypePrecision>
+<dataTypeScale>0</dataTypeScale>
+<ownDataTypeParameters>,*,0</ownDataTypeParameters>
+</Attribute>
+<Attribute name="INSTR ADDRESS" id="112F528F-8072-36E0-33E6-7F772ABB832B">
+<createdBy>Bwiz</createdBy>
+<createdTime>2015-10-01 23:27:57 UTC</createdTime>
+<generatorID>B6AB3049-6258-BB5E-4DC2-4B360FC6FD2F</generatorID>
+<ownerDesignName>ER Model Data Modeler</ownerDesignName>
+<engineerTo>
+<item key="8CBE0E24-A0F0-4658-5D6A-7130998EC189" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100 BYTE</dataTypeSize>
+<ownDataTypeParameters>100 BYTE,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="INSTR PHONENUM" id="46409FCD-5907-265B-4FB8-4F7D881508C7">
+<createdBy>Bwiz</createdBy>
+<createdTime>2015-10-01 23:27:57 UTC</createdTime>
+<generatorID>71BFAC0E-6759-A08D-2EF1-CEDCA70E25BE</generatorID>
+<ownerDesignName>ER Model Data Modeler</ownerDesignName>
+<engineerTo>
+<item key="8CBE0E24-A0F0-4658-5D6A-7130998EC189" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>20 BYTE</dataTypeSize>
+<ownDataTypeParameters>20 BYTE,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="SECTION NUM" id="03CDCD16-F92E-3355-FA99-38ECA09327C5">
+<createdBy>Bwiz</createdBy>
+<createdTime>2015-10-01 23:27:57 UTC</createdTime>
+<generatorID>89EE3017-FF5D-85EA-DA79-E15E8A5ACB02</generatorID>
+<ownerDesignName>ER Model Data Modeler</ownerDesignName>
+<engineerTo>
+<item key="8CBE0E24-A0F0-4658-5D6A-7130998EC189" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<referedAttribute>3AF414AD-A4B8-8C56-B16F-4658E4BB5F7C</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>*</dataTypePrecision>
+<dataTypeScale>0</dataTypeScale>
+<ownDataTypeParameters>,*,0</ownDataTypeParameters>
+</Attribute>
+<Attribute name="INSTR LNAME" id="CEAB033A-B5A5-8488-203D-6310FACFCF1B">
+<createdBy>Bwiz</createdBy>
+<createdTime>2015-10-01 23:27:57 UTC</createdTime>
+<generatorID>403B28BD-01DF-860B-EFAB-212DE270D820</generatorID>
+<ownerDesignName>ER Model Data Modeler</ownerDesignName>
+<engineerTo>
+<item key="8CBE0E24-A0F0-4658-5D6A-7130998EC189" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>20 BYTE</dataTypeSize>
+<ownDataTypeParameters>20 BYTE,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="INSTR FNAME" id="990F98E6-C34F-ADF6-1658-1B001EB59FB0">
+<createdBy>Bwiz</createdBy>
+<createdTime>2015-10-01 23:27:57 UTC</createdTime>
+<generatorID>1527ED09-F175-2B60-9EAA-3093DFE1D2CE</generatorID>
+<ownerDesignName>ER Model Data Modeler</ownerDesignName>
+<engineerTo>
+<item key="8CBE0E24-A0F0-4658-5D6A-7130998EC189" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>20 BYTE</dataTypeSize>
+<ownDataTypeParameters>20 BYTE,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="INSTR ZIPCODE" id="D5211B84-480F-4FAC-6885-1D319D364C7F">
+<createdBy>Bwiz</createdBy>
+<createdTime>2015-10-01 23:27:57 UTC</createdTime>
+<generatorID>3FA2F714-3411-E36D-795D-930F4409542D</generatorID>
+<ownerDesignName>ER Model Data Modeler</ownerDesignName>
+<engineerTo>
+<item key="8CBE0E24-A0F0-4658-5D6A-7130998EC189" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>10 BYTE</dataTypeSize>
+<ownDataTypeParameters>10 BYTE,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="F6F54F7C-62CC-6A38-831B-71B032126B0E" name="PK INSTR">
+<createdBy>Bwiz</createdBy>
+<createdTime>2015-10-01 23:27:57 UTC</createdTime>
+<generatorID>AF25E1E3-43F3-23A9-7698-83A1374D3131</generatorID>
+<ownerDesignName>ER Model Data Modeler</ownerDesignName>
+<engineerTo>
+<item key="8CBE0E24-A0F0-4658-5D6A-7130998EC189" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>51B5DCCF-CEF8-C6F6-7A63-19A04F182FF0</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

@@ -1,0 +1,110 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="ADE50242-9D67-8A3A-E0D2-C19405A215FA" name="CLASS SCHEDULE">
+<createdBy>Bwiz</createdBy>
+<createdTime>2015-10-01 23:27:56 UTC</createdTime>
+<generatorID>44353234-ED52-E95A-D2E6-978750D0674B</generatorID>
+<ownerDesignName>ER Model Data Modeler</ownerDesignName>
+<engineerTo>
+<item key="8CBE0E24-A0F0-4658-5D6A-7130998EC189" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="SCHED NUM" id="03353991-6832-E1E6-6760-5CE134DACD61">
+<createdBy>Bwiz</createdBy>
+<createdTime>2015-10-01 23:27:57 UTC</createdTime>
+<generatorID>177D4612-343D-F760-56D9-0ADD5D2F8E9D</generatorID>
+<ownerDesignName>ER Model Data Modeler</ownerDesignName>
+<engineerTo>
+<item key="8CBE0E24-A0F0-4658-5D6A-7130998EC189" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>*</dataTypePrecision>
+<dataTypeScale>0</dataTypeScale>
+<ownDataTypeParameters>,*,0</ownDataTypeParameters>
+</Attribute>
+<Attribute name="SCHED DAY" id="023509CA-68A9-B68B-C3ED-A9C1AD8DACBE">
+<createdBy>Bwiz</createdBy>
+<createdTime>2015-10-01 23:27:57 UTC</createdTime>
+<generatorID>A01871F8-4136-E584-D688-335529EB4A49</generatorID>
+<ownerDesignName>ER Model Data Modeler</ownerDesignName>
+<engineerTo>
+<item key="8CBE0E24-A0F0-4658-5D6A-7130998EC189" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100 BYTE</dataTypeSize>
+<ownDataTypeParameters>100 BYTE,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="SCHED TIME" id="6CEF8502-F5EA-5733-742D-C6C6E86E98BA">
+<createdBy>Bwiz</createdBy>
+<createdTime>2015-10-01 23:27:57 UTC</createdTime>
+<generatorID>E2AC3365-A907-C6FB-D831-5076E95FDAD8</generatorID>
+<ownerDesignName>ER Model Data Modeler</ownerDesignName>
+<engineerTo>
+<item key="8CBE0E24-A0F0-4658-5D6A-7130998EC189" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>10 BYTE</dataTypeSize>
+<ownDataTypeParameters>10 BYTE,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="SCHED DAY OFF" id="831EC116-1542-316A-910D-197FE814FE01">
+<createdBy>Bwiz</createdBy>
+<createdTime>2015-10-01 23:27:57 UTC</createdTime>
+<generatorID>3D17BA80-7910-CB8A-40F5-E16E22E7E7EC</generatorID>
+<ownerDesignName>ER Model Data Modeler</ownerDesignName>
+<engineerTo>
+<item key="8CBE0E24-A0F0-4658-5D6A-7130998EC189" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100 BYTE</dataTypeSize>
+<ownDataTypeParameters>100 BYTE,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="SCHED NOTES" id="6BA630CA-91C5-A9AB-AE25-CA6703B0299F">
+<createdBy>Bwiz</createdBy>
+<createdTime>2015-10-01 23:27:57 UTC</createdTime>
+<generatorID>FA992981-7C20-89E6-05C4-A5CBD1194375</generatorID>
+<ownerDesignName>ER Model Data Modeler</ownerDesignName>
+<engineerTo>
+<item key="8CBE0E24-A0F0-4658-5D6A-7130998EC189" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>1000 BYTE</dataTypeSize>
+<ownDataTypeParameters>1000 BYTE,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="0E654A01-7810-2A3C-679F-6041562FD881" name="PK SCHEDULE">
+<createdBy>Bwiz</createdBy>
+<createdTime>2015-10-01 23:27:57 UTC</createdTime>
+<generatorID>4A55894C-842A-20BC-9BBB-2E7E6775EDB6</generatorID>
+<ownerDesignName>ER Model Data Modeler</ownerDesignName>
+<engineerTo>
+<item key="8CBE0E24-A0F0-4658-5D6A-7130998EC189" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>03353991-6832-E1E6-6760-5CE134DACD61</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

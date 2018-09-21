@@ -1,0 +1,64 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<TableProxyOraclev11g class="oracle.dbtools.crest.model.design.storage.oracle.v11g.TableProxyOraclev11g" name="SECTION_INFO" directorySegmentName="seg_0" id="1D4F33EA-3CA6-367C-E7FF-CFE1EEAE248A">
+<createdBy>Bwiz</createdBy>
+<createdTime>2015-10-01 23:27:15 UTC</createdTime>
+<ownerDesignName>ER Model Data Modeler</ownerDesignName>
+<schemaObject>23FEBBCB-D85E-1168-E9C6-699BF7D6DB3D</schemaObject>
+<logging>YES</logging>
+<partitionedRowMovement>DISABLE</partitionedRowMovement>
+<segment>9AFCCD7B-3DC3-2F34-31E8-B54F8F447627</segment>
+<tableSpace>DBDAE0B7-2215-1D4F-0B49-A0986CD64318</tableSpace>
+<temporaryChanged>false</temporaryChanged>
+<accessDriverType>oracle_loader</accessDriverType>
+<rejectLimit></rejectLimit>
+<columnProxies itemClass="oracle.dbtools.crest.model.design.storage.oracle.v12c.ColumnProxyOraclev12c">
+<ColumnProxy name="SECTION_ZIPCODE" id="0EC8C339-129E-58EE-4D14-2C9EDA9E8FFD">
+<createdBy>Bwiz</createdBy>
+<createdTime>2015-10-01 23:27:15 UTC</createdTime>
+<ownerDesignName>ER Model Data Modeler</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="SECTION_NAME" id="2819B1EA-EF92-D33E-A0C5-FD3C0F5BB596">
+<createdBy>Bwiz</createdBy>
+<createdTime>2015-10-01 23:27:15 UTC</createdTime>
+<ownerDesignName>ER Model Data Modeler</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="SECTION_NUM" id="7E229A73-9B35-F4BE-5C75-19037C79308C">
+<createdBy>Bwiz</createdBy>
+<createdTime>2015-10-01 23:27:15 UTC</createdTime>
+<ownerDesignName>ER Model Data Modeler</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="SECTION_FOS" id="C30F68B7-6AB3-5488-468D-D2B1AEDD38A3">
+<createdBy>Bwiz</createdBy>
+<createdTime>2015-10-01 23:27:15 UTC</createdTime>
+<ownerDesignName>ER Model Data Modeler</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="SECTION_ADDRESS" id="FD85FC63-C625-23FD-142E-67B124B4F6B0">
+<createdBy>Bwiz</createdBy>
+<createdTime>2015-10-01 23:27:15 UTC</createdTime>
+<ownerDesignName>ER Model Data Modeler</ownerDesignName>
+</ColumnProxy>
+</columnProxies>
+<indexProxies>
+<IndexProxy class="oracle.dbtools.crest.model.design.storage.oracle.v10g.IndexProxyOraclev10g" name="PK_SECTION" id="28A3AA87-C443-5C4D-7430-B9D666614C76">
+<createdBy>Bwiz</createdBy>
+<createdTime>2015-10-01 23:27:15 UTC</createdTime>
+<ownerDesignName>ER Model Data Modeler</ownerDesignName>
+<schemaObject>23FEBBCB-D85E-1168-E9C6-699BF7D6DB3D</schemaObject>
+<segment>7CD39940-C7EF-658B-64DF-D632C9670ECC</segment>
+<tableSpace>DBDAE0B7-2215-1D4F-0B49-A0986CD64318</tableSpace>
+</IndexProxy>
+</indexProxies>
+<primaryKeys>
+<PrimaryKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.PKProxyOraclev10g" name="PK_SECTION" id="E8C2E630-8A38-5C90-10A0-889EAD6DA17C">
+<createdBy>Bwiz</createdBy>
+<createdTime>2015-10-01 23:27:16 UTC</createdTime>
+<ownerDesignName>ER Model Data Modeler</ownerDesignName>
+<segment>7CD39940-C7EF-658B-64DF-D632C9670ECC</segment>
+<tableSpace>DBDAE0B7-2215-1D4F-0B49-A0986CD64318</tableSpace>
+<existingIndex>28A3AA87-C443-5C4D-7430-B9D666614C76</existingIndex>
+<indexSegment>7CD39940-C7EF-658B-64DF-D632C9670ECC</indexSegment>
+<indexSort>SORTED</indexSort>
+<usingIndex>BY INDEX NAME</usingIndex>
+</PrimaryKey>
+</primaryKeys>
+</TableProxyOraclev11g>

@@ -1,0 +1,16 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<oracle.dbtools.crest.model.design.storage.oracle.v11g.StorageDesignOraclev11g>
+   <object objectType="TSpace" objectID="DBDAE0B7-2215-1D4F-0B49-A0986CD64318" name="USERS" seqName="seg_0"/>
+   <object objectType="User" objectID="MDSYS" name="MDSYS" seqName="seg_0"/>
+   <object objectType="User" objectID="PUBLIC" name="PUBLIC" seqName="seg_0"/>
+   <object objectType="User" objectID="875C7099-35E8-5D73-B141-8C5CD55EC247" name="RBRANDON87" seqName="seg_0"/>
+   <object objectType="SType" objectID="47E390DE-0671-C4B1-8428-0F45CBEE18F8" name="SDO_GEOMETRY" seqName="seg_0"/>
+   <object objectType="SType" objectID="F72C39E0-D1CA-8821-2AD7-A1E95A37D3D1" name="XMLTYPE" seqName="seg_0"/>
+   <object objectType="Table" objectID="18D7E03D-97AE-1E44-4D6B-95B412350AF3" name="COURSE_LIST" seqName="seg_0"/>
+   <object objectType="Table" objectID="1D4F33EA-3CA6-367C-E7FF-CFE1EEAE248A" name="SECTION_INFO" seqName="seg_0"/>
+   <object objectType="Table" objectID="318F1A37-DCB0-3BB7-6250-AF822B262AC6" name="INSTR_INFO" seqName="seg_0"/>
+   <object objectType="Table" objectID="44353234-ED52-E95A-D2E6-978750D0674B" name="CLASS_SCHEDULE" seqName="seg_0"/>
+   <object objectType="Table" objectID="7B0D6388-30E0-6E26-BBEF-370CA84455FD" name="INSTR_CLASSES" seqName="seg_0"/>
+   <object objectType="Segment" objectID="9AFCCD7B-3DC3-2F34-31E8-B54F8F447627" name="Storage1" seqName="seg_0"/>
+   <object objectType="Segment" objectID="7CD39940-C7EF-658B-64DF-D632C9670ECC" name="Storage6" seqName="seg_0"/>
+</oracle.dbtools.crest.model.design.storage.oracle.v11g.StorageDesignOraclev11g>

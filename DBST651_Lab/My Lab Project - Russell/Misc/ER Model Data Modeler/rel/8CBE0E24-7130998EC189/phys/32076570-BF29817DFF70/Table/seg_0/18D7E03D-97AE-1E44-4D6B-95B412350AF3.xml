@@ -1,0 +1,76 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<TableProxyOraclev11g class="oracle.dbtools.crest.model.design.storage.oracle.v11g.TableProxyOraclev11g" name="COURSE_LIST" directorySegmentName="seg_0" id="18D7E03D-97AE-1E44-4D6B-95B412350AF3">
+<createdBy>Bwiz</createdBy>
+<createdTime>2015-10-01 23:27:15 UTC</createdTime>
+<ownerDesignName>ER Model Data Modeler</ownerDesignName>
+<schemaObject>23FEBBCB-D85E-1168-E9C6-699BF7D6DB3D</schemaObject>
+<logging>YES</logging>
+<partitionedRowMovement>DISABLE</partitionedRowMovement>
+<segment>9AFCCD7B-3DC3-2F34-31E8-B54F8F447627</segment>
+<tableSpace>DBDAE0B7-2215-1D4F-0B49-A0986CD64318</tableSpace>
+<temporaryChanged>false</temporaryChanged>
+<accessDriverType>oracle_loader</accessDriverType>
+<rejectLimit></rejectLimit>
+<columnProxies itemClass="oracle.dbtools.crest.model.design.storage.oracle.v12c.ColumnProxyOraclev12c">
+<ColumnProxy name="COURSE_NUM" id="014DD016-B37D-3599-61D9-EEE390A4D412">
+<createdBy>Bwiz</createdBy>
+<createdTime>2015-10-01 23:27:15 UTC</createdTime>
+<ownerDesignName>ER Model Data Modeler</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="COURSE_AUTHOR" id="16324993-434B-1D0F-4AE5-877424976605">
+<createdBy>Bwiz</createdBy>
+<createdTime>2015-10-01 23:27:15 UTC</createdTime>
+<ownerDesignName>ER Model Data Modeler</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="SECTION_NUM" id="5992FB62-FCA4-92FD-3149-2F3C40775CA5">
+<createdBy>Bwiz</createdBy>
+<createdTime>2015-10-01 23:27:15 UTC</createdTime>
+<ownerDesignName>ER Model Data Modeler</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="COURSE_HOURS" id="786FF794-F0AB-F5AF-2D2C-1DF7026D9FE9">
+<createdBy>Bwiz</createdBy>
+<createdTime>2015-10-01 23:27:15 UTC</createdTime>
+<ownerDesignName>ER Model Data Modeler</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="COURSE_DESC" id="AA2EC8AA-A08D-E794-7E68-7979E1A9D425">
+<createdBy>Bwiz</createdBy>
+<createdTime>2015-10-01 23:27:15 UTC</createdTime>
+<ownerDesignName>ER Model Data Modeler</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="COURSE_NAME" id="F9565244-D493-D6A9-33AC-05ADDA143E9F">
+<createdBy>Bwiz</createdBy>
+<createdTime>2015-10-01 23:27:15 UTC</createdTime>
+<ownerDesignName>ER Model Data Modeler</ownerDesignName>
+</ColumnProxy>
+</columnProxies>
+<indexProxies>
+<IndexProxy class="oracle.dbtools.crest.model.design.storage.oracle.v10g.IndexProxyOraclev10g" name="PK_COURSE" id="25B2C195-D258-9C42-2815-A15812F750F7">
+<createdBy>Bwiz</createdBy>
+<createdTime>2015-10-01 23:27:15 UTC</createdTime>
+<ownerDesignName>ER Model Data Modeler</ownerDesignName>
+<schemaObject>23FEBBCB-D85E-1168-E9C6-699BF7D6DB3D</schemaObject>
+<segment>7CD39940-C7EF-658B-64DF-D632C9670ECC</segment>
+<tableSpace>DBDAE0B7-2215-1D4F-0B49-A0986CD64318</tableSpace>
+</IndexProxy>
+</indexProxies>
+<foreignKeys>
+<ForeignKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.FKProxyOraclev10g" name="FK_COURSE_SECTION" id="A307B27D-074C-BC0C-C622-0541DCD0A9A5">
+<createdBy>Bwiz</createdBy>
+<createdTime>2015-10-01 23:27:16 UTC</createdTime>
+<ownerDesignName>ER Model Data Modeler</ownerDesignName>
+</ForeignKey>
+</foreignKeys>
+<primaryKeys>
+<PrimaryKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.PKProxyOraclev10g" name="PK_COURSE" id="04C45B6B-7ACF-8C26-38E8-0E49839CA6A2">
+<createdBy>Bwiz</createdBy>
+<createdTime>2015-10-01 23:27:16 UTC</createdTime>
+<ownerDesignName>ER Model Data Modeler</ownerDesignName>
+<segment>7CD39940-C7EF-658B-64DF-D632C9670ECC</segment>
+<tableSpace>DBDAE0B7-2215-1D4F-0B49-A0986CD64318</tableSpace>
+<existingIndex>25B2C195-D258-9C42-2815-A15812F750F7</existingIndex>
+<indexSegment>7CD39940-C7EF-658B-64DF-D632C9670ECC</indexSegment>
+<indexSort>SORTED</indexSort>
+<usingIndex>BY INDEX NAME</usingIndex>
+</PrimaryKey>
+</primaryKeys>
+</TableProxyOraclev11g>

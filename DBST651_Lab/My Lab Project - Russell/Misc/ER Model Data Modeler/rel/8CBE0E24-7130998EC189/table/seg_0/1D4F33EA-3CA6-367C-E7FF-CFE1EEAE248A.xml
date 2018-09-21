@@ -1,0 +1,118 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="1D4F33EA-3CA6-367C-E7FF-CFE1EEAE248A" schemaObject="23FEBBCB-D85E-1168-E9C6-699BF7D6DB3D" name="SECTION_INFO">
+<sourceConnName>dbst651</sourceConnName>
+<sourceObjSchema>RBRANDON87</sourceObjSchema>
+<sourceObjName>SECTION_INFO</sourceObjName>
+<createdBy>Bwiz</createdBy>
+<createdTime>2015-10-01 23:27:15 UTC</createdTime>
+<ownerDesignName>ER Model Data Modeler</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="SECTION_NUM" id="7E229A73-9B35-F4BE-5C75-19037C79308C">
+<sourceConnName>dbst651</sourceConnName>
+<sourceObjSchema>SECTION_INFO</sourceObjSchema>
+<sourceObjName>SECTION_NUM</sourceObjName>
+<createdBy>Bwiz</createdBy>
+<createdTime>2015-10-01 23:27:15 UTC</createdTime>
+<ownerDesignName>ER Model Data Modeler</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>*</dataTypePrecision>
+<dataTypeScale>0</dataTypeScale>
+<ownDataTypeParameters>,*,0</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="SECTION_NAME" id="2819B1EA-EF92-D33E-A0C5-FD3C0F5BB596">
+<sourceConnName>dbst651</sourceConnName>
+<sourceObjSchema>SECTION_INFO</sourceObjSchema>
+<sourceObjName>SECTION_NAME</sourceObjName>
+<createdBy>Bwiz</createdBy>
+<createdTime>2015-10-01 23:27:15 UTC</createdTime>
+<ownerDesignName>ER Model Data Modeler</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100 BYTE</dataTypeSize>
+<ownDataTypeParameters>100 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="SECTION_ADDRESS" id="FD85FC63-C625-23FD-142E-67B124B4F6B0">
+<sourceConnName>dbst651</sourceConnName>
+<sourceObjSchema>SECTION_INFO</sourceObjSchema>
+<sourceObjName>SECTION_ADDRESS</sourceObjName>
+<createdBy>Bwiz</createdBy>
+<createdTime>2015-10-01 23:27:15 UTC</createdTime>
+<ownerDesignName>ER Model Data Modeler</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100 BYTE</dataTypeSize>
+<ownDataTypeParameters>100 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="SECTION_FOS" id="C30F68B7-6AB3-5488-468D-D2B1AEDD38A3">
+<sourceConnName>dbst651</sourceConnName>
+<sourceObjSchema>SECTION_INFO</sourceObjSchema>
+<sourceObjName>SECTION_FOS</sourceObjName>
+<createdBy>Bwiz</createdBy>
+<createdTime>2015-10-01 23:27:15 UTC</createdTime>
+<ownerDesignName>ER Model Data Modeler</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100 BYTE</dataTypeSize>
+<ownDataTypeParameters>100 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="SECTION_ZIPCODE" id="0EC8C339-129E-58EE-4D14-2C9EDA9E8FFD">
+<sourceConnName>dbst651</sourceConnName>
+<sourceObjSchema>SECTION_INFO</sourceObjSchema>
+<sourceObjName>SECTION_ZIPCODE</sourceObjName>
+<createdBy>Bwiz</createdBy>
+<createdTime>2015-10-01 23:27:15 UTC</createdTime>
+<ownerDesignName>ER Model Data Modeler</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>10 BYTE</dataTypeSize>
+<ownDataTypeParameters>10 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="E8C2E630-8A38-5C90-10A0-889EAD6DA17C" name="PK_SECTION">
+<sourceConnName>dbst651</sourceConnName>
+<sourceObjSchema>RBRANDON87</sourceObjSchema>
+<sourceObjName>PK_SECTION</sourceObjName>
+<createdBy>Bwiz</createdBy>
+<createdTime>2015-10-01 23:27:16 UTC</createdTime>
+<ownerDesignName>ER Model Data Modeler</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="7E229A73-9B35-F4BE-5C75-19037C79308C"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="28A3AA87-C443-5C4D-7430-B9D666614C76" schemaObject="23FEBBCB-D85E-1168-E9C6-699BF7D6DB3D" name="PK_SECTION">
+<sourceConnName>dbst651</sourceConnName>
+<sourceObjSchema>RBRANDON87</sourceObjSchema>
+<sourceObjName>PK_SECTION</sourceObjName>
+<createdBy>Bwiz</createdBy>
+<createdTime>2015-10-01 23:27:15 UTC</createdTime>
+<ownerDesignName>ER Model Data Modeler</ownerDesignName>
+<indexState>Unique Plain Index</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="7E229A73-9B35-F4BE-5C75-19037C79308C"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

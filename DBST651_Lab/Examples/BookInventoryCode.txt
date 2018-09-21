@@ -1,0 +1,410 @@
+/* Drop tables */
+drop table inventory;
+
+drop table store;
+
+drop table book;
+
+drop table zipcode;
+
+drop table author;
+
+drop sequence authorID_Seq;
+
+
+
+
+/* Create 5 tables */
+
+create table author
+(
+  AuthorID	CHAR(10)	NOT NULL,
+  FirstName	VARCHAR (20),	
+  LastName	VARCHAR (30),	
+  Nickname	VARCHAR (20),	
+  DateOfBirth	DATE,	
+  constraint pk_author primary key (AuthorID)
+);
+
+describe author;
+
+create table zipcode
+(
+  ZipCode	CHAR(10)	NOT NULL,
+  City	        VARCHAR (20),	
+  State	        VARCHAR (30),	
+  constraint    PKzipcode primary key (zipCode)
+);
+
+describe zipcode;
+
+create table book
+(
+  ISBN	      CHAR(15)	    NOT NULL,
+  Title	      VARCHAR (40),	
+  Publisher   VARCHAR (25),	
+  Edition     VARCHAR (15),	
+  IsHardCover CHAR(1),	
+  AuthorID    CHAR(10)	NOT NULL,
+  constraint  PKISBN primary key (ISBN),
+  constraint  FKAuthorID foreign key (AuthorID) references author
+);
+
+describe book;
+
+create table store
+(
+  StoreID       CHAR(10)	Not NULL,
+  Name	        VARCHAR (20),	
+  StreetAddress	VARCHAR (30),	
+  ManagerName	VARCHAR (35),	
+  ZipCode	CHAR(10)	Not NULL,
+  constraint    PKStoreID primary key (StoreID),
+  constraint    FKSipCode foreign key (ZipCode) references zipcode
+);
+
+describe store;
+
+create table inventory
+(
+  InventoryID	CHAR(10)	NOT NULL,
+  NumCopies	INTEGER,	
+  Price	        DECIMAL (7, 2),	
+  ISBN	        CHAR(15)	NOT NULL,
+  StoreID	CHAR(10)	NOT NULL,
+  constraint    PKInventory primary key (InventoryID),
+  constraint    FKISBN foreign key (ISBN) references book,
+  constraint    FKStoreID foreign key (StoreID) references store
+);
+
+describe inventory;
+
+/* Create indexes */
+create index fk_MyStore
+on inventory (StoreID);
+
+create index fk_ISBN
+on inventory (ISBN);
+
+
+create index fk_zip
+on store (ZipCode);
+
+
+create index fk_AuthorID
+on book (AuthorID);
+
+/* Create views */
+create or replace view HardCoverbook_view as
+	select * from book
+	where IsHardCover='1' or IsHardCover='Y' or IsHardCover='y';
+
+
+describe HardCoverbook_view;
+
+create view Inventory_view as
+       select i.ISBN, b.title, i.StoreID, i.NumCopies, i.price
+       from inventory i inner join book b on i.ISBN=b.ISBN;
+
+describe Inventory_view;
+
+/* Create trigger */
+
+create or replace trigger inventory_trig
+   after insert on inventory
+   for each row
+   begin
+   dbms_output.put_line ('The inventory item has been inserted. Congratualtions!!');
+   end;
+/
+
+
+/* Check the catalog content */
+
+purge recyclebin;
+
+select substr(object_name, 1, 20), object_type, status
+  from user_objects;
+
+
+/* isert data */
+/* create authorID_Seq sequence to use for the authorId values */
+
+create sequence authorID_Seq
+start with 1
+increment by 1;
+
+insert into author values (authorID_Seq.nextVal, 'Virginia', 'Andrews', 'VC Andrews', '02-JAN-50');
+
+
+insert into author values (authorID_Seq.nextVal, 'Danielle', 'Steel', 'DS', '02-JAN-45');
+
+
+insert into author values (authorID_Seq.nextVal, 'Barbara', 'Michaels', 'Barb', '02-JAN-55');
+
+
+insert into author values (authorID_Seq.nextVal, 'John', 'Grisham', 'JG', '12-MAR-40');
+
+
+insert into author values (authorID_Seq.nextVal, 'Michael', 'Crichton', 'MC', '20-APR-70');
+
+insert into author values (authorID_Seq.nextVal, 'Nora', 'Roberts', 'MD', '22-APR-74');
+
+insert into author values (authorID_Seq.nextVal, 'Jennifer', 'Weiner', 'MD', '22-JAN-74');
+
+insert into author values (authorID_Seq.nextVal, 'Kathryn', 'Stockett', 'MD', '22-FEB-74');
+
+insert into author values (authorID_Seq.nextVal, 'Jennifer', 'Weiner', 'MD', '22-MAR-74');
+
+insert into author values (authorID_Seq.nextVal, 'James', 'Patterson', 'MD', '22-APR-74');
+
+
+
+
+select * from author;
+
+insert into zipcode values ('19876', 'Richmond', 'Virginia');
+
+
+insert into zipcode values ('20876', 'Germantown', 'Maryland');
+
+
+insert into zipcode values ('20850', 'Rockville', 'Maryland');
+
+
+insert into zipcode values ('20772', 'College Park', 'Maryland');
+
+insert into zipcode values ('20852', 'Rockville', 'Maryland');
+
+
+insert into zipcode values ('94106', 'San Francisco', 'California');
+
+
+
+insert into zipcode values ('94104', 'San Francisco', 'California');
+
+insert into zipcode values ('94108', 'Redwood City', 'California');
+
+
+insert into zipcode values ('20860', 'Bethesda', 'Maryland');
+
+
+insert into zipcode values ('94100', 'Las Vegas', 'Nevada');
+
+
+
+select * from zipcode;
+
+insert into book values ('5737243737', 'Flowers in the Attic', 'McGraw-Hill', '1', '1','1');
+
+
+insert into book values ('7272727272', 'Heaven', 'McGraw-Hill', '2', '0','1');
+
+
+insert into book values ('2765432197', 'Lighting', 'Vanda General Partnersip', '2', '1','2');
+
+
+insert into book values ('2727272799', 'Jewels', 'Vanda General Partnersip', '1', '1','2');
+
+
+insert into book values ('2827776799', 'Timeline', 'McGraw-Hill', '4', '0','5');
+
+insert into book values ('2827776800', 'THE SEARCH', 'McGraw-Hill', '2', '1','6');
+
+insert into book values ('2827776801', 'FLY AWAY HOME', 'McGraw-Hill', '2', '1','9');
+
+insert into book values ('2827776802', 'THE HELP', 'McGraw-Hill', '2', '1','8');
+
+insert into book values ('2827776803', 'The girl', 'McGraw-Hill', '3', '0','6');
+
+insert into book values ('2827776804', 'Private', 'McGraw-Hill', '2', '1','10');
+
+
+
+select * from book;
+
+insert into store values ('1', 'Boarders', '4733 Frederick Road', 'Jose Fernandez', '20876');
+
+
+insert into store values ('2', 'Boarders', '7373 Main Avenue', 'Kelly Smith', '94106');
+
+
+insert into store values ('3', 'Crown', '332 South Lincoln Street', 'Yelena Bytenskaya', '19876');
+
+
+insert into store values ('4', 'Get Smart', '5353 Rockville Pike', 'George Bytenskiy', '20850');
+
+
+insert into store values ('5', 'Book Exchange', '786 University Boul', 'Stacy Jones', '20772');
+
+
+insert into store values ('6', 'Get Smart', '78 University Boul', 'Games Greene', '20772');
+
+insert into store values ('7', 'Crown', '200 Gernamtown road', 'Leon Martin', '20876');
+
+insert into store values ('8', 'Used books store', '790 Rockville pike', 'Games Greene', '20850');
+
+insert into store values ('9', 'Barns and Noble', '500 Connecticut Avenue', 'Mark Fishman', '20772');
+
+insert into store values ('10', 'Get Smart', '100 Century drive', 'Jack Markov', '20672');
+
+
+
+select * from store;
+
+
+insert into inventory values ('1', '100', '10.59', '5737243737', '3');
+
+
+insert into inventory values ('2', '50', '11.59', '5737243737', '4');
+
+
+insert into inventory values ('3', '0', '9.99', '2765432197', '4');
+
+
+insert into inventory values ('4', '1', '5.99', '2727272799', '5');
+
+
+insert into inventory values ('5', '10', '8.99', '7272727272', '1');
+
+
+insert into inventory values ('6', '10', '8.99', '2827776800', '1');
+
+
+insert into inventory values ('7', '10', '8.99', '2827776800', '10');
+
+
+insert into inventory values ('8', '10', '8.99', '2827776802', '9');
+
+
+insert into inventory values ('9', '10', '8.99', '2827776801', '8');
+
+
+insert into inventory values ('10', '10', '8.99', '2827776803', '7');
+
+
+select * from inventory;
+
+/* Queries */
+
+/* 1. Select all columns and 10 rows from one table */
+
+select * from book where rownum<11;
+
+
+/* 2. Select all columns and 5 rows from one table */
+
+select ISBN, Title, Publisher, Edition, AuthorID from book;
+
+/* 3. Select all columns and all rows from 2 tables */
+
+select ISBN, Title, Publisher, ishardcover, book. AUTHORID,
+       author. AUTHORID, firstname, lastname, nickname, dateofbirth
+from book inner join author on book. AUTHORID=author. AUTHORID;
+
+/* 4. Select and order data retreived from 1 table */
+
+ select * from book order by ISBN;
+
+/* 5. Select 5 columns and 10 rows from 3 tables */
+
+select book.ISBN,title, store.name, StreetAddress, price 
+from (inventory inner join book on inventory.isbn=book.isbn) inner join store on store.storeid=inventory.storeid
+where rownum<11;
+
+/* 6. Select everything from one table */
+
+select * from author;
+
+/* 7. Select all columns and 10 rows from 2 tables */
+select ISBN, Title, Publisher, ishardcover, book. AUTHORID,
+       author. AUTHORID, firstname, lastname, nickname, dateofbirth
+from book inner join author on book. AUTHORID=author. AUTHORID
+where rownum<11;
+
+/* 8. Select distinct values from one table */
+
+select distinct publisher from book;
+
+/9. *Use IN clause */
+ select * from book where edition in (1, 3);
+
+/* 10. Select lenght of a column*/
+
+select title, length (title) from book;
+
+/* 11. Use column alias*/
+
+select title, length (title) as numLettert from book;
+
+/* 12. Another query to order the data */
+
+select * from book order by title;
+
+/* 13 Use an aggregate function */
+
+
+ SELECT ISBN, avg(price) AS Average_Price
+ FROM  inventory
+ group by ISBN;
+
+/* 14 A query to update the data */
+
+
+update inventory set price=price+1;
+
+select * from inventory;
+
+rollback;
+
+
+/* 15. Perform 6 advanced queries */
+
+/* 15.1  (Type 2 subquery) List the title, anuther first and last name for the books sold in more than one stores. */
+
+SELECT Title, FirstName, Lastname
+FROM   book INNER JOIN author ON book.authorID=author.AuthorID
+WHERE  (SELECT count(*) as count
+        FROM   inventory
+        WHERE inventory.ISBN=Book.ISBN)>=2;
+
+
+
+/* 15.2 (Type 2 subquery) List the ISBN and Title of the book that is not sold at any store. */
+
+SELECT book.ISBN, Title
+FROM   book
+WHERE  NOT EXISTS
+       (SELECT ISBN
+        FROM   inventory
+	WHERE  inventory.ISBN=book.ISBN);
+
+
+/* 15.3 (5 table join) List the book title, the author first and last name, the store name and address (street address,  city, state, and Zipcode), 
+price, and number of available copies for each book.*/
+
+SELECT title, FirstName, LastName, Name as Store, StreetAddress, City, store.ZipCode AS ZipCode, Price, NumCopies
+FROM (((inventory INNER JOIN book on inventory.ISBN=book.ISBN)
+      INNER JOIN author on author.AuthorID=book.AuthorID)
+      INNER JOIN store on store.StoreID=inventory.StoreID)
+      INNER JOIN zipcode on zipcode.ZipCode=store.ZipCode;   
+
+
+/* 15.4 (Type 1 subquery) List the title, store name and price for all books with the greater than average price */
+
+select title, Name as Store, price
+from (inventory INNER JOIN book on inventory.ISBN=book.ISBN) INNER JOIN store on store.StoreID=inventory.StoreID
+where price> (select avg(price) from inventory);
+
+
+/* 15.5 (Type 1 subquery) List the books titles that are unavailable for sale */
+
+select title from book where isbn not in (select isbn from inventory);
+
+/* 15.6 (outer join) List the first and last name of the Authors who don't have any books listed in the book table. */
+
+SELECT FirstName, LastName
+FROM   author LEFT JOIN book on book.AuthorID=author.AuthorID
+WHERE  book.AuthorID is NULL;
+
+

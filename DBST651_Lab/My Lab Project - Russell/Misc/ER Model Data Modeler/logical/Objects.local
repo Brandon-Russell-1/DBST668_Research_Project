@@ -1,0 +1,12 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<oracle.dbtools.crest.model.design.logical.LogicalDesign>
+   <object objectType="Entity" objectID="ADE50242-9D67-8A3A-E0D2-C19405A215FA" name="CLASS SCHEDULE" seqName="seg_0"/>
+   <object objectType="Entity" objectID="AE424A9C-2EBD-83A2-38C4-39D3C12FBB3B" name="COURSE LIST" seqName="seg_0"/>
+   <object objectType="Entity" objectID="0AA03A12-27B9-5607-41DB-B67742637963" name="INSTR CLASSES" seqName="seg_0"/>
+   <object objectType="Entity" objectID="976C706C-7045-D05E-4506-1AF43AFBF370" name="INSTR INFO" seqName="seg_0"/>
+   <object objectType="Entity" objectID="C069ABED-DF5B-BEE4-47FC-D7E4B8F9FB8B" name="SECTION INFO" seqName="seg_0"/>
+   <object objectType="Relation" objectID="2423ED4D-4869-E69A-1AAC-4E71CC6313C8" name="FK_COURSE_SECTION" seqName="seg_0"/>
+   <object objectType="Relation" objectID="BD5A63FC-DC39-316F-B5DF-AD7B540D3A30" name="FK_INSTR" seqName="seg_0"/>
+   <object objectType="Relation" objectID="89EE3017-FF5D-85EA-DA79-E15E8A5ACB02" name="FK_INSTR_SECTION" seqName="seg_0"/>
+   <object objectType="Relation" objectID="6B9B2372-652B-C7A8-8707-318F591D9BE3" name="FK_SCHED" seqName="seg_0"/>
+</oracle.dbtools.crest.model.design.logical.LogicalDesign>

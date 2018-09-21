@@ -1,0 +1,8 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<OSDM_Design class="oracle.dbtools.crest.model.design.Design" name="ER Model Data Modeler" id="20703FAC-81BC-B8C8-4AA5-6E40939B790D" version="3.5">
+<createdBy>Bwiz</createdBy>
+<createdTime>2015-10-01 23:25:54 UTC</createdTime>
+<ownerDesignName>ER Model Data Modeler</ownerDesignName>
+<capitalNames>false</capitalNames>
+<designId>20703FAC-81BC-B8C8-4AA5-6E40939B790D</designId>
+</OSDM_Design>

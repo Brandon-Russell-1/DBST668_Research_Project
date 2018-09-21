@@ -1,0 +1,21 @@
+/* Drop tables, sequence, and other objects you create*/
+
+/* Create 5 tables */
+
+/* Describe Statements to Verify that tables have been created */
+
+/* Create indexes on foreign keys*/
+
+/* Create 2 views */
+
+/* Create trigger */
+
+/* Create sequence*/
+
+/* Data Dictionary query */
+
+/* Insert 10 rows into each table */
+
+commit;
+
+/* Verify that each table has 10 rows of data */

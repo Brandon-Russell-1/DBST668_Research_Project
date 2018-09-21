@@ -1,0 +1,81 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<TableProxyOraclev11g class="oracle.dbtools.crest.model.design.storage.oracle.v11g.TableProxyOraclev11g" name="INSTR_INFO" directorySegmentName="seg_0" id="318F1A37-DCB0-3BB7-6250-AF822B262AC6">
+<createdBy>Bwiz</createdBy>
+<createdTime>2015-10-01 23:27:15 UTC</createdTime>
+<ownerDesignName>ER Model Data Modeler</ownerDesignName>
+<schemaObject>23FEBBCB-D85E-1168-E9C6-699BF7D6DB3D</schemaObject>
+<logging>YES</logging>
+<partitionedRowMovement>DISABLE</partitionedRowMovement>
+<segment>9AFCCD7B-3DC3-2F34-31E8-B54F8F447627</segment>
+<tableSpace>DBDAE0B7-2215-1D4F-0B49-A0986CD64318</tableSpace>
+<temporaryChanged>false</temporaryChanged>
+<accessDriverType>oracle_loader</accessDriverType>
+<rejectLimit></rejectLimit>
+<columnProxies itemClass="oracle.dbtools.crest.model.design.storage.oracle.v12c.ColumnProxyOraclev12c">
+<ColumnProxy name="INSTR_FNAME" id="1527ED09-F175-2B60-9EAA-3093DFE1D2CE">
+<createdBy>Bwiz</createdBy>
+<createdTime>2015-10-01 23:27:15 UTC</createdTime>
+<ownerDesignName>ER Model Data Modeler</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="INSTR_ZIPCODE" id="3FA2F714-3411-E36D-795D-930F4409542D">
+<createdBy>Bwiz</createdBy>
+<createdTime>2015-10-01 23:27:15 UTC</createdTime>
+<ownerDesignName>ER Model Data Modeler</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="INSTR_LNAME" id="403B28BD-01DF-860B-EFAB-212DE270D820">
+<createdBy>Bwiz</createdBy>
+<createdTime>2015-10-01 23:27:15 UTC</createdTime>
+<ownerDesignName>ER Model Data Modeler</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="INSTR_PHONENUM" id="71BFAC0E-6759-A08D-2EF1-CEDCA70E25BE">
+<createdBy>Bwiz</createdBy>
+<createdTime>2015-10-01 23:27:15 UTC</createdTime>
+<ownerDesignName>ER Model Data Modeler</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="SECTION_NUM" id="77C4B506-12AA-7442-ED22-2A939FFE8766">
+<createdBy>Bwiz</createdBy>
+<createdTime>2015-10-01 23:27:15 UTC</createdTime>
+<ownerDesignName>ER Model Data Modeler</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="INSTR_ADDRESS" id="B6AB3049-6258-BB5E-4DC2-4B360FC6FD2F">
+<createdBy>Bwiz</createdBy>
+<createdTime>2015-10-01 23:27:15 UTC</createdTime>
+<ownerDesignName>ER Model Data Modeler</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="INSTR_NUM" id="B85B404F-F4F9-5B8B-BD79-96651816E663">
+<createdBy>Bwiz</createdBy>
+<createdTime>2015-10-01 23:27:15 UTC</createdTime>
+<ownerDesignName>ER Model Data Modeler</ownerDesignName>
+</ColumnProxy>
+</columnProxies>
+<indexProxies>
+<IndexProxy class="oracle.dbtools.crest.model.design.storage.oracle.v10g.IndexProxyOraclev10g" name="PK_INSTR" id="42055D06-C0DA-3643-0A2E-1F2C5121C2CC">
+<createdBy>Bwiz</createdBy>
+<createdTime>2015-10-01 23:27:15 UTC</createdTime>
+<ownerDesignName>ER Model Data Modeler</ownerDesignName>
+<schemaObject>23FEBBCB-D85E-1168-E9C6-699BF7D6DB3D</schemaObject>
+<segment>7CD39940-C7EF-658B-64DF-D632C9670ECC</segment>
+<tableSpace>DBDAE0B7-2215-1D4F-0B49-A0986CD64318</tableSpace>
+</IndexProxy>
+</indexProxies>
+<foreignKeys>
+<ForeignKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.FKProxyOraclev10g" name="FK_INSTR_SECTION" id="54633EE6-0CE9-1E80-DAD1-CAFDACE78D8E">
+<createdBy>Bwiz</createdBy>
+<createdTime>2015-10-01 23:27:16 UTC</createdTime>
+<ownerDesignName>ER Model Data Modeler</ownerDesignName>
+</ForeignKey>
+</foreignKeys>
+<primaryKeys>
+<PrimaryKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.PKProxyOraclev10g" name="PK_INSTR" id="AF25E1E3-43F3-23A9-7698-83A1374D3131">
+<createdBy>Bwiz</createdBy>
+<createdTime>2015-10-01 23:27:16 UTC</createdTime>
+<ownerDesignName>ER Model Data Modeler</ownerDesignName>
+<segment>7CD39940-C7EF-658B-64DF-D632C9670ECC</segment>
+<tableSpace>DBDAE0B7-2215-1D4F-0B49-A0986CD64318</tableSpace>
+<existingIndex>42055D06-C0DA-3643-0A2E-1F2C5121C2CC</existingIndex>
+<indexSegment>7CD39940-C7EF-658B-64DF-D632C9670ECC</indexSegment>
+<indexSort>SORTED</indexSort>
+<usingIndex>BY INDEX NAME</usingIndex>
+</PrimaryKey>
+</primaryKeys>
+</TableProxyOraclev11g>

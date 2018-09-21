@@ -1,0 +1,20 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="FK_INSTR_SECTION" directorySegmentName="seg_0" id="89EE3017-FF5D-85EA-DA79-E15E8A5ACB02">
+<createdBy>Bwiz</createdBy>
+<createdTime>2015-10-01 23:27:57 UTC</createdTime>
+<generatorID>DF2CE532-FE33-6E67-8234-3243444ACA46</generatorID>
+<ownerDesignName>ER Model Data Modeler</ownerDesignName>
+<engineerTo>
+<item key="8CBE0E24-A0F0-4658-5D6A-7130998EC189" value="true"/>
+</engineerTo>
+<sourcePk>FA7D3803-065A-657A-2A07-FB117917A705</sourcePk>
+<identifying>false</identifying>
+<optionalSource>true</optionalSource>
+<optionalTarget>true</optionalTarget>
+<sourceCardinality>1</sourceCardinality>
+<sourceEntity>C069ABED-DF5B-BEE4-47FC-D7E4B8F9FB8B</sourceEntity>
+<targetCardinalityString>*</targetCardinalityString>
+<targetEntity>976C706C-7045-D05E-4506-1AF43AFBF370</targetEntity>
+<transferable>true</transferable>
+<deleteRule>SET NULL</deleteRule>
+</Relation>

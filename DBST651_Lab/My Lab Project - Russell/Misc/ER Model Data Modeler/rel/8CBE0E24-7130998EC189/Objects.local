@@ -1,0 +1,13 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<oracle.dbtools.crest.model.design.relational.RelationalDesign>
+   <object objectType="SchemaObject" objectID="23FEBBCB-D85E-1168-E9C6-699BF7D6DB3D" name="RBRANDON87" seqName="seg_0"/>
+   <object objectType="Table" objectID="44353234-ED52-E95A-D2E6-978750D0674B" name="CLASS_SCHEDULE" seqName="seg_0"/>
+   <object objectType="Table" objectID="18D7E03D-97AE-1E44-4D6B-95B412350AF3" name="COURSE_LIST" seqName="seg_0"/>
+   <object objectType="Table" objectID="7B0D6388-30E0-6E26-BBEF-370CA84455FD" name="INSTR_CLASSES" seqName="seg_0"/>
+   <object objectType="Table" objectID="318F1A37-DCB0-3BB7-6250-AF822B262AC6" name="INSTR_INFO" seqName="seg_0"/>
+   <object objectType="Table" objectID="1D4F33EA-3CA6-367C-E7FF-CFE1EEAE248A" name="SECTION_INFO" seqName="seg_0"/>
+   <object objectType="FKIndexAssociation" objectID="F82228B2-BD47-5EE1-E3E5-2CFE9E2745EE" name="FK_COURSE_SECTION" seqName="seg_0" containerID="18D7E03D-97AE-1E44-4D6B-95B412350AF3" refContainerID="1D4F33EA-3CA6-367C-E7FF-CFE1EEAE248A"/>
+   <object objectType="FKIndexAssociation" objectID="845D2F85-A912-957C-CCB6-272C2F890482" name="FK_INSTR" seqName="seg_0" containerID="7B0D6388-30E0-6E26-BBEF-370CA84455FD" refContainerID="318F1A37-DCB0-3BB7-6250-AF822B262AC6"/>
+   <object objectType="FKIndexAssociation" objectID="DF2CE532-FE33-6E67-8234-3243444ACA46" name="FK_INSTR_SECTION" seqName="seg_0" containerID="318F1A37-DCB0-3BB7-6250-AF822B262AC6" refContainerID="1D4F33EA-3CA6-367C-E7FF-CFE1EEAE248A"/>
+   <object objectType="FKIndexAssociation" objectID="62732ED1-0BDA-FCF6-34B9-E01BDE561366" name="FK_SCHED" seqName="seg_0" containerID="7B0D6388-30E0-6E26-BBEF-370CA84455FD" refContainerID="44353234-ED52-E95A-D2E6-978750D0674B"/>
+</oracle.dbtools.crest.model.design.relational.RelationalDesign>
