@@ -1,0 +1,105 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="C846551B-6C08-FBD5-292C-C3B0A3F6AE10" name="Student_List">
+<sourceDDLFile>Russell - DBST668 - DDL_DML.sql</sourceDDLFile>
+<createdBy>rbran</createdBy>
+<createdTime>2018-09-30 15:40:11 UTC</createdTime>
+<ownerDesignName>DBST668_ERD_Model</ownerDesignName>
+<importedID>993C07D8-1D71-89C5-9FF7-25853F62E472</importedID>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="Student_Num" id="883711EB-08B7-0A1B-8E1A-03476A5061C9">
+<sourceDDLFile>Russell - DBST668 - DDL_DML.sql</sourceDDLFile>
+<createdBy>rbran</createdBy>
+<createdTime>2018-09-30 15:40:11 UTC</createdTime>
+<ownerDesignName>DBST668_ERD_Model</ownerDesignName>
+<importedID>CAD9DBE9-446D-6954-BF39-1261B01C62D7</importedID>
+<use>0</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<domain>788AD51C-A064-B4E8-C996-C6709A0B5D42</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Student_Address" id="7810897D-8C33-C710-5D6D-AD7388F66391">
+<sourceDDLFile>Russell - DBST668 - DDL_DML.sql</sourceDDLFile>
+<createdBy>rbran</createdBy>
+<createdTime>2018-09-30 15:40:11 UTC</createdTime>
+<ownerDesignName>DBST668_ERD_Model</ownerDesignName>
+<importedID>E3483A58-2DD4-0A3B-4087-6BF8F7177130</importedID>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>A7542110-4A10-CF45-CA0E-398E517CB0B2</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Student_PhoneNum" id="D33B563D-D667-F0E3-4121-2AB36F3D135D">
+<sourceDDLFile>Russell - DBST668 - DDL_DML.sql</sourceDDLFile>
+<createdBy>rbran</createdBy>
+<createdTime>2018-09-30 15:40:11 UTC</createdTime>
+<ownerDesignName>DBST668_ERD_Model</ownerDesignName>
+<importedID>0D5D004B-3992-AD88-1A80-D98D9DBF773B</importedID>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>3C70FD3C-B68B-9A92-729D-70BF5BAADFB3</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Student_LName" id="01FEE52E-B45C-57F9-63EE-EE8A46EE0FAF">
+<sourceDDLFile>Russell - DBST668 - DDL_DML.sql</sourceDDLFile>
+<createdBy>rbran</createdBy>
+<createdTime>2018-09-30 15:40:11 UTC</createdTime>
+<ownerDesignName>DBST668_ERD_Model</ownerDesignName>
+<importedID>8DF006EB-44CC-643C-842B-B2C55B34365B</importedID>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>3C70FD3C-B68B-9A92-729D-70BF5BAADFB3</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Student_FName" id="D84096AE-813C-D0EE-96AE-0C60735EB52C">
+<sourceDDLFile>Russell - DBST668 - DDL_DML.sql</sourceDDLFile>
+<createdBy>rbran</createdBy>
+<createdTime>2018-09-30 15:40:11 UTC</createdTime>
+<ownerDesignName>DBST668_ERD_Model</ownerDesignName>
+<importedID>F87FBC1A-3BE0-8072-3C3F-327E5546C138</importedID>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>3C70FD3C-B68B-9A92-729D-70BF5BAADFB3</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Student_ZipCode" id="115B73F8-E522-D42C-A0C5-6463FCFDF10A">
+<sourceDDLFile>Russell - DBST668 - DDL_DML.sql</sourceDDLFile>
+<createdBy>rbran</createdBy>
+<createdTime>2018-09-30 15:40:11 UTC</createdTime>
+<ownerDesignName>DBST668_ERD_Model</ownerDesignName>
+<importedID>3C56FA04-C956-8CB4-F8E6-AEEDAE01B03B</importedID>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>2A1FD8C8-9C4F-D70F-106D-631D44359DF6</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="101A42A4-29FB-47B9-97F4-E5048BCE11D2" name="pk_Student">
+<sourceDDLFile>Russell - DBST668 - DDL_DML.sql</sourceDDLFile>
+<createdBy>rbran</createdBy>
+<createdTime>2018-09-30 15:40:11 UTC</createdTime>
+<ownerDesignName>DBST668_ERD_Model</ownerDesignName>
+<importedID>9D97F9AE-112A-6C89-A0EB-69C632BB4B0F</importedID>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="883711EB-08B7-0A1B-8E1A-03476A5061C9"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

@@ -1,0 +1,72 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<TableProxyOraclev11g class="oracle.dbtools.crest.model.design.storage.oracle.v11g.TableProxyOraclev11g" name="Student_Class_Signup" directorySegmentName="seg_0" id="72317A52-D20E-27EE-EC76-46D6D7321F7A">
+<createdBy>rbran</createdBy>
+<createdTime>2018-09-30 15:40:11 UTC</createdTime>
+<ownerDesignName>DBST668_ERD_Model</ownerDesignName>
+<partitionedRowMovement>DISABLE</partitionedRowMovement>
+<temporaryChanged>false</temporaryChanged>
+<accessDriverType>oracle_loader</accessDriverType>
+<rejectLimit></rejectLimit>
+<columnProxies itemClass="oracle.dbtools.crest.model.design.storage.oracle.v12c.ColumnProxyOraclev12c">
+<ColumnProxy name="Student_Grade" id="1D9512B1-6776-C134-EC8E-1F2561A414DA">
+<createdBy>rbran</createdBy>
+<createdTime>2018-09-30 15:40:11 UTC</createdTime>
+<ownerDesignName>DBST668_ERD_Model</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="Student_Num" id="3EDBDC59-CC48-C71A-3120-3DDB344D7702">
+<createdBy>rbran</createdBy>
+<createdTime>2018-09-30 15:40:11 UTC</createdTime>
+<ownerDesignName>DBST668_ERD_Model</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="Sched_Num" id="9A4FD7F0-B44D-1CE7-EAFD-80FB2755F608">
+<createdBy>rbran</createdBy>
+<createdTime>2018-09-30 15:40:11 UTC</createdTime>
+<ownerDesignName>DBST668_ERD_Model</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="Instr_Num" id="C8A94210-446B-5F93-37DD-364A11CA464C">
+<createdBy>rbran</createdBy>
+<createdTime>2018-09-30 15:40:11 UTC</createdTime>
+<ownerDesignName>DBST668_ERD_Model</ownerDesignName>
+</ColumnProxy>
+</columnProxies>
+<indexProxies>
+<IndexProxy class="oracle.dbtools.crest.model.design.storage.oracle.v10g.IndexProxyOraclev10g" name="fk_Sched_StudentSignup_Index" id="4CD221E1-710D-5914-3060-78EEB5AF10E7">
+<createdBy>rbran</createdBy>
+<createdTime>2018-09-30 15:40:11 UTC</createdTime>
+<ownerDesignName>DBST668_ERD_Model</ownerDesignName>
+<logging></logging>
+</IndexProxy>
+<IndexProxy class="oracle.dbtools.crest.model.design.storage.oracle.v10g.IndexProxyOraclev10g" name="fk_Instr_StudentSignup_Index" id="5A27927F-EAA6-E681-5002-A31861209911">
+<createdBy>rbran</createdBy>
+<createdTime>2018-09-30 15:40:11 UTC</createdTime>
+<ownerDesignName>DBST668_ERD_Model</ownerDesignName>
+<logging></logging>
+</IndexProxy>
+<IndexProxy class="oracle.dbtools.crest.model.design.storage.oracle.v10g.IndexProxyOraclev10g" name="fk_Student_StudentSignup_Index" id="6BBF9DCB-22E4-56E8-0490-3BF14FD04185">
+<createdBy>rbran</createdBy>
+<createdTime>2018-09-30 15:40:11 UTC</createdTime>
+<ownerDesignName>DBST668_ERD_Model</ownerDesignName>
+<logging></logging>
+</IndexProxy>
+</indexProxies>
+<foreignKeys>
+<ForeignKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.FKProxyOraclev10g" name="fk_S_InstrClasses" id="79B95290-9060-303F-1140-41A8773A7DE2">
+<createdBy>rbran</createdBy>
+<createdTime>2018-09-30 15:40:11 UTC</createdTime>
+<ownerDesignName>DBST668_ERD_Model</ownerDesignName>
+</ForeignKey>
+<ForeignKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.FKProxyOraclev10g" name="fk_Student" id="A68136F2-4B0F-6083-0881-6FD0063E3366">
+<createdBy>rbran</createdBy>
+<createdTime>2018-09-30 15:40:11 UTC</createdTime>
+<ownerDesignName>DBST668_ERD_Model</ownerDesignName>
+</ForeignKey>
+</foreignKeys>
+<primaryKeys>
+<PrimaryKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.PKProxyOraclev10g" name="pk_StudentSignup" id="C15A4A39-1E5E-527C-8E61-B50FE8DC254B">
+<createdBy>rbran</createdBy>
+<createdTime>2018-09-30 15:40:11 UTC</createdTime>
+<ownerDesignName>DBST668_ERD_Model</ownerDesignName>
+<indexSort>SORTED</indexSort>
+</PrimaryKey>
+</primaryKeys>
+</TableProxyOraclev11g>

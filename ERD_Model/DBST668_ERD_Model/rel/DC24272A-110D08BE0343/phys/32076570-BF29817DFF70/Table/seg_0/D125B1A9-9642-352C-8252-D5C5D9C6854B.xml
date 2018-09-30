@@ -1,0 +1,45 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<TableProxyOraclev11g class="oracle.dbtools.crest.model.design.storage.oracle.v11g.TableProxyOraclev11g" name="Class_Sched" directorySegmentName="seg_0" id="D125B1A9-9642-352C-8252-D5C5D9C6854B">
+<createdBy>rbran</createdBy>
+<createdTime>2018-09-30 15:40:11 UTC</createdTime>
+<ownerDesignName>DBST668_ERD_Model</ownerDesignName>
+<partitionedRowMovement>DISABLE</partitionedRowMovement>
+<temporaryChanged>false</temporaryChanged>
+<accessDriverType>oracle_loader</accessDriverType>
+<rejectLimit></rejectLimit>
+<columnProxies itemClass="oracle.dbtools.crest.model.design.storage.oracle.v12c.ColumnProxyOraclev12c">
+<ColumnProxy name="Sched_Num" id="3DBF5F23-92E2-2ABF-544D-4E7711C204E4">
+<createdBy>rbran</createdBy>
+<createdTime>2018-09-30 15:40:11 UTC</createdTime>
+<ownerDesignName>DBST668_ERD_Model</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="Sched_Day_Off" id="4A4DAE39-ACC5-9C2D-CEF1-1368148C8FDB">
+<createdBy>rbran</createdBy>
+<createdTime>2018-09-30 15:40:11 UTC</createdTime>
+<ownerDesignName>DBST668_ERD_Model</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="Sched_Day" id="9C19AC33-A7DE-3BEC-C0F4-B54F99046BAB">
+<createdBy>rbran</createdBy>
+<createdTime>2018-09-30 15:40:11 UTC</createdTime>
+<ownerDesignName>DBST668_ERD_Model</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="Sched_Notes" id="AF2B767F-AD3C-18EC-1FAB-B49684BF713A">
+<createdBy>rbran</createdBy>
+<createdTime>2018-09-30 15:40:11 UTC</createdTime>
+<ownerDesignName>DBST668_ERD_Model</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="Sched_Time" id="B626192C-1358-B254-18B8-457999B6B805">
+<createdBy>rbran</createdBy>
+<createdTime>2018-09-30 15:40:11 UTC</createdTime>
+<ownerDesignName>DBST668_ERD_Model</ownerDesignName>
+</ColumnProxy>
+</columnProxies>
+<primaryKeys>
+<PrimaryKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.PKProxyOraclev10g" name="pk_Schedule" id="30424B5F-6507-56DB-52C9-0F9AF4EB3843">
+<createdBy>rbran</createdBy>
+<createdTime>2018-09-30 15:40:11 UTC</createdTime>
+<ownerDesignName>DBST668_ERD_Model</ownerDesignName>
+<indexSort>SORTED</indexSort>
+</PrimaryKey>
+</primaryKeys>
+</TableProxyOraclev11g>

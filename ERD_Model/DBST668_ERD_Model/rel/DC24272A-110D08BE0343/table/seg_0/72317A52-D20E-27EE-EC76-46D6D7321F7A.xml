@@ -1,0 +1,142 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="72317A52-D20E-27EE-EC76-46D6D7321F7A" name="Student_Class_Signup">
+<sourceDDLFile>Russell - DBST668 - DDL_DML.sql</sourceDDLFile>
+<createdBy>rbran</createdBy>
+<createdTime>2018-09-30 15:40:11 UTC</createdTime>
+<ownerDesignName>DBST668_ERD_Model</ownerDesignName>
+<importedID>3745B0FC-9716-A98E-87C0-09752C9341AB</importedID>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="Student_Num" id="3EDBDC59-CC48-C71A-3120-3DDB344D7702">
+<sourceDDLFile>Russell - DBST668 - DDL_DML.sql</sourceDDLFile>
+<createdBy>rbran</createdBy>
+<createdTime>2018-09-30 15:40:11 UTC</createdTime>
+<ownerDesignName>DBST668_ERD_Model</ownerDesignName>
+<importedID>BFA15440-A3DD-B6B4-F273-46637BC37AC8</importedID>
+<use>0</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<domain>788AD51C-A064-B4E8-C996-C6709A0B5D42</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="BDB00974-871A-B0A8-4965-B0D57DBCB90A" referredColumn="883711EB-08B7-0A1B-8E1A-03476A5061C9"/>
+</associations>
+</Column>
+<Column name="Instr_Num" id="C8A94210-446B-5F93-37DD-364A11CA464C">
+<sourceDDLFile>Russell - DBST668 - DDL_DML.sql</sourceDDLFile>
+<createdBy>rbran</createdBy>
+<createdTime>2018-09-30 15:40:11 UTC</createdTime>
+<ownerDesignName>DBST668_ERD_Model</ownerDesignName>
+<importedID>06E94291-71FA-C584-B9D6-A578D5BD7B92</importedID>
+<use>0</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<domain>788AD51C-A064-B4E8-C996-C6709A0B5D42</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="B7A1004D-C57B-9B56-DA4B-CD1F2D46EF24" referredColumn="0EDF9953-5DCC-996B-B57C-C048CAD9EF88"/>
+</associations>
+</Column>
+<Column name="Sched_Num" id="9A4FD7F0-B44D-1CE7-EAFD-80FB2755F608">
+<sourceDDLFile>Russell - DBST668 - DDL_DML.sql</sourceDDLFile>
+<createdBy>rbran</createdBy>
+<createdTime>2018-09-30 15:40:11 UTC</createdTime>
+<ownerDesignName>DBST668_ERD_Model</ownerDesignName>
+<importedID>C2B49832-8D05-4605-870C-4F9E1D478E5B</importedID>
+<use>0</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<domain>788AD51C-A064-B4E8-C996-C6709A0B5D42</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="B7A1004D-C57B-9B56-DA4B-CD1F2D46EF24" referredColumn="0CF2DABA-5369-DA7D-F017-B642BA9282B2"/>
+</associations>
+</Column>
+<Column name="Student_Grade" id="1D9512B1-6776-C134-EC8E-1F2561A414DA">
+<sourceDDLFile>Russell - DBST668 - DDL_DML.sql</sourceDDLFile>
+<createdBy>rbran</createdBy>
+<createdTime>2018-09-30 15:40:11 UTC</createdTime>
+<ownerDesignName>DBST668_ERD_Model</ownerDesignName>
+<importedID>2F0A9D18-CAC3-2BDA-3E8C-050B9059F753</importedID>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>4BF79206-28AA-0CC6-9593-A5B0DE87814A</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="C15A4A39-1E5E-527C-8E61-B50FE8DC254B" name="pk_StudentSignup">
+<sourceDDLFile>Russell - DBST668 - DDL_DML.sql</sourceDDLFile>
+<createdBy>rbran</createdBy>
+<createdTime>2018-09-30 15:40:11 UTC</createdTime>
+<ownerDesignName>DBST668_ERD_Model</ownerDesignName>
+<importedID>44895426-A894-FA22-A704-8105D24167AE</importedID>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="3EDBDC59-CC48-C71A-3120-3DDB344D7702"/>
+<colUsage columnID="C8A94210-446B-5F93-37DD-364A11CA464C"/>
+<colUsage columnID="9A4FD7F0-B44D-1CE7-EAFD-80FB2755F608"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="6BBF9DCB-22E4-56E8-0490-3BF14FD04185" name="fk_Student_StudentSignup_Index">
+<sourceDDLFile>Russell - DBST668 - DDL_DML.sql</sourceDDLFile>
+<createdBy>rbran</createdBy>
+<createdTime>2018-09-30 15:40:11 UTC</createdTime>
+<ownerDesignName>DBST668_ERD_Model</ownerDesignName>
+<importedID>CB70AC7A-F20E-06F5-07DB-C06736EB2F7C</importedID>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="3EDBDC59-CC48-C71A-3120-3DDB344D7702"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="5A27927F-EAA6-E681-5002-A31861209911" name="fk_Instr_StudentSignup_Index">
+<sourceDDLFile>Russell - DBST668 - DDL_DML.sql</sourceDDLFile>
+<createdBy>rbran</createdBy>
+<createdTime>2018-09-30 15:40:11 UTC</createdTime>
+<ownerDesignName>DBST668_ERD_Model</ownerDesignName>
+<importedID>7E75274C-863E-241E-978B-6C68D3E7B8B0</importedID>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="C8A94210-446B-5F93-37DD-364A11CA464C"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="4CD221E1-710D-5914-3060-78EEB5AF10E7" name="fk_Sched_StudentSignup_Index">
+<sourceDDLFile>Russell - DBST668 - DDL_DML.sql</sourceDDLFile>
+<createdBy>rbran</createdBy>
+<createdTime>2018-09-30 15:40:11 UTC</createdTime>
+<ownerDesignName>DBST668_ERD_Model</ownerDesignName>
+<importedID>CEF21D3A-1A15-2117-19E8-A9C3CFB7596C</importedID>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="9A4FD7F0-B44D-1CE7-EAFD-80FB2755F608"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="79B95290-9060-303F-1140-41A8773A7DE2" name="fk_S_InstrClasses">
+<createdBy>rbran</createdBy>
+<createdTime>2018-09-30 15:40:11 UTC</createdTime>
+<ownerDesignName>DBST668_ERD_Model</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="C8A94210-446B-5F93-37DD-364A11CA464C"/>
+<colUsage columnID="9A4FD7F0-B44D-1CE7-EAFD-80FB2755F608"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="A68136F2-4B0F-6083-0881-6FD0063E3366" name="fk_Student">
+<createdBy>rbran</createdBy>
+<createdTime>2018-09-30 15:40:11 UTC</createdTime>
+<ownerDesignName>DBST668_ERD_Model</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="3EDBDC59-CC48-C71A-3120-3DDB344D7702"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

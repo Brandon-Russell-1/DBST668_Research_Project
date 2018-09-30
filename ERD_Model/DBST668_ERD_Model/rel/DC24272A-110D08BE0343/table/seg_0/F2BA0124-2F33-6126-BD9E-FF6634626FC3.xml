@@ -1,0 +1,163 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="F2BA0124-2F33-6126-BD9E-FF6634626FC3" name="Instr_Classes">
+<sourceDDLFile>Russell - DBST668 - DDL_DML.sql</sourceDDLFile>
+<createdBy>rbran</createdBy>
+<createdTime>2018-09-30 15:40:11 UTC</createdTime>
+<ownerDesignName>DBST668_ERD_Model</ownerDesignName>
+<importedID>A45C520B-AAC5-50D7-121D-B9E44DFF3F8E</importedID>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="Instr_Num" id="0EDF9953-5DCC-996B-B57C-C048CAD9EF88">
+<sourceDDLFile>Russell - DBST668 - DDL_DML.sql</sourceDDLFile>
+<createdBy>rbran</createdBy>
+<createdTime>2018-09-30 15:40:11 UTC</createdTime>
+<ownerDesignName>DBST668_ERD_Model</ownerDesignName>
+<importedID>333D1A27-FF00-EC1C-7CB3-A1854B88A6AB</importedID>
+<use>0</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<domain>788AD51C-A064-B4E8-C996-C6709A0B5D42</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="9DF81E20-8443-A166-9EF2-D25CF21B8A24" referredColumn="BF9F0B54-B0F8-6E96-37D4-2BDD81FF0FA7"/>
+</associations>
+</Column>
+<Column name="Sched_Num" id="0CF2DABA-5369-DA7D-F017-B642BA9282B2">
+<sourceDDLFile>Russell - DBST668 - DDL_DML.sql</sourceDDLFile>
+<createdBy>rbran</createdBy>
+<createdTime>2018-09-30 15:40:11 UTC</createdTime>
+<ownerDesignName>DBST668_ERD_Model</ownerDesignName>
+<importedID>AB0BA687-850C-9D86-0A6A-FD7ACFCCDC4D</importedID>
+<use>0</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<domain>788AD51C-A064-B4E8-C996-C6709A0B5D42</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="052DB6EE-DB49-D796-E0B7-C8B81C2D8217" referredColumn="3DBF5F23-92E2-2ABF-544D-4E7711C204E4"/>
+</associations>
+</Column>
+<Column name="Course_Num" id="7D4547BD-E2A6-F976-BFBC-1986E92CC374">
+<sourceDDLFile>Russell - DBST668 - DDL_DML.sql</sourceDDLFile>
+<createdBy>rbran</createdBy>
+<createdTime>2018-09-30 15:40:11 UTC</createdTime>
+<ownerDesignName>DBST668_ERD_Model</ownerDesignName>
+<importedID>5E2C6085-1584-C408-5385-8209D815B004</importedID>
+<use>0</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<domain>788AD51C-A064-B4E8-C996-C6709A0B5D42</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="3E5F5F19-0186-A32C-CCB5-4A41271B7AB1" referredColumn="2E4E40B7-9B59-A14F-B0CA-D2551DB588A5"/>
+</associations>
+</Column>
+<Column name="Class_Notes" id="F526CB9F-F24E-09A6-A193-046F0092C1E4">
+<sourceDDLFile>Russell - DBST668 - DDL_DML.sql</sourceDDLFile>
+<createdBy>rbran</createdBy>
+<createdTime>2018-09-30 15:40:11 UTC</createdTime>
+<ownerDesignName>DBST668_ERD_Model</ownerDesignName>
+<importedID>99A77FA9-6A35-C2D7-E3AC-4EBC02263D51</importedID>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>09483BD0-A0BC-17AE-1013-CE0A5A10209D</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Class_Room" id="73FA7F6B-2A91-8460-1D98-7C85D375B022">
+<sourceDDLFile>Russell - DBST668 - DDL_DML.sql</sourceDDLFile>
+<createdBy>rbran</createdBy>
+<createdTime>2018-09-30 15:40:11 UTC</createdTime>
+<ownerDesignName>DBST668_ERD_Model</ownerDesignName>
+<importedID>1833BD57-B9E5-64F4-3BE8-72CBEB714C31</importedID>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>4BF79206-28AA-0CC6-9593-A5B0DE87814A</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="74CBA0EF-8259-792F-1158-F6F35AD03A25" name="pk_Class">
+<sourceDDLFile>Russell - DBST668 - DDL_DML.sql</sourceDDLFile>
+<createdBy>rbran</createdBy>
+<createdTime>2018-09-30 15:40:11 UTC</createdTime>
+<ownerDesignName>DBST668_ERD_Model</ownerDesignName>
+<importedID>97E7763D-F11C-5AD2-C7E5-20450E6A65A5</importedID>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="0EDF9953-5DCC-996B-B57C-C048CAD9EF88"/>
+<colUsage columnID="0CF2DABA-5369-DA7D-F017-B642BA9282B2"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="E30D3B67-B3B5-F716-5916-B8FA3AFBA874" name="fk_InstrClass_Index">
+<sourceDDLFile>Russell - DBST668 - DDL_DML.sql</sourceDDLFile>
+<createdBy>rbran</createdBy>
+<createdTime>2018-09-30 15:40:11 UTC</createdTime>
+<ownerDesignName>DBST668_ERD_Model</ownerDesignName>
+<importedID>15BAF59C-E666-966E-DF3B-514FFDBEE9DA</importedID>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="0EDF9953-5DCC-996B-B57C-C048CAD9EF88"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="8C04EFA8-78D9-6BFD-B03A-5190764A9868" name="fk_ClassSched_Index">
+<sourceDDLFile>Russell - DBST668 - DDL_DML.sql</sourceDDLFile>
+<createdBy>rbran</createdBy>
+<createdTime>2018-09-30 15:40:11 UTC</createdTime>
+<ownerDesignName>DBST668_ERD_Model</ownerDesignName>
+<importedID>97722E16-812C-9729-F89B-0C3C4CF160D7</importedID>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="0CF2DABA-5369-DA7D-F017-B642BA9282B2"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="7512C75A-DA5F-BE3A-D358-60C8162FC273" name="fk_CourseClass_Index">
+<sourceDDLFile>Russell - DBST668 - DDL_DML.sql</sourceDDLFile>
+<createdBy>rbran</createdBy>
+<createdTime>2018-09-30 15:40:11 UTC</createdTime>
+<ownerDesignName>DBST668_ERD_Model</ownerDesignName>
+<importedID>B00C5AC9-2890-08A5-2F1B-FAAD299E277E</importedID>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="7D4547BD-E2A6-F976-BFBC-1986E92CC374"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="2B51CFAD-6F22-BDD3-917B-3B1406B3F2A7" name="fk_Course">
+<createdBy>rbran</createdBy>
+<createdTime>2018-09-30 15:40:11 UTC</createdTime>
+<ownerDesignName>DBST668_ERD_Model</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="7D4547BD-E2A6-F976-BFBC-1986E92CC374"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="5DDF4FCA-D16F-7C68-8FA1-729BE525319D" name="fk_Instr">
+<createdBy>rbran</createdBy>
+<createdTime>2018-09-30 15:40:11 UTC</createdTime>
+<ownerDesignName>DBST668_ERD_Model</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="0EDF9953-5DCC-996B-B57C-C048CAD9EF88"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="B0E19EA1-5A56-A372-8612-0A5CCC3E9164" name="fk_Sched">
+<createdBy>rbran</createdBy>
+<createdTime>2018-09-30 15:40:11 UTC</createdTime>
+<ownerDesignName>DBST668_ERD_Model</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="0CF2DABA-5369-DA7D-F017-B642BA9282B2"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

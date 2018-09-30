@@ -1,0 +1,104 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="DAA77EC1-6E30-D960-4394-34CC7CBE491D" name="Class Sched">
+<createdBy>rbran</createdBy>
+<createdTime>2018-09-30 15:43:24 UTC</createdTime>
+<generatorID>D125B1A9-9642-352C-8252-D5C5D9C6854B</generatorID>
+<ownerDesignName>DBST668_ERD_Model</ownerDesignName>
+<engineerTo>
+<item key="DC24272A-29E6-B99A-9BA8-110D08BE0343" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="Sched Num" id="EDF11C71-8F16-13EC-9EF8-1CB14196B212">
+<createdBy>rbran</createdBy>
+<createdTime>2018-09-30 15:43:24 UTC</createdTime>
+<generatorID>3DBF5F23-92E2-2ABF-544D-4E7711C204E4</generatorID>
+<ownerDesignName>DBST668_ERD_Model</ownerDesignName>
+<engineerTo>
+<item key="DC24272A-29E6-B99A-9BA8-110D08BE0343" value="true"/>
+</engineerTo>
+<use>0</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<domain>788AD51C-A064-B4E8-C996-C6709A0B5D42</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Sched Day" id="E92B42E8-0DE0-5099-249D-DABA04CA493B">
+<createdBy>rbran</createdBy>
+<createdTime>2018-09-30 15:43:24 UTC</createdTime>
+<generatorID>9C19AC33-A7DE-3BEC-C0F4-B54F99046BAB</generatorID>
+<ownerDesignName>DBST668_ERD_Model</ownerDesignName>
+<engineerTo>
+<item key="DC24272A-29E6-B99A-9BA8-110D08BE0343" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>A7542110-4A10-CF45-CA0E-398E517CB0B2</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Sched Time" id="DCE73232-70FC-BB77-B081-173049E6D85F">
+<createdBy>rbran</createdBy>
+<createdTime>2018-09-30 15:43:24 UTC</createdTime>
+<generatorID>B626192C-1358-B254-18B8-457999B6B805</generatorID>
+<ownerDesignName>DBST668_ERD_Model</ownerDesignName>
+<engineerTo>
+<item key="DC24272A-29E6-B99A-9BA8-110D08BE0343" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>2A1FD8C8-9C4F-D70F-106D-631D44359DF6</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Sched Day Off" id="3A4B88E9-EFE4-AFCA-181A-6EA2120A1C98">
+<createdBy>rbran</createdBy>
+<createdTime>2018-09-30 15:43:24 UTC</createdTime>
+<generatorID>4A4DAE39-ACC5-9C2D-CEF1-1368148C8FDB</generatorID>
+<ownerDesignName>DBST668_ERD_Model</ownerDesignName>
+<engineerTo>
+<item key="DC24272A-29E6-B99A-9BA8-110D08BE0343" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>A7542110-4A10-CF45-CA0E-398E517CB0B2</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Sched Notes" id="E61272F2-1361-F2BE-1C61-59882C91B26B">
+<createdBy>rbran</createdBy>
+<createdTime>2018-09-30 15:43:24 UTC</createdTime>
+<generatorID>AF2B767F-AD3C-18EC-1FAB-B49684BF713A</generatorID>
+<ownerDesignName>DBST668_ERD_Model</ownerDesignName>
+<engineerTo>
+<item key="DC24272A-29E6-B99A-9BA8-110D08BE0343" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>09483BD0-A0BC-17AE-1013-CE0A5A10209D</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="0A50243A-ED5C-2CC3-0467-E062CDCE2BB3" name="pk Schedule">
+<createdBy>rbran</createdBy>
+<createdTime>2018-09-30 15:43:24 UTC</createdTime>
+<generatorID>30424B5F-6507-56DB-52C9-0F9AF4EB3843</generatorID>
+<ownerDesignName>DBST668_ERD_Model</ownerDesignName>
+<engineerTo>
+<item key="DC24272A-29E6-B99A-9BA8-110D08BE0343" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>EDF11C71-8F16-13EC-9EF8-1CB14196B212</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

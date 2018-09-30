@@ -1,0 +1,15 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<relationalModel class="oracle.dbtools.crest.model.design.relational.RelationalDesign" name="Relational_1" id="DC24272A-29E6-B99A-9BA8-110D08BE0343" mainViewID="22778D10-11C0-7FF3-8FB2-E97F891A322B">
+<createdBy>rbran</createdBy>
+<createdTime>2018-09-30 15:38:04 UTC</createdTime>
+<ownerDesignName>DBST668_ERD_Model</ownerDesignName>
+<shouldBeOpen>false</shouldBeOpen>
+<selectedRDBMSSite>32076570-2523-435C-2E92-BF29817DFF70</selectedRDBMSSite>
+<importDDLFileStamps>
+<importDDLFileStamp class="oracle.dbtools.crest.imports.DDLFileStamp">
+<fileName>Russell - DBST668 - DDL_DML.sql</fileName>
+<pathName>G:\OneDrive\Documents\Classes\DBST 668\Research_Project</pathName>
+<dbType>9</dbType>
+</importDDLFileStamp>
+</importDDLFileStamps>
+</relationalModel>

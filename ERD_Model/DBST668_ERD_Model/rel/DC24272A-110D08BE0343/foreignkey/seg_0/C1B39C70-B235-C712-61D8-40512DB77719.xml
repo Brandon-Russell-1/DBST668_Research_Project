@@ -1,0 +1,18 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="C1B39C70-B235-C712-61D8-40512DB77719" containerWithKeyObject="E1AAD7F9-470C-89DD-07EE-4C4B7A1D93D7" localFKIndex="C63A0032-AEFF-2726-F7B7-EFF524538645" name="fk_Admin">
+<sourceDDLFile>Russell - DBST668 - DDL_DML.sql</sourceDDLFile>
+<createdBy>rbran</createdBy>
+<createdTime>2018-09-30 15:40:11 UTC</createdTime>
+<ownerDesignName>DBST668_ERD_Model</ownerDesignName>
+<importedID>B337F7F8-7E21-C5DD-AE76-5E4CFA31ABF5</importedID>
+<referredTableLongName>Admin_List</referredTableLongName>
+<deleteRule>NO ACTION</deleteRule>
+<referredTableID>3D7C4759-4075-705B-AC46-2C8FD5FBAC93</referredTableID>
+<keyObject>F16979F8-2FEC-43B7-2DEF-C17A423AA0D0</keyObject>
+<referredKeyID>F16979F8-2FEC-43B7-2DEF-C17A423AA0D0</referredKeyID>
+<mandatory>true</mandatory>
+<refColNames>Admin_Num</refColNames>
+<transferable>true</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>

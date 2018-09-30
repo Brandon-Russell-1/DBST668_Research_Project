@@ -1,0 +1,106 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="7D12BE52-0E3C-B748-F554-156C939BEE1D" name="Instr Classes">
+<createdBy>rbran</createdBy>
+<createdTime>2018-09-30 15:43:24 UTC</createdTime>
+<generatorID>F2BA0124-2F33-6126-BD9E-FF6634626FC3</generatorID>
+<ownerDesignName>DBST668_ERD_Model</ownerDesignName>
+<engineerTo>
+<item key="DC24272A-29E6-B99A-9BA8-110D08BE0343" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="Instr Num" id="EB7375A9-4794-271D-D30F-542EDB888D3E">
+<createdBy>rbran</createdBy>
+<createdTime>2018-09-30 15:43:24 UTC</createdTime>
+<generatorID>EC0E306D-C83A-8BFD-5BCE-26FBAEA52A12</generatorID>
+<ownerDesignName>DBST668_ERD_Model</ownerDesignName>
+<engineerTo>
+<item key="DC24272A-29E6-B99A-9BA8-110D08BE0343" value="true"/>
+</engineerTo>
+<referedAttribute>66BD775A-506E-2755-FDD2-339A692D6DFA</referedAttribute>
+<use>0</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<domain>788AD51C-A064-B4E8-C996-C6709A0B5D42</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Sched Num" id="2AAC3992-EA2A-8FC1-6A94-83B1A71D5AB7">
+<createdBy>rbran</createdBy>
+<createdTime>2018-09-30 15:43:24 UTC</createdTime>
+<generatorID>83A7FBC1-492C-1B45-7220-A75C614ACA88</generatorID>
+<ownerDesignName>DBST668_ERD_Model</ownerDesignName>
+<engineerTo>
+<item key="DC24272A-29E6-B99A-9BA8-110D08BE0343" value="true"/>
+</engineerTo>
+<referedAttribute>EDF11C71-8F16-13EC-9EF8-1CB14196B212</referedAttribute>
+<use>0</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<domain>788AD51C-A064-B4E8-C996-C6709A0B5D42</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Course Num" id="7D82D858-815D-ECD7-EE72-CAB3525D52D0">
+<createdBy>rbran</createdBy>
+<createdTime>2018-09-30 15:43:24 UTC</createdTime>
+<generatorID>934DB8AF-76D8-0384-0A90-F51D5E5B2011</generatorID>
+<ownerDesignName>DBST668_ERD_Model</ownerDesignName>
+<engineerTo>
+<item key="DC24272A-29E6-B99A-9BA8-110D08BE0343" value="true"/>
+</engineerTo>
+<referedAttribute>9378EAB7-DE10-34E3-CA87-3B9FAACCE4D3</referedAttribute>
+<use>0</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<domain>788AD51C-A064-B4E8-C996-C6709A0B5D42</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Class Notes" id="59B6D537-4183-D13E-0D19-44A611073553">
+<createdBy>rbran</createdBy>
+<createdTime>2018-09-30 15:43:24 UTC</createdTime>
+<generatorID>F526CB9F-F24E-09A6-A193-046F0092C1E4</generatorID>
+<ownerDesignName>DBST668_ERD_Model</ownerDesignName>
+<engineerTo>
+<item key="DC24272A-29E6-B99A-9BA8-110D08BE0343" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>09483BD0-A0BC-17AE-1013-CE0A5A10209D</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Class Room" id="AA85AD1E-D777-E9F4-EB50-E2936F3ED2D1">
+<createdBy>rbran</createdBy>
+<createdTime>2018-09-30 15:43:24 UTC</createdTime>
+<generatorID>73FA7F6B-2A91-8460-1D98-7C85D375B022</generatorID>
+<ownerDesignName>DBST668_ERD_Model</ownerDesignName>
+<engineerTo>
+<item key="DC24272A-29E6-B99A-9BA8-110D08BE0343" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>4BF79206-28AA-0CC6-9593-A5B0DE87814A</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="FA7EC873-A9B9-33EF-F81E-D6E0A2197D94" name="pk Class">
+<createdBy>rbran</createdBy>
+<createdTime>2018-09-30 15:43:24 UTC</createdTime>
+<generatorID>74CBA0EF-8259-792F-1158-F6F35AD03A25</generatorID>
+<ownerDesignName>DBST668_ERD_Model</ownerDesignName>
+<engineerTo>
+<item key="DC24272A-29E6-B99A-9BA8-110D08BE0343" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>EB7375A9-4794-271D-D30F-542EDB888D3E</attributeRef>
+<attributeRef>2AAC3992-EA2A-8FC1-6A94-83B1A71D5AB7</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

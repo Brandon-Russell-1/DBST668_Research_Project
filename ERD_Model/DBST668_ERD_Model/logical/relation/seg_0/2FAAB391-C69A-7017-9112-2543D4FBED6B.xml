@@ -1,0 +1,20 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="fk_S_InstrClasses" directorySegmentName="seg_0" id="2FAAB391-C69A-7017-9112-2543D4FBED6B">
+<createdBy>rbran</createdBy>
+<createdTime>2018-09-30 15:43:24 UTC</createdTime>
+<generatorID>B7A1004D-C57B-9B56-DA4B-CD1F2D46EF24</generatorID>
+<ownerDesignName>DBST668_ERD_Model</ownerDesignName>
+<engineerTo>
+<item key="DC24272A-29E6-B99A-9BA8-110D08BE0343" value="true"/>
+</engineerTo>
+<sourcePk>FA7EC873-A9B9-33EF-F81E-D6E0A2197D94</sourcePk>
+<identifying>true</identifying>
+<optionalSource>false</optionalSource>
+<optionalTarget>false</optionalTarget>
+<sourceCardinality>1</sourceCardinality>
+<sourceEntity>7D12BE52-0E3C-B748-F554-156C939BEE1D</sourceEntity>
+<targetCardinalityString>*</targetCardinalityString>
+<targetEntity>27C0D0CE-3984-0427-A446-41C448BAC0A5</targetEntity>
+<transferable>true</transferable>
+<deleteRule>CASCADE</deleteRule>
+</Relation>

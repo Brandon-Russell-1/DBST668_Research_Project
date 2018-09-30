@@ -1,0 +1,18 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="B7A1004D-C57B-9B56-DA4B-CD1F2D46EF24" containerWithKeyObject="72317A52-D20E-27EE-EC76-46D6D7321F7A" localFKIndex="79B95290-9060-303F-1140-41A8773A7DE2" name="fk_S_InstrClasses">
+<sourceDDLFile>Russell - DBST668 - DDL_DML.sql</sourceDDLFile>
+<createdBy>rbran</createdBy>
+<createdTime>2018-09-30 15:40:11 UTC</createdTime>
+<ownerDesignName>DBST668_ERD_Model</ownerDesignName>
+<importedID>D4737EE7-010C-A908-E900-D036B69E586D</importedID>
+<referredTableLongName>Instr_Classes</referredTableLongName>
+<deleteRule>CASCADE</deleteRule>
+<referredTableID>F2BA0124-2F33-6126-BD9E-FF6634626FC3</referredTableID>
+<keyObject>74CBA0EF-8259-792F-1158-F6F35AD03A25</keyObject>
+<referredKeyID>74CBA0EF-8259-792F-1158-F6F35AD03A25</referredKeyID>
+<mandatory>true</mandatory>
+<refColNames>Instr_Num,Sched_Num</refColNames>
+<transferable>true</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>

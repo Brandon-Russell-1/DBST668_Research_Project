@@ -1,0 +1,13 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<OSDM_Design class="oracle.dbtools.crest.model.design.Design" name="DBST668_ERD_Model" id="4DE6673E-235B-4156-88C3-40843F72190B" version="3.5">
+<createdBy>rbran</createdBy>
+<createdTime>2018-09-30 15:38:04 UTC</createdTime>
+<ownerDesignName>DBST668_ERD_Model</ownerDesignName>
+<capitalNames>false</capitalNames>
+<designId>4DE6673E-235B-4156-88C3-40843F72190B</designId>
+<usedDesignStorageDescriptors>
+<designDescr class="oracle.dbtools.crest.model.design.Design$DesignStorageDesc" id="8A20FF27-5E62-DDED-05D3-78B53DA586EB">
+<designStoragePath>C:\Russell - DBST668 - DDL_DML</designStoragePath>
+</designDescr>
+</usedDesignStorageDescriptors>
+</OSDM_Design>

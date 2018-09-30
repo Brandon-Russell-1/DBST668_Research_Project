@@ -1,0 +1,18 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="052DB6EE-DB49-D796-E0B7-C8B81C2D8217" containerWithKeyObject="F2BA0124-2F33-6126-BD9E-FF6634626FC3" localFKIndex="B0E19EA1-5A56-A372-8612-0A5CCC3E9164" name="fk_Sched">
+<sourceDDLFile>Russell - DBST668 - DDL_DML.sql</sourceDDLFile>
+<createdBy>rbran</createdBy>
+<createdTime>2018-09-30 15:40:11 UTC</createdTime>
+<ownerDesignName>DBST668_ERD_Model</ownerDesignName>
+<importedID>78A2FAB1-2A18-87CD-AA15-D586DD105BDC</importedID>
+<referredTableLongName>Class_Sched</referredTableLongName>
+<deleteRule>CASCADE</deleteRule>
+<referredTableID>D125B1A9-9642-352C-8252-D5C5D9C6854B</referredTableID>
+<keyObject>30424B5F-6507-56DB-52C9-0F9AF4EB3843</keyObject>
+<referredKeyID>30424B5F-6507-56DB-52C9-0F9AF4EB3843</referredKeyID>
+<mandatory>true</mandatory>
+<refColNames>Sched_Num</refColNames>
+<transferable>true</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>

@@ -1,0 +1,20 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="fk_Course" directorySegmentName="seg_0" id="934DB8AF-76D8-0384-0A90-F51D5E5B2011">
+<createdBy>rbran</createdBy>
+<createdTime>2018-09-30 15:43:24 UTC</createdTime>
+<generatorID>3E5F5F19-0186-A32C-CCB5-4A41271B7AB1</generatorID>
+<ownerDesignName>DBST668_ERD_Model</ownerDesignName>
+<engineerTo>
+<item key="DC24272A-29E6-B99A-9BA8-110D08BE0343" value="true"/>
+</engineerTo>
+<sourcePk>0C1BFF83-B748-DE11-4440-B33E2937092D</sourcePk>
+<identifying>false</identifying>
+<optionalSource>false</optionalSource>
+<optionalTarget>false</optionalTarget>
+<sourceCardinality>1</sourceCardinality>
+<sourceEntity>46C94F24-C479-2CA1-85AF-0EE6F1046904</sourceEntity>
+<targetCardinalityString>*</targetCardinalityString>
+<targetEntity>7D12BE52-0E3C-B748-F554-156C939BEE1D</targetEntity>
+<transferable>true</transferable>
+<deleteRule>CASCADE</deleteRule>
+</Relation>

@@ -1,0 +1,68 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<DomainFile class="oracle.dbtools.crest.model.design.DomainFileWrapper" fileName="Russell - DBST668 - DDL_DML_Domains">
+   <domains>
+      <Domain class="oracle.dbtools.crest.model.design.Domain" name="VARCHAR_0_0_1000" id="09483BD0-A0BC-17AE-1013-CE0A5A10209D">
+         <createdBy>rbran</createdBy>
+         <createdTime>2018-09-30 15:40:11 UTC</createdTime>
+         <ownerDesignName>DBST668_ERD_Model</ownerDesignName>
+         <avTSortOrder>0</avTSortOrder>
+         <dataTypePrecision>0</dataTypePrecision>
+         <dataTypeScale>0</dataTypeScale>
+         <dataTypeSize>1000</dataTypeSize>
+         <fileName>Russell - DBST668 - DDL_DML_Domains</fileName>
+         <logicalDatatype>LOGDT024</logicalDatatype>
+      </Domain>
+      <Domain class="oracle.dbtools.crest.model.design.Domain" name="VARCHAR_0_0_10" id="2A1FD8C8-9C4F-D70F-106D-631D44359DF6">
+         <createdBy>rbran</createdBy>
+         <createdTime>2018-09-30 15:40:11 UTC</createdTime>
+         <ownerDesignName>DBST668_ERD_Model</ownerDesignName>
+         <avTSortOrder>0</avTSortOrder>
+         <dataTypePrecision>0</dataTypePrecision>
+         <dataTypeScale>0</dataTypeScale>
+         <dataTypeSize>10</dataTypeSize>
+         <fileName>Russell - DBST668 - DDL_DML_Domains</fileName>
+         <logicalDatatype>LOGDT024</logicalDatatype>
+      </Domain>
+      <Domain class="oracle.dbtools.crest.model.design.Domain" name="VARCHAR_0_0_20" id="3C70FD3C-B68B-9A92-729D-70BF5BAADFB3">
+         <createdBy>rbran</createdBy>
+         <createdTime>2018-09-30 15:40:11 UTC</createdTime>
+         <ownerDesignName>DBST668_ERD_Model</ownerDesignName>
+         <avTSortOrder>0</avTSortOrder>
+         <dataTypePrecision>0</dataTypePrecision>
+         <dataTypeScale>0</dataTypeScale>
+         <dataTypeSize>20</dataTypeSize>
+         <fileName>Russell - DBST668 - DDL_DML_Domains</fileName>
+         <logicalDatatype>LOGDT024</logicalDatatype>
+      </Domain>
+      <Domain class="oracle.dbtools.crest.model.design.Domain" name="VARCHAR_0_0_5" id="4BF79206-28AA-0CC6-9593-A5B0DE87814A">
+         <createdBy>rbran</createdBy>
+         <createdTime>2018-09-30 15:40:11 UTC</createdTime>
+         <ownerDesignName>DBST668_ERD_Model</ownerDesignName>
+         <avTSortOrder>0</avTSortOrder>
+         <dataTypePrecision>0</dataTypePrecision>
+         <dataTypeScale>0</dataTypeScale>
+         <dataTypeSize>5</dataTypeSize>
+         <fileName>Russell - DBST668 - DDL_DML_Domains</fileName>
+         <logicalDatatype>LOGDT024</logicalDatatype>
+      </Domain>
+      <Domain class="oracle.dbtools.crest.model.design.Domain" name="Integer_0_0_0" id="788AD51C-A064-B4E8-C996-C6709A0B5D42">
+         <createdBy>rbran</createdBy>
+         <createdTime>2018-09-30 15:40:11 UTC</createdTime>
+         <ownerDesignName>DBST668_ERD_Model</ownerDesignName>
+         <avTSortOrder>0</avTSortOrder>
+         <fileName>Russell - DBST668 - DDL_DML_Domains</fileName>
+         <logicalDatatype>LOGDT011</logicalDatatype>
+      </Domain>
+      <Domain class="oracle.dbtools.crest.model.design.Domain" name="VARCHAR_0_0_100" id="A7542110-4A10-CF45-CA0E-398E517CB0B2">
+         <createdBy>rbran</createdBy>
+         <createdTime>2018-09-30 15:40:11 UTC</createdTime>
+         <ownerDesignName>DBST668_ERD_Model</ownerDesignName>
+         <avTSortOrder>0</avTSortOrder>
+         <dataTypePrecision>0</dataTypePrecision>
+         <dataTypeScale>0</dataTypeScale>
+         <dataTypeSize>100</dataTypeSize>
+         <fileName>Russell - DBST668 - DDL_DML_Domains</fileName>
+         <logicalDatatype>LOGDT024</logicalDatatype>
+      </Domain>
+   </domains>
+</DomainFile>

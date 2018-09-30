@@ -1,0 +1,11 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<TriggerOraclev10g class="oracle.dbtools.crest.model.design.storage.oracle.v10g.TriggerOraclev10g" name="SchedClass_Trigger" directorySegmentName="seg_0" id="DE8E9A91-3007-B951-F3AC-13DD7FE3C213">
+<sourceDDLFile>Russell - DBST668 - DDL_DML.sql</sourceDDLFile>
+<createdBy>rbran</createdBy>
+<createdTime>2018-09-30 15:40:09 UTC</createdTime>
+<ownerDesignName>DBST668_ERD_Model</ownerDesignName>
+<actions>INSERT</actions>
+<body>BEGIN&amp;amp;lt;br&amp;amp;gt;      dbms_output.put_line (&amp;apos;A class has been added!!&amp;apos;);&amp;amp;lt;br&amp;amp;gt;    END;</body>
+<triggerTime>AFTER</triggerTime>
+<table>F2BA0124-2F33-6126-BD9E-FF6634626FC3</table>
+</TriggerOraclev10g>

@@ -1,0 +1,9 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<SequenceOraclev10g class="oracle.dbtools.crest.model.design.storage.oracle.v10g.SequenceOraclev10g" name="InstrNum_Seq" directorySegmentName="seg_0" id="D8BD8FFD-FF91-6AFD-0DD2-D83CA8EBD659">
+<sourceDDLFile>Russell - DBST668 - DDL_DML.sql</sourceDDLFile>
+<createdBy>rbran</createdBy>
+<createdTime>2018-09-30 15:40:09 UTC</createdTime>
+<ownerDesignName>DBST668_ERD_Model</ownerDesignName>
+<incrementBy>1</incrementBy>
+<startWith>1</startWith>
+</SequenceOraclev10g>

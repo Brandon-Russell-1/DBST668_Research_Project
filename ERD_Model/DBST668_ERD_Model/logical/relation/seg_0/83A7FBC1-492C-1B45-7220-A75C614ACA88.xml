@@ -1,0 +1,20 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="fk_Sched" directorySegmentName="seg_0" id="83A7FBC1-492C-1B45-7220-A75C614ACA88">
+<createdBy>rbran</createdBy>
+<createdTime>2018-09-30 15:43:24 UTC</createdTime>
+<generatorID>052DB6EE-DB49-D796-E0B7-C8B81C2D8217</generatorID>
+<ownerDesignName>DBST668_ERD_Model</ownerDesignName>
+<engineerTo>
+<item key="DC24272A-29E6-B99A-9BA8-110D08BE0343" value="true"/>
+</engineerTo>
+<sourcePk>0A50243A-ED5C-2CC3-0467-E062CDCE2BB3</sourcePk>
+<identifying>true</identifying>
+<optionalSource>false</optionalSource>
+<optionalTarget>false</optionalTarget>
+<sourceCardinality>1</sourceCardinality>
+<sourceEntity>DAA77EC1-6E30-D960-4394-34CC7CBE491D</sourceEntity>
+<targetCardinalityString>*</targetCardinalityString>
+<targetEntity>7D12BE52-0E3C-B748-F554-156C939BEE1D</targetEntity>
+<transferable>true</transferable>
+<deleteRule>CASCADE</deleteRule>
+</Relation>

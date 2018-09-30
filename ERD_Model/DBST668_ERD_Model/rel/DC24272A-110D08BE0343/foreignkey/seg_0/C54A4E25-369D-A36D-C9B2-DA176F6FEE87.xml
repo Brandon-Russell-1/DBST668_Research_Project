@@ -1,0 +1,18 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="C54A4E25-369D-A36D-C9B2-DA176F6FEE87" containerWithKeyObject="3D7C4759-4075-705B-AC46-2C8FD5FBAC93" localFKIndex="0C7B3185-408A-9D61-D20A-4FD456DB29AE" name="fk_Admin_Section">
+<sourceDDLFile>Russell - DBST668 - DDL_DML.sql</sourceDDLFile>
+<createdBy>rbran</createdBy>
+<createdTime>2018-09-30 15:40:11 UTC</createdTime>
+<ownerDesignName>DBST668_ERD_Model</ownerDesignName>
+<importedID>1E546EE9-DB0A-4C8D-EA2D-79A647DE4971</importedID>
+<referredTableLongName>Section_Info</referredTableLongName>
+<deleteRule>NO ACTION</deleteRule>
+<referredTableID>A2B2FAA5-27EA-F69E-D01A-563E031AB2DA</referredTableID>
+<keyObject>8F83B6B4-D092-F795-5835-457E7D7747C0</keyObject>
+<referredKeyID>8F83B6B4-D092-F795-5835-457E7D7747C0</referredKeyID>
+<mandatory>true</mandatory>
+<refColNames>Section_Num</refColNames>
+<transferable>true</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>

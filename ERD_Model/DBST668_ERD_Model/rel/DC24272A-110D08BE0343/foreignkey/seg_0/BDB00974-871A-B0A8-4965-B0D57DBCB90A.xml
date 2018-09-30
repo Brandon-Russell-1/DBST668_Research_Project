@@ -1,0 +1,18 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="BDB00974-871A-B0A8-4965-B0D57DBCB90A" containerWithKeyObject="72317A52-D20E-27EE-EC76-46D6D7321F7A" localFKIndex="A68136F2-4B0F-6083-0881-6FD0063E3366" name="fk_Student">
+<sourceDDLFile>Russell - DBST668 - DDL_DML.sql</sourceDDLFile>
+<createdBy>rbran</createdBy>
+<createdTime>2018-09-30 15:40:11 UTC</createdTime>
+<ownerDesignName>DBST668_ERD_Model</ownerDesignName>
+<importedID>DB7A1645-7713-CAC5-9522-38C822DB21E5</importedID>
+<referredTableLongName>Student_List</referredTableLongName>
+<deleteRule>CASCADE</deleteRule>
+<referredTableID>C846551B-6C08-FBD5-292C-C3B0A3F6AE10</referredTableID>
+<keyObject>101A42A4-29FB-47B9-97F4-E5048BCE11D2</keyObject>
+<referredKeyID>101A42A4-29FB-47B9-97F4-E5048BCE11D2</referredKeyID>
+<mandatory>true</mandatory>
+<refColNames>Student_Num</refColNames>
+<transferable>true</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>
