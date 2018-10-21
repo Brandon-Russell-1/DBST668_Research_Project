@@ -4,6 +4,7 @@ SET SERVEROUTPUT ON;
 DROP ROLE student_role;
 DROP ROLE instructor_role;
 DROP ROLE admin_role;
+
 BEGIN
 DBMS_RLS.DROP_POLICY(
     object_schema => 'system',
@@ -30,6 +31,12 @@ BEGIN
   END LOOP;
 END;
 /
+
+ALTER TABLE Admin_List DROP COLUMN User_Name;
+ALTER TABLE Instr_List DROP COLUMN User_Name;
+ALTER TABLE Student_List DROP COLUMN User_Name;
+
+
 /*Username Procedure - Create user names for every user*/
 ALTER TABLE Admin_List ADD User_Name VARCHAR2(45);
 ALTER TABLE Instr_List ADD User_Name VARCHAR2(45);
@@ -116,8 +123,6 @@ GRANT SELECT, INSERT, DELETE, UPDATE ON Instr_List TO admin_role;
 GRANT SELECT, INSERT, DELETE, UPDATE ON Student_List TO admin_role;
 
 /*Test Account Modify Procedure*/
-
-
 /*Test admin access*/
 CONNECT bevans1/TheSecPass0;
 show user;
@@ -148,6 +153,7 @@ SELECT /*fixed*/* FROM system.Student_List;
 
 CONNECT system/brr1wik7;
 show user;    
+
 /*Course Management Procedure - Admin have full rights to course information*/
 GRANT SELECT, INSERT, DELETE, UPDATE ON Course_List TO admin_role;
 
@@ -163,6 +169,12 @@ INSERT INTO system.Course_List (Course_Num,            Course_Name,             
 SELECT /*fixed*/* FROM system.Course_List;
 DELETE FROM system.Course_List;
 ROLLBACK TO Course_Account_Modify_Procedure;
+
+/*Test instructor access*/
+CONNECT mlopez3/TheSecPass2;
+show user;
+SELECT /*fixed*/* FROM system.Course_List;
+
 /*Test student access*/
 CONNECT sgilbert1/TheSecPass0;
 show user;
@@ -170,7 +182,6 @@ SELECT /*fixed*/* FROM system.Course_List;
 
 CONNECT system/brr1wik7;
 show user;  
-
 
 
 /*Section Management Procedure - Admins have full rights to section information*/
@@ -215,10 +226,16 @@ INSERT INTO system.Class_Sched (Sched_Num,           Sched_Day, Sched_Time, Sche
 SELECT /*fixed*/* FROM system.Class_Sched;
 DELETE FROM system.Class_Sched WHERE Sched_Num = 9999;
 ROLLBACK TO Schedule_Account_Modify_Procedure;
+
+/*Test instructor access*/
+CONNECT mlopez3/TheSecPass2;
+show user;
+SELECT /*fixed*/* FROM system.Class_Sched;
+
 /*Test student access*/
 CONNECT sgilbert1/TheSecPass0;
 show user;
-SELECT /*fixed*/* FROM system.Section_Info;
+SELECT /*fixed*/* FROM system.Class_Sched;
 
 CONNECT system/brr1wik7;
 show user;  
@@ -252,6 +269,18 @@ DELETE FROM system.Instr_Classes WHERE Instr_Num = 8 AND Sched_Num = 9;
 DELETE FROM system.Student_Class_Signup WHERE Student_Num = 10 AND Instr_Num = 9 AND Sched_Num = 9;
 ROLLBACK TO Admin_Support_Account_Modify_Procedure;
 
+/*Test instructor access*/
+CONNECT mlopez3/TheSecPass2;
+show user;
+
+INSERT INTO system.Instr_Classes (Instr_Num, Sched_Num, Course_Num, Class_Notes, Class_Room)
+    VALUES                ('8',       '9',       '9',        'Room Ready','Z');
+
+/*Test student access*/
+CONNECT sgilbert1/TheSecPass0;
+show user;
+DELETE FROM system.Student_Class_Signup WHERE Student_Num = 1 AND Instr_Num = 1 AND Sched_Num = 1;
+
 CONNECT system/brr1wik7;
 show user;  
 
@@ -283,15 +312,21 @@ END;
 /*Test admin account*/
 CONNECT bevans1/TheSecPass0; 
 show user;
+SAVEPOINT Admin_Restriction_Procedure;
 SELECT * FROM system.Admin_List;
 UPDATE system.Admin_List SET Admin_Address = 'Changeit!';
 UPDATE system.Admin_List SET Admin_Num = 1234555;
 SELECT * FROM system.Admin_List;
-
+ROLLBACK TO Admin_Restriction_Procedure;
 /*Test instructor account*/
 CONNECT mlopez3/TheSecPass2; 
 show user;
 SELECT * FROM system.Admin_List;
+
+/*Test student access*/
+CONNECT sgilbert1/TheSecPass0;
+show user;
+SELECT * FROM Admin_List;
 
 /*Test system account*/
 CONNECT system/brr1wik7 
@@ -401,10 +436,12 @@ GRANT SELECT, UPDATE (Student_Grade) , DELETE ON Instr_Student_Modify TO instruc
 /*Test instructor update on personal info*/
 CONNECT mlopez3/TheSecPass2;
 show user;
+SAVEPOINT Instr_Modify_Personal_Procedure;
+SELECT /*fixed*/* FROM system.Instr_Personal_Info;
 UPDATE system.Instr_Personal_Info SET Instr_Address = '867 Orange St';
 UPDATE system.Instr_Personal_Info SET User_Name = 'BillyBob7';
 SELECT /*fixed*/* FROM system.Instr_Personal_Info;
-
+ROLLBACK TO Instr_Modify_Personal_Procedure;
 /*Test student account access*/
 CONNECT sgilbert1/TheSecPass0;
 show user;
@@ -414,31 +451,39 @@ SELECT /*fixed*/* FROM system.Instr_Personal_Info;
 /*Test instructor ability to select and update on their class schedule*/
 CONNECT mlopez3/TheSecPass2;
 show user;
+SAVEPOINT Instr_Modify_Class_Procedure;
 SELECT /*fixed*/* FROM system.Instr_Classes_Update;
 UPDATE system.Instr_Classes_Update SET Class_Notes = 'A/C Broke' WHERE Sched_Num = 3;
 UPDATE system.Instr_Classes_Update SET Class_Room = 'Party_Room' WHERE Sched_Num = 3;
 SELECT /*fixed*/* FROM system.Instr_Classes_Update;
-
+ROLLBACK TO Instr_Modify_Class_Procedure;
 /*Test Select & Update with instructor trying to update another instructor's class*/
 CONNECT brussell2/TheSecPass1;
 show user;
 SELECT /*fixed*/* FROM system.Instr_Classes_Update;
 UPDATE system.Instr_Classes_Update SET Class_Notes = 'A/C Broke' WHERE Sched_Num = 3;
+UPDATE system.Instr_Classes_Update SET Class_Notes = 'A/C Broke' WHERE Instr_Num = 3 AND Sched_Num = 3;
 SELECT /*fixed*/* FROM system.Instr_Classes_Update;
 
+/*Test student account access*/
+CONNECT sgilbert1/TheSecPass0;
+show user;
+SELECT /*fixed*/* FROM system.Instr_Classes_Update;
+UPDATE system.Instr_Classes_Update SET Class_Notes = 'A/C Broke' WHERE Sched_Num = 3;
 
 /*Test instructor ability to select, update, and delete students from their class*/
 CONNECT mlopez3/TheSecPass2;
 show user;
+SAVEPOINT Instr_Modify_Delete_Point;
 SELECT /*fixed*/* FROM system.Instr_Student_Modify;
 UPDATE system.Instr_Student_Modify SET Student_Grade = 'F' WHERE Student_Num = 2;
 UPDATE system.Instr_Student_Modify SET Student_Grade = 'F' WHERE Student_Num = 3;
 UPDATE system.Instr_Student_Modify SET Student_Num = 4 WHERE Student_Num = 3;
 SELECT /*fixed*/* FROM system.Instr_Student_Modify;
-SAVEPOINT Instr_Modify_Delete_Point;
 DELETE FROM system.Instr_Student_Modify WHERE Student_Num = 3;
 SELECT /*fixed*/* FROM system.Instr_Student_Modify;
 ROLLBACK TO Instr_Modify_Delete_Point;
+
 /*Test student access*/
 CONNECT sgilbert1/TheSecPass0;
 show user;
@@ -530,8 +575,12 @@ GRANT INSERT  ON Student_Class_Signup TO student_role;
 /*Test update personal info*/
 CONNECT sgilbert1/TheSecPass0;
 show user;
+SAVEPOINT Student_Modify_Personal_Point;
+SELECT * FROM system.Student_Personal_Info;
 UPDATE system.Student_Personal_Info SET Student_ZipCode = '90210';
-
+UPDATE system.Student_Personal_Info SET User_Name = 'HackerMode';
+SELECT * FROM system.Student_Personal_Info;
+ROLLBACK TO Student_Modify_Personal_Point;
 /*Test instructor access*/
 CONNECT mlopez3/TheSecPass2;
 show user;
@@ -551,6 +600,7 @@ INSERT INTO system.Student_Class_Signup (Student_Num, Instr_Num, Sched_Num,  Stu
 
 SELECT /*fixed*/* FROM system.Student_Class_Grade_View;
 ROLLBACK TO Student_Class_Signup_Point;
+
 /*Test instructor access*/
 CONNECT mlopez3/TheSecPass2;
 show user;
