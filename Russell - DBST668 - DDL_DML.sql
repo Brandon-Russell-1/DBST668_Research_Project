@@ -1,5 +1,15 @@
 SET echo on;
 SET serveroutput on;
+connect sys/brr1wik7 as sysdba;
+show user;
+/*Drop and Create a DBA*/
+DROP USER InstructorDBA cascade;
+Create user InstructorDBA identified by brr1wik7;
+grant create session to InstructorDBA;
+grant dba to InstructorDBA;
+grant execute on dbms_rls to InstructorDBA;
+connect InstructorDBA/brr1wik7;
+show user;
 /* Drop tables, sequence, and other objects you create*/
 
 DROP TABLE Student_Class_Signup;
