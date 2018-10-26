@@ -344,6 +344,10 @@ INSERT INTO Class_Sched (Sched_Num,           Sched_Day, Sched_Time, Sched_Day_O
     VALUES              (SchedNum_Seq.NEXTVAL,'Sat',     '0900-1100','Oct. 20th',   'Weekend Schedule');
 INSERT INTO Class_Sched (Sched_Num,           Sched_Day, Sched_Time, Sched_Day_Off, Sched_Notes)
     VALUES              (SchedNum_Seq.NEXTVAL,'Sun',     '0900-1100','Oct. 21st',   'Weekend Schedule');
+INSERT INTO Class_Sched (Sched_Num,           Sched_Day, Sched_Time, Sched_Day_Off, Sched_Notes)
+    VALUES              (SchedNum_Seq.NEXTVAL,'Mon',     '0900-0930','6 days a week',   'Beta');
+INSERT INTO Class_Sched (Sched_Num,           Sched_Day, Sched_Time, Sched_Day_Off, Sched_Notes)
+    VALUES              (SchedNum_Seq.NEXTVAL,'Tues',     '1100-1115','6 days a week',   'Beta');    
     
 INSERT INTO Instr_Classes (Instr_Num, Sched_Num, Course_Num, Class_Notes,                        Class_Room)
     VALUES                ('1',       '1',       '1',        'Computer one broke','A');

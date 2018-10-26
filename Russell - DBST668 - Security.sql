@@ -1,14 +1,7 @@
 SET ECHO ON;
 SET SERVEROUTPUT ON;
-connect sys/brr1wik7 as sysdba;
-show user;
 /* Drop users, roles, policies, and other objects you create*/
-/*Drop and Create a DBA*/
-DROP USER InstructorDBA cascade;
-Create user InstructorDBA identified by brr1wik7;
-grant create session to InstructorDBA;
-grant dba to InstructorDBA;
-grant execute on dbms_rls to InstructorDBA;
+/*Connect to Instructor DBA*/
 connect InstructorDBA/brr1wik7;
 show user;
 
@@ -375,80 +368,8 @@ CREATE OR REPLACE VIEW Instr_Section_Info AS
 GRANT SELECT ON Instr_Section_Info TO instructor_role;
 
 /*Show class schedules info*/
-GRANT SELECT ON InstructorDBA.Class_Sched TO instructor_role;
-/********************************************Test OLS**************************************************************/
-CONNECT lbacsys/brr1wik7 
-show user;
+GRANT SELECT ON Class_Sched TO instructor_role;
 
-BEGIN
- SA_SYSDBA.CREATE_POLICY (
-  policy_name      => 'Sched_OLS_POL',
-  column_name      => 'ols_col',
-  default_options  => 'read_control');
-END;
-/
-BEGIN
- SA_COMPONENTS.CREATE_LEVEL (
-   policy_name   => 'Sched_OLS_POL',
-   level_num     => 4,
-   short_name    => 'HS',
-   long_name     => 'HIGHLY_SENSITIVE');
- SA_COMPONENTS.CREATE_LEVEL (
-   policy_name   => 'Sched_OLS_POL',
-   level_num     => 3,
-   short_name    => 'S',
-   long_name     => 'SENSITIVE');
-END;
-/
-BEGIN
- SA_LABEL_ADMIN.CREATE_LABEL  (
-  policy_name     => 'Sched_OLS_POL',
-  label_tag       => '40',
-  label_value     => 'HS',
-  data_label      => TRUE);
- SA_LABEL_ADMIN.CREATE_LABEL  (
-  policy_name     => 'Sched_OLS_POL',
-  label_tag       => '30',
-  label_value     => 'S',
-  data_label      => TRUE);  
-END;
-/
-BEGIN
- SA_USER_ADMIN.SET_LEVELS (
-  policy_name   => 'Sched_OLS_POL',
-  user_name     => 'mlopez3', 
-  max_level     => 'HS',
-  min_level     => 'S',
-  def_level     => 'HS',
-  row_level     => 'HS');
-END;
-/
-BEGIN
- SA_USER_ADMIN.SET_LEVELS (
-  policy_name   => 'Sched_OLS_POL',
-  user_name     => 'InstructorDBA', 
-  max_level     => 'HS',
-  min_level     => 'S',
-  def_level     => 'HS',
-  row_level     => 'HS');
-END;
-/
-
-BEGIN
- SA_POLICY_ADMIN.APPLY_TABLE_POLICY (
-  policy_name    => 'Sched_OLS_POL',
-  schema_name    => 'InstructorDBA', 
-  table_name     => 'Class_Sched');
-END;
-/
-
-
-CONNECT InstructorDBA/brr1wik7 
-
-UPDATE InstructorDBA.Class_Sched SET ols_col = CHAR_TO_LABEL('Sched_OLS_POL','HS');
-SELECT /*fixed */LABEL_TO_CHAR (40) FROM InstructorDBA.Class_Sched;
-show user;
-/********************************************Test OLS**************************************************************/
 /*Show course info*/
 GRANT SELECT ON Course_List TO instructor_role;
 
@@ -716,5 +637,135 @@ ROLLBACK TO Admin_Student_Class_Signup_Point;
 CONNECT InstructorDBA/brr1wik7;
 show user;        
 
+/*Class Tentative Schedule Procedure*/
+connect sys/brr1wik7 as sysdba;
+show user;
+GRANT SELECT ON InstructorDBA.Student_List TO lbacsys;
+GRANT SELECT ON InstructorDBA.Instr_List TO lbacsys;
+GRANT SELECT ON InstructorDBA.Admin_List TO lbacsys;
+
+CONNECT lbacsys/brr1wik7; 
+show user;
+
+BEGIN
+ SA_SYSDBA.CREATE_POLICY (
+  policy_name      => 'Sched_OLS_POL',
+  column_name      => 'ols_col',
+  default_options  => 'read_control');
+
+ SA_COMPONENTS.CREATE_LEVEL (
+   policy_name   => 'Sched_OLS_POL',
+   level_num     => 4,
+   short_name    => 'HS',
+   long_name     => 'HIGHLY_SENSITIVE');
+ SA_COMPONENTS.CREATE_LEVEL (
+   policy_name   => 'Sched_OLS_POL',
+   level_num     => 3,
+   short_name    => 'S',
+   long_name     => 'SENSITIVE');
+
+ SA_LABEL_ADMIN.CREATE_LABEL  (
+  policy_name     => 'Sched_OLS_POL',
+  label_tag       => '40',
+  label_value     => 'HS',
+  data_label      => TRUE);
+ SA_LABEL_ADMIN.CREATE_LABEL  (
+  policy_name     => 'Sched_OLS_POL',
+  label_tag       => '30',
+  label_value     => 'S',
+  data_label      => TRUE);  
+
+ SA_USER_ADMIN.SET_LEVELS (
+  policy_name   => 'Sched_OLS_POL',
+  user_name     => 'InstructorDBA', 
+  max_level     => 'HS',
+  min_level     => 'S',
+  def_level     => 'HS',
+  row_level     => 'HS');
+
+/*Student account update classification level*/
+  FOR x IN (SELECT User_Name FROM InstructorDBA.Student_List)
+  LOOP
+  SA_USER_ADMIN.SET_LEVELS (
+  policy_name   => 'Sched_OLS_POL',
+  user_name     => ''||x.User_Name||'', 
+  max_level     => 'S',
+  min_level     => 'S',
+  def_level     => 'S',
+  row_level     => 'S');
+  END LOOP;  
+  
+/*Instructor account update classification level*/
+  FOR x IN (SELECT User_Name FROM InstructorDBA.Instr_List)
+  LOOP
+  SA_USER_ADMIN.SET_LEVELS (
+  policy_name   => 'Sched_OLS_POL',
+  user_name     => ''||x.User_Name||'', 
+  max_level     => 'HS',
+  min_level     => 'S',
+  def_level     => 'HS',
+  row_level     => 'HS');
+  END LOOP; 
+  
+/*Admin account update classification level*/
+  FOR x IN (SELECT User_Name FROM InstructorDBA.Admin_List)
+  LOOP
+  SA_USER_ADMIN.SET_LEVELS (
+  policy_name   => 'Sched_OLS_POL',
+  user_name     => ''||x.User_Name||'', 
+  max_level     => 'HS',
+  min_level     => 'S',
+  def_level     => 'HS',
+  row_level     => 'HS');
+  END LOOP;   
+  
+SA_POLICY_ADMIN.APPLY_TABLE_POLICY (
+  policy_name    => 'Sched_OLS_POL',
+  schema_name    => 'InstructorDBA', 
+  table_name     => 'Class_Sched',
+  table_options  =>  'READ_CONTROL');
+END;
+/
+
+/*Update classification column and test access*/
+connect sys/brr1wik7 as sysdba;
+show user;
+UPDATE InstructorDBA.Class_Sched SET ols_col = CHAR_TO_LABEL('Sched_OLS_POL','S');
+UPDATE InstructorDBA.Class_Sched SET ols_col = CHAR_TO_LABEL('Sched_OLS_POL','HS') WHERE Sched_Notes = 'Beta';
+SELECT /*fixed*/* FROM InstructorDBA.Class_Sched;
+GRANT SELECT ON InstructorDBA.Class_Sched TO student_role;
+
+/*Test InstructorDBA access*/
+CONNECT InstructorDBA/brr1wik7;
+show user; 
+SELECT /*fixed*/* FROM Class_Sched;
+SAVEPOINT InstructorDBA_Student_Class_Sched_Insert;
+INSERT INTO Class_Sched (Sched_Num,           Sched_Day, Sched_Time, Sched_Day_Off, Sched_Notes, ols_col)
+    VALUES              (12345,'All',     '24 Hours','7 days a week',   'Alpha', CHAR_TO_LABEL('Sched_OLS_POL','HS'));  
+SELECT /*fixed*/* FROM Class_Sched;    
+ROLLBACK TO InstructorDBA_Student_Class_Sched_Insert;
+
+
+/*Test admin access*/
+CONNECT bevans1/TheSecPass0;
+show user;
+SELECT /*fixed*/* FROM InstructorDBA.Class_Sched;
+SAVEPOINT Admin_Student_Class_Sched_Insert;
+INSERT INTO InstructorDBA.Class_Sched (Sched_Num,           Sched_Day, Sched_Time, Sched_Day_Off, Sched_Notes, ols_col)
+    VALUES              (12345,'All',     '24 Hours','7 days a week',   'Alpha', CHAR_TO_LABEL('Sched_OLS_POL','HS')); 
+SELECT /*fixed*/* FROM InstructorDBA.Class_Sched;    
+ROLLBACK TO Admin_Student_Class_Sched_Insert;
+
+
+/*Test instructor access*/
+CONNECT mlopez3/TheSecPass2;
+show user;
+SELECT /*fixed*/* FROM InstructorDBA.Class_Sched;
+
+
+/*Test student access*/
+CONNECT sgilbert1/TheSecPass0;
+show user;
+SELECT /*fixed*/* FROM InstructorDBA.Class_Sched;
 
 
