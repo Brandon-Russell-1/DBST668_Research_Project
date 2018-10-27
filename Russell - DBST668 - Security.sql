@@ -1,15 +1,15 @@
 SET ECHO ON;
 SET SERVEROUTPUT ON;
-/* Drop users, roles, policies, and other objects you create*/
+set sqlformat ansiconsole;
+
 /*Connect to Instructor DBA*/
 connect InstructorDBA/brr1wik7;
 show user;
 
+/* Drop users, roles, policies, and other objects you create*/
 DROP ROLE student_role;
 DROP ROLE instructor_role;
 DROP ROLE admin_role;
-
-
 
 BEGIN
 DBMS_RLS.DROP_POLICY(
@@ -31,6 +31,7 @@ END;
 /
 connect InstructorDBA/brr1wik7;
 show user;
+
 /*Instructor account drop*/
 BEGIN
   FOR x IN (SELECT User_Name FROM Instr_List)
@@ -145,29 +146,29 @@ GRANT SELECT, INSERT, DELETE, UPDATE ON Student_List TO admin_role;
 CONNECT bevans1/TheSecPass0;
 show user;
 SAVEPOINT Admin_Account_Modify_Procedure;
-SELECT /*fixed*/* FROM InstructorDBA.Instr_List;
-SELECT /*fixed*/* FROM InstructorDBA.Student_List;
+SELECT * FROM InstructorDBA.Instr_List;
+SELECT * FROM InstructorDBA.Student_List;
 UPDATE InstructorDBA.Instr_List SET Instr_LName = 'test';
 UPDATE InstructorDBA.Student_List SET Student_LName = 'test';
 INSERT INTO InstructorDBA.Student_List  (Student_Num,           Student_Address,     Student_PhoneNum, Student_LName, Student_FName, Student_ZipCode)
     VALUES              (999,'Dorm 11','222-333-3444',         'Pines',    'Matt',      '31005');
 INSERT INTO InstructorDBA.Instr_List  (Instr_Num,           Instr_Address,     Instr_PhoneNum, Section_Num, Instr_LName, Instr_FName, Instr_ZipCode)
     VALUES              (888,'101 Apple Street','111-222-3434', '1',         'Roberts',   'John',      '31003');             
-SELECT /*fixed*/* FROM InstructorDBA.Instr_List;
-SELECT /*fixed*/* FROM InstructorDBA.Student_List;
+SELECT * FROM InstructorDBA.Instr_List;
+SELECT * FROM InstructorDBA.Student_List;
 DELETE FROM InstructorDBA.Instr_List;
 DELETE FROM InstructorDBA.Student_List;
 ROLLBACK TO Admin_Account_Modify_Procedure;
 /*Test student access*/
 CONNECT sgilbert1/TheSecPass0;
 show user;
-SELECT /*fixed*/* FROM InstructorDBA.Instr_List;
-SELECT /*fixed*/* FROM InstructorDBA.Student_List;
+SELECT * FROM InstructorDBA.Instr_List;
+SELECT * FROM InstructorDBA.Student_List;
 /*Test instructor access*/
 CONNECT mlopez3/TheSecPass2;
 show user;
-SELECT /*fixed*/* FROM InstructorDBA.Instr_List;
-SELECT /*fixed*/* FROM InstructorDBA.Student_List;
+SELECT * FROM InstructorDBA.Instr_List;
+SELECT * FROM InstructorDBA.Student_List;
 
 CONNECT InstructorDBA/brr1wik7;
 show user;    
@@ -180,23 +181,23 @@ GRANT SELECT, INSERT, DELETE, UPDATE ON Course_List TO admin_role;
 CONNECT bevans1/TheSecPass0;
 show user;
 SAVEPOINT Course_Account_Modify_Procedure;
-SELECT /*fixed*/* FROM InstructorDBA.Course_List;
+SELECT * FROM InstructorDBA.Course_List;
 UPDATE InstructorDBA.Course_List SET Course_Name = 'test';
 INSERT INTO InstructorDBA.Course_List (Course_Num,            Course_Name,                Admin_Num , Course_Desc,                       Course_Hours, Section_Num)
     VALUES              (8888, 'Intro to Computer Science',1,             'Intro to Computer Science','3',          '1');          
-SELECT /*fixed*/* FROM InstructorDBA.Course_List;
+SELECT * FROM InstructorDBA.Course_List;
 DELETE FROM InstructorDBA.Course_List;
 ROLLBACK TO Course_Account_Modify_Procedure;
 
 /*Test instructor access*/
 CONNECT mlopez3/TheSecPass2;
 show user;
-SELECT /*fixed*/* FROM InstructorDBA.Course_List;
+SELECT * FROM InstructorDBA.Course_List;
 
 /*Test student access*/
 CONNECT sgilbert1/TheSecPass0;
 show user;
-SELECT /*fixed*/* FROM InstructorDBA.Course_List;
+SELECT * FROM InstructorDBA.Course_List;
 
 CONNECT InstructorDBA/brr1wik7;
 show user;  
@@ -210,21 +211,21 @@ GRANT SELECT, INSERT, DELETE, UPDATE ON Section_Info TO admin_role;
 CONNECT bevans1/TheSecPass0;
 show user;
 SAVEPOINT Section_Account_Modify_Procedure;
-SELECT /*fixed*/* FROM InstructorDBA.Section_Info;
+SELECT * FROM InstructorDBA.Section_Info;
 UPDATE InstructorDBA.Section_Info SET Section_Name = 'test';
 INSERT INTO InstructorDBA.Section_Info (Section_Num,            Section_Name,           Section_Address,     Section_FoS,   Section_ZipCode)
     VALUES               (9999, 'Space Travel Section', '120 Finegand Place','Space Travel','31088');
-SELECT /*fixed*/* FROM InstructorDBA.Section_Info;
+SELECT * FROM InstructorDBA.Section_Info;
 DELETE FROM InstructorDBA.Section_Info WHERE Section_Num = 9999;
 ROLLBACK TO Section_Account_Modify_Procedure;
 /*Test student access*/
 CONNECT sgilbert1/TheSecPass0;
 show user;
-SELECT /*fixed*/* FROM InstructorDBA.Section_Info;
+SELECT * FROM InstructorDBA.Section_Info;
 /*Test instructor access*/
 CONNECT mlopez3/TheSecPass2;
 show user;
-SELECT /*fixed*/* FROM InstructorDBA.Section_Info;
+SELECT * FROM InstructorDBA.Section_Info;
 
 CONNECT InstructorDBA/brr1wik7;
 show user;  
@@ -237,23 +238,23 @@ GRANT SELECT, INSERT, DELETE, UPDATE ON Class_Sched TO admin_role;
 CONNECT bevans1/TheSecPass0;
 show user;
 SAVEPOINT Schedule_Account_Modify_Procedure;
-SELECT /*fixed*/* FROM InstructorDBA.Class_Sched;
+SELECT * FROM InstructorDBA.Class_Sched;
 UPDATE InstructorDBA.Class_Sched SET Sched_Notes = 'test';
 INSERT INTO InstructorDBA.Class_Sched (Sched_Num,           Sched_Day, Sched_Time, Sched_Day_Off, Sched_Notes)
     VALUES              (9999,'Sun',     '0900-1100','Oct. 21st',   'Weekend Schedule');
-SELECT /*fixed*/* FROM InstructorDBA.Class_Sched;
+SELECT * FROM InstructorDBA.Class_Sched;
 DELETE FROM InstructorDBA.Class_Sched WHERE Sched_Num = 9999;
 ROLLBACK TO Schedule_Account_Modify_Procedure;
 
 /*Test instructor access*/
 CONNECT mlopez3/TheSecPass2;
 show user;
-SELECT /*fixed*/* FROM InstructorDBA.Class_Sched;
+SELECT * FROM InstructorDBA.Class_Sched;
 
 /*Test student access*/
 CONNECT sgilbert1/TheSecPass0;
 show user;
-SELECT /*fixed*/* FROM InstructorDBA.Class_Sched;
+SELECT * FROM InstructorDBA.Class_Sched;
 
 CONNECT InstructorDBA/brr1wik7;
 show user;  
@@ -268,8 +269,8 @@ GRANT SELECT, INSERT, DELETE, UPDATE ON Student_Class_Signup TO admin_role;
 CONNECT bevans1/TheSecPass0;
 show user;
 SAVEPOINT Admin_Support_Account_Modify_Procedure;
-SELECT /*fixed*/* FROM InstructorDBA.Instr_Classes;
-SELECT /*fixed*/* FROM InstructorDBA.Student_Class_Signup;
+SELECT * FROM InstructorDBA.Instr_Classes;
+SELECT * FROM InstructorDBA.Student_Class_Signup;
 UPDATE InstructorDBA.Instr_Classes SET Class_Notes = 'test';
 UPDATE InstructorDBA.Student_Class_Signup SET Student_Grade = 'test';
 
@@ -280,8 +281,8 @@ INSERT INTO InstructorDBA.Instr_Classes (Instr_Num, Sched_Num, Course_Num, Class
 INSERT INTO InstructorDBA.Student_Class_Signup (Student_Num, Instr_Num, Sched_Num,  Student_Grade)
     VALUES                (10, 9, 9,  'A');
 
-SELECT /*fixed*/* FROM InstructorDBA.Instr_Classes;
-SELECT /*fixed*/* FROM InstructorDBA.Student_Class_Signup;
+SELECT * FROM InstructorDBA.Instr_Classes;
+SELECT * FROM InstructorDBA.Student_Class_Signup;
 
 DELETE FROM InstructorDBA.Instr_Classes WHERE Instr_Num = 8 AND Sched_Num = 9;
 DELETE FROM InstructorDBA.Student_Class_Signup WHERE Student_Num = 10 AND Instr_Num = 9 AND Sched_Num = 9;
@@ -408,24 +409,24 @@ GRANT SELECT ON Instr_All_Class TO instructor_role;
 /*Test Instructor View Policy*/
 CONNECT mlopez3/TheSecPass2;
 show user;
-SELECT /*fixed*/* FROM InstructorDBA.Instr_Personal_Info;
-SELECT /*fixed*/* FROM InstructorDBA.Instr_Section_Info;
-SELECT /*fixed*/* FROM InstructorDBA.Instr_Class_Course_Info;
-SELECT /*fixed*/* FROM InstructorDBA.Instr_Student_Class;
-SELECT /*fixed*/* FROM InstructorDBA.Instr_All_Class;
-SELECT /*fixed*/* FROM InstructorDBA.Class_Sched;
-SELECT /*fixed*/* FROM InstructorDBA.Course_List;
+SELECT * FROM InstructorDBA.Instr_Personal_Info;
+SELECT * FROM InstructorDBA.Instr_Section_Info;
+SELECT * FROM InstructorDBA.Instr_Class_Course_Info;
+SELECT * FROM InstructorDBA.Instr_Student_Class;
+SELECT * FROM InstructorDBA.Instr_All_Class;
+SELECT * FROM InstructorDBA.Class_Sched;
+SELECT * FROM InstructorDBA.Course_List;
 
 /*Test student ability to view*/
 CONNECT sgilbert1/TheSecPass0;
 show user;
-SELECT /*fixed*/* FROM InstructorDBA.Instr_Personal_Info;
-SELECT /*fixed*/* FROM InstructorDBA.Instr_Section_Info;
-SELECT /*fixed*/* FROM InstructorDBA.Instr_Class_Course_Info;
-SELECT /*fixed*/* FROM InstructorDBA.Instr_Student_Class;
-SELECT /*fixed*/* FROM InstructorDBA.Instr_All_Class;
-SELECT /*fixed*/* FROM InstructorDBA.Class_Sched;
-SELECT /*fixed*/* FROM InstructorDBA.Course_List;
+SELECT * FROM InstructorDBA.Instr_Personal_Info;
+SELECT * FROM InstructorDBA.Instr_Section_Info;
+SELECT * FROM InstructorDBA.Instr_Class_Course_Info;
+SELECT * FROM InstructorDBA.Instr_Student_Class;
+SELECT * FROM InstructorDBA.Instr_All_Class;
+SELECT * FROM InstructorDBA.Class_Sched;
+SELECT * FROM InstructorDBA.Course_List;
 
 CONNECT InstructorDBA/brr1wik7;    
 show user;
@@ -456,60 +457,60 @@ GRANT SELECT, UPDATE (Student_Grade) , DELETE ON Instr_Student_Modify TO instruc
 CONNECT mlopez3/TheSecPass2;
 show user;
 SAVEPOINT Instr_Modify_Personal_Procedure;
-SELECT /*fixed*/* FROM InstructorDBA.Instr_Personal_Info;
+SELECT * FROM InstructorDBA.Instr_Personal_Info;
 UPDATE InstructorDBA.Instr_Personal_Info SET Instr_Address = '867 Orange St';
 UPDATE InstructorDBA.Instr_Personal_Info SET User_Name = 'BillyBob7';
-SELECT /*fixed*/* FROM InstructorDBA.Instr_Personal_Info;
+SELECT * FROM InstructorDBA.Instr_Personal_Info;
 ROLLBACK TO Instr_Modify_Personal_Procedure;
 /*Test student account access*/
 CONNECT sgilbert1/TheSecPass0;
 show user;
 UPDATE InstructorDBA.Instr_Personal_Info SET Instr_Address = '867 Orange St';
-SELECT /*fixed*/* FROM InstructorDBA.Instr_Personal_Info;
+SELECT * FROM InstructorDBA.Instr_Personal_Info;
 
 /*Test instructor ability to select and update on their class schedule*/
 CONNECT mlopez3/TheSecPass2;
 show user;
 SAVEPOINT Instr_Modify_Class_Procedure;
-SELECT /*fixed*/* FROM InstructorDBA.Instr_Classes_Update;
+SELECT * FROM InstructorDBA.Instr_Classes_Update;
 UPDATE InstructorDBA.Instr_Classes_Update SET Class_Notes = 'A/C Broke' WHERE Sched_Num = 3;
 UPDATE InstructorDBA.Instr_Classes_Update SET Class_Room = 'Party_Room' WHERE Sched_Num = 3;
-SELECT /*fixed*/* FROM InstructorDBA.Instr_Classes_Update;
+SELECT * FROM InstructorDBA.Instr_Classes_Update;
 ROLLBACK TO Instr_Modify_Class_Procedure;
 /*Test Select & Update with instructor trying to update another instructor's class*/
 CONNECT brussell2/TheSecPass1;
 show user;
-SELECT /*fixed*/* FROM InstructorDBA.Instr_Classes_Update;
+SELECT * FROM InstructorDBA.Instr_Classes_Update;
 UPDATE InstructorDBA.Instr_Classes_Update SET Class_Notes = 'A/C Broke' WHERE Sched_Num = 3;
 UPDATE InstructorDBA.Instr_Classes_Update SET Class_Notes = 'A/C Broke' WHERE Instr_Num = 3 AND Sched_Num = 3;
-SELECT /*fixed*/* FROM InstructorDBA.Instr_Classes_Update;
+SELECT * FROM InstructorDBA.Instr_Classes_Update;
 
 /*Test student account access*/
 CONNECT sgilbert1/TheSecPass0;
 show user;
-SELECT /*fixed*/* FROM InstructorDBA.Instr_Classes_Update;
+SELECT * FROM InstructorDBA.Instr_Classes_Update;
 UPDATE InstructorDBA.Instr_Classes_Update SET Class_Notes = 'A/C Broke' WHERE Sched_Num = 3;
 
 /*Test instructor ability to select, update, and delete students from their class*/
 CONNECT mlopez3/TheSecPass2;
 show user;
 SAVEPOINT Instr_Modify_Delete_Point;
-SELECT /*fixed*/* FROM InstructorDBA.Instr_Student_Modify;
+SELECT * FROM InstructorDBA.Instr_Student_Modify;
 UPDATE InstructorDBA.Instr_Student_Modify SET Student_Grade = 'F' WHERE Student_Num = 2;
 UPDATE InstructorDBA.Instr_Student_Modify SET Student_Grade = 'F' WHERE Student_Num = 3;
 UPDATE InstructorDBA.Instr_Student_Modify SET Student_Num = 4 WHERE Student_Num = 3;
-SELECT /*fixed*/* FROM InstructorDBA.Instr_Student_Modify;
+SELECT * FROM InstructorDBA.Instr_Student_Modify;
 DELETE FROM InstructorDBA.Instr_Student_Modify WHERE Student_Num = 3;
-SELECT /*fixed*/* FROM InstructorDBA.Instr_Student_Modify;
+SELECT * FROM InstructorDBA.Instr_Student_Modify;
 ROLLBACK TO Instr_Modify_Delete_Point;
 
 /*Test student access*/
 CONNECT sgilbert1/TheSecPass0;
 show user;
-SELECT /*fixed*/* FROM InstructorDBA.Instr_Student_Modify;
+SELECT * FROM InstructorDBA.Instr_Student_Modify;
 UPDATE InstructorDBA.Instr_Student_Modify SET Student_Grade = 'F' WHERE Student_Num = 2;
 DELETE FROM InstructorDBA.Instr_Student_Modify WHERE Student_Num = 2;
-SELECT /*fixed*/* FROM InstructorDBA.Instr_Student_Modify;
+SELECT * FROM InstructorDBA.Instr_Student_Modify;
 
 CONNECT InstructorDBA/brr1wik7;    
 show user;
@@ -542,26 +543,26 @@ GRANT SELECT ON Student_Class_Grade_View TO student_role;
 /*Test Student View personal info*/
 CONNECT sgilbert1/TheSecPass0;
 show user;
-SELECT /*fixed*/* FROM InstructorDBA.Student_Personal_Info;
+SELECT * FROM InstructorDBA.Student_Personal_Info;
 
 /*Test instructor access*/
 CONNECT mlopez3/TheSecPass2;
 show user;
-SELECT /*fixed*/* FROM InstructorDBA.Student_Personal_Info;
+SELECT * FROM InstructorDBA.Student_Personal_Info;
 
 /*Test Student View instructor clas schedule*/
 CONNECT sgilbert1/TheSecPass0;
 show user;
-SELECT /*fixed*/* FROM InstructorDBA.Instr_All_Class;
+SELECT * FROM InstructorDBA.Instr_All_Class;
 
 /*Test Student View classes enrolled in and grade*/
 CONNECT sgilbert1/TheSecPass0;
 show user;
-SELECT /*fixed*/* FROM InstructorDBA.Student_Class_Grade_View;
+SELECT * FROM InstructorDBA.Student_Class_Grade_View;
 /*Test instructor access*/
 CONNECT mlopez3/TheSecPass2;
 show user;
-SELECT /*fixed*/* FROM InstructorDBA.Student_Class_Grade_View;
+SELECT * FROM InstructorDBA.Student_Class_Grade_View;
 
 CONNECT InstructorDBA/brr1wik7;    
 show user;
@@ -610,14 +611,14 @@ UPDATE InstructorDBA.Student_Personal_Info SET Student_ZipCode = '90210';
 CONNECT sgilbert1/TheSecPass0;
 show user;
 SAVEPOINT Student_Class_Signup_Point;
-SELECT /*fixed*/* FROM InstructorDBA.Student_Class_Grade_View;
+SELECT * FROM InstructorDBA.Student_Class_Grade_View;
 INSERT INTO InstructorDBA.Student_Class_Signup (Student_Num, Instr_Num, Sched_Num,  Student_Grade)
         VALUES                ( 3,6, 6,  'A');
 
 INSERT INTO InstructorDBA.Student_Class_Signup (Student_Num, Instr_Num, Sched_Num,  Student_Grade)
         VALUES                ( 1,3, 3,  'A');
 
-SELECT /*fixed*/* FROM InstructorDBA.Student_Class_Grade_View;
+SELECT * FROM InstructorDBA.Student_Class_Grade_View;
 ROLLBACK TO Student_Class_Signup_Point;
 
 /*Test instructor access*/
@@ -632,7 +633,7 @@ show user;
 SAVEPOINT Admin_Student_Class_Signup_Point;
 INSERT INTO InstructorDBA.Student_Class_Signup (Student_Num, Instr_Num, Sched_Num,  Student_Grade)
         VALUES                ( 3,6, 6,  'A');
-SELECT /*fixed*/ * FROM InstructorDBA.Student_Class_Signup;
+SELECT  * FROM InstructorDBA.Student_Class_Signup;
 ROLLBACK TO Admin_Student_Class_Signup_Point;
 CONNECT InstructorDBA/brr1wik7;
 show user;        
@@ -732,40 +733,40 @@ connect sys/brr1wik7 as sysdba;
 show user;
 UPDATE InstructorDBA.Class_Sched SET ols_col = CHAR_TO_LABEL('Sched_OLS_POL','S');
 UPDATE InstructorDBA.Class_Sched SET ols_col = CHAR_TO_LABEL('Sched_OLS_POL','HS') WHERE Sched_Notes = 'Beta';
-SELECT /*fixed*/* FROM InstructorDBA.Class_Sched;
+SELECT * FROM InstructorDBA.Class_Sched;
 GRANT SELECT ON InstructorDBA.Class_Sched TO student_role;
 
 /*Test InstructorDBA access*/
 CONNECT InstructorDBA/brr1wik7;
 show user; 
-SELECT /*fixed*/* FROM Class_Sched;
+SELECT * FROM Class_Sched;
 SAVEPOINT InstructorDBA_Student_Class_Sched_Insert;
 INSERT INTO Class_Sched (Sched_Num,           Sched_Day, Sched_Time, Sched_Day_Off, Sched_Notes, ols_col)
     VALUES              (12345,'All',     '24 Hours','7 days a week',   'Alpha', CHAR_TO_LABEL('Sched_OLS_POL','HS'));  
-SELECT /*fixed*/* FROM Class_Sched;    
+SELECT * FROM Class_Sched;    
 ROLLBACK TO InstructorDBA_Student_Class_Sched_Insert;
 
 
 /*Test admin access*/
 CONNECT bevans1/TheSecPass0;
 show user;
-SELECT /*fixed*/* FROM InstructorDBA.Class_Sched;
+SELECT * FROM InstructorDBA.Class_Sched;
 SAVEPOINT Admin_Student_Class_Sched_Insert;
 INSERT INTO InstructorDBA.Class_Sched (Sched_Num,           Sched_Day, Sched_Time, Sched_Day_Off, Sched_Notes, ols_col)
     VALUES              (12345,'All',     '24 Hours','7 days a week',   'Alpha', CHAR_TO_LABEL('Sched_OLS_POL','HS')); 
-SELECT /*fixed*/* FROM InstructorDBA.Class_Sched;    
+SELECT * FROM InstructorDBA.Class_Sched;    
 ROLLBACK TO Admin_Student_Class_Sched_Insert;
 
 
 /*Test instructor access*/
 CONNECT mlopez3/TheSecPass2;
 show user;
-SELECT /*fixed*/* FROM InstructorDBA.Class_Sched;
+SELECT * FROM InstructorDBA.Class_Sched;
 
 
 /*Test student access*/
 CONNECT sgilbert1/TheSecPass0;
 show user;
-SELECT /*fixed*/* FROM InstructorDBA.Class_Sched;
+SELECT * FROM InstructorDBA.Class_Sched;
 
 

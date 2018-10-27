@@ -1,66 +1,177 @@
-SQL> SET echo on;
 SQL> SET serveroutput on;
-SQL> /* Drop tables, sequence, and other objects you create*/
+SQL> set sqlformat ansiconsole;
 SQL> 
+SQL> /*Database Administrator Account Procedure*/
+SQL> connect sys/brr1wik7 as sysdba;
+Connected.
+SQL> show user;
+USER is "SYS"
+SQL> DROP USER InstructorDBA cascade;
+
+User INSTRUCTORDBA dropped.
+
+SQL> Create user InstructorDBA identified by brr1wik7;
+
+User INSTRUCTORDBA created.
+
+SQL> grant create session to InstructorDBA;
+
+Grant succeeded.
+
+SQL> grant dba to InstructorDBA;
+
+Grant succeeded.
+
+SQL> grant execute on dbms_rls to InstructorDBA;
+
+Grant succeeded.
+
+SQL> connect InstructorDBA/brr1wik7;
+Connected.
+SQL> show user;
+USER is "INSTRUCTORDBA"
+SQL> 
+SQL> /* Drop tables, sequence, and other objects you create*/
 SQL> DROP TABLE Student_Class_Signup;
 
-Table STUDENT_CLASS_SIGNUP dropped.
-
+Error starting at line : 17 in command -
+DROP TABLE Student_Class_Signup
+Error report -
+ORA-00942: table or view does not exist
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
 SQL> DROP TABLE Instr_Classes;
 
-Table INSTR_CLASSES dropped.
-
+Error starting at line : 18 in command -
+DROP TABLE Instr_Classes
+Error report -
+ORA-00942: table or view does not exist
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
 SQL> DROP TABLE Student_List;
 
-Table STUDENT_LIST dropped.
-
+Error starting at line : 19 in command -
+DROP TABLE Student_List
+Error report -
+ORA-00942: table or view does not exist
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
 SQL> DROP TABLE Instr_List;
 
-Table INSTR_LIST dropped.
-
+Error starting at line : 20 in command -
+DROP TABLE Instr_List
+Error report -
+ORA-00942: table or view does not exist
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
 SQL> DROP TABLE Course_List;
 
-Table COURSE_LIST dropped.
-
+Error starting at line : 21 in command -
+DROP TABLE Course_List
+Error report -
+ORA-00942: table or view does not exist
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
 SQL> DROP TABLE Admin_List;
 
-Table ADMIN_LIST dropped.
-
+Error starting at line : 22 in command -
+DROP TABLE Admin_List
+Error report -
+ORA-00942: table or view does not exist
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
 SQL> DROP TABLE Section_Info;
 
-Table SECTION_INFO dropped.
-
+Error starting at line : 23 in command -
+DROP TABLE Section_Info
+Error report -
+ORA-00942: table or view does not exist
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
 SQL> DROP TABLE Class_Sched;
 
-Table CLASS_SCHED dropped.
-
+Error starting at line : 24 in command -
+DROP TABLE Class_Sched
+Error report -
+ORA-00942: table or view does not exist
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
 SQL> DROP SEQUENCE SectionNum_Seq;
 
-Sequence SECTIONNUM_SEQ dropped.
-
+Error starting at line : 25 in command -
+DROP SEQUENCE SectionNum_Seq
+Error report -
+ORA-02289: sequence does not exist
+02289. 00000 -  "sequence does not exist"
+*Cause:    The specified sequence does not exist, or the user does
+           not have the required privilege to perform this operation.
+*Action:   Make sure the sequence name is correct, and that you have
+           the right to perform the desired operation on this sequence.
 SQL> DROP SEQUENCE InstrNum_Seq;
 
-Sequence INSTRNUM_SEQ dropped.
-
+Error starting at line : 26 in command -
+DROP SEQUENCE InstrNum_Seq
+Error report -
+ORA-02289: sequence does not exist
+02289. 00000 -  "sequence does not exist"
+*Cause:    The specified sequence does not exist, or the user does
+           not have the required privilege to perform this operation.
+*Action:   Make sure the sequence name is correct, and that you have
+           the right to perform the desired operation on this sequence.
 SQL> DROP SEQUENCE CourseNum_Seq;
 
-Sequence COURSENUM_SEQ dropped.
-
+Error starting at line : 27 in command -
+DROP SEQUENCE CourseNum_Seq
+Error report -
+ORA-02289: sequence does not exist
+02289. 00000 -  "sequence does not exist"
+*Cause:    The specified sequence does not exist, or the user does
+           not have the required privilege to perform this operation.
+*Action:   Make sure the sequence name is correct, and that you have
+           the right to perform the desired operation on this sequence.
 SQL> DROP SEQUENCE AdminNum_Seq;
 
-Sequence ADMINNUM_SEQ dropped.
-
+Error starting at line : 28 in command -
+DROP SEQUENCE AdminNum_Seq
+Error report -
+ORA-02289: sequence does not exist
+02289. 00000 -  "sequence does not exist"
+*Cause:    The specified sequence does not exist, or the user does
+           not have the required privilege to perform this operation.
+*Action:   Make sure the sequence name is correct, and that you have
+           the right to perform the desired operation on this sequence.
 SQL> DROP SEQUENCE SchedNum_Seq;
 
-Sequence SCHEDNUM_SEQ dropped.
-
+Error starting at line : 29 in command -
+DROP SEQUENCE SchedNum_Seq
+Error report -
+ORA-02289: sequence does not exist
+02289. 00000 -  "sequence does not exist"
+*Cause:    The specified sequence does not exist, or the user does
+           not have the required privilege to perform this operation.
+*Action:   Make sure the sequence name is correct, and that you have
+           the right to perform the desired operation on this sequence.
 SQL> DROP SEQUENCE StudentNum_Seq;
 
-Sequence STUDENTNUM_SEQ dropped.
-
+Error starting at line : 30 in command -
+DROP SEQUENCE StudentNum_Seq
+Error report -
+ORA-02289: sequence does not exist
+02289. 00000 -  "sequence does not exist"
+*Cause:    The specified sequence does not exist, or the user does
+           not have the required privilege to perform this operation.
+*Action:   Make sure the sequence name is correct, and that you have
+           the right to perform the desired operation on this sequence.
 SQL> 
 SQL> /* Create tables */
-SQL> 
 SQL> CREATE TABLE Section_Info
   2  (
   3    Section_Num		INTEGER         NOT NULL,
@@ -75,13 +186,13 @@ Table SECTION_INFO created.
 
 SQL> 
 SQL> DESCRIBE Section_Info;
-Name            Null?    Type          
---------------- -------- ------------- 
-SECTION_NUM     NOT NULL NUMBER(38)    
-SECTION_NAME             VARCHAR2(100) 
-SECTION_ADDRESS          VARCHAR2(100) 
-SECTION_FOS              VARCHAR2(100) 
-SECTION_ZIPCODE          VARCHAR2(10)  
+Name              Null?      Type            
+SECTION_NUM       NOT NULL   NUMBER(38)      
+SECTION_NAME                 VARCHAR2(100)   
+SECTION_ADDRESS              VARCHAR2(100)   
+SECTION_FOS                  VARCHAR2(100)   
+SECTION_ZIPCODE              VARCHAR2(10)    
+
 SQL> 
 SQL> CREATE TABLE Admin_List
   2  (
@@ -101,15 +212,15 @@ Table ADMIN_LIST created.
 
 SQL> 
 SQL> DESCRIBE Admin_List;
-Name           Null?    Type          
--------------- -------- ------------- 
-ADMIN_NUM      NOT NULL NUMBER(38)    
-ADMIN_ADDRESS           VARCHAR2(100) 
-ADMIN_PHONENUM          VARCHAR2(20)  
-SECTION_NUM    NOT NULL NUMBER(38)    
-ADMIN_LNAME             VARCHAR2(20)  
-ADMIN_FNAME             VARCHAR2(20)  
-ADMIN_ZIPCODE           VARCHAR2(10)  
+Name             Null?      Type            
+ADMIN_NUM        NOT NULL   NUMBER(38)      
+ADMIN_ADDRESS               VARCHAR2(100)   
+ADMIN_PHONENUM              VARCHAR2(20)    
+SECTION_NUM      NOT NULL   NUMBER(38)      
+ADMIN_LNAME                 VARCHAR2(20)    
+ADMIN_FNAME                 VARCHAR2(20)    
+ADMIN_ZIPCODE               VARCHAR2(10)    
+
 SQL> 
 SQL> 
 SQL> CREATE TABLE Student_List
@@ -127,14 +238,14 @@ Table STUDENT_LIST created.
 
 SQL> 
 SQL> DESCRIBE Student_List;
-Name             Null?    Type          
----------------- -------- ------------- 
-STUDENT_NUM      NOT NULL NUMBER(38)    
-STUDENT_ADDRESS           VARCHAR2(100) 
-STUDENT_PHONENUM          VARCHAR2(20)  
-STUDENT_LNAME             VARCHAR2(20)  
-STUDENT_FNAME             VARCHAR2(20)  
-STUDENT_ZIPCODE           VARCHAR2(10)  
+Name               Null?      Type            
+STUDENT_NUM        NOT NULL   NUMBER(38)      
+STUDENT_ADDRESS               VARCHAR2(100)   
+STUDENT_PHONENUM              VARCHAR2(20)    
+STUDENT_LNAME                 VARCHAR2(20)    
+STUDENT_FNAME                 VARCHAR2(20)    
+STUDENT_ZIPCODE               VARCHAR2(10)    
+
 SQL> 
 SQL> 
 SQL> CREATE TABLE Instr_List
@@ -155,15 +266,15 @@ Table INSTR_LIST created.
 
 SQL> 
 SQL> DESCRIBE Instr_List;
-Name           Null?    Type          
--------------- -------- ------------- 
-INSTR_NUM      NOT NULL NUMBER(38)    
-INSTR_ADDRESS           VARCHAR2(100) 
-INSTR_PHONENUM          VARCHAR2(20)  
-SECTION_NUM    NOT NULL NUMBER(38)    
-INSTR_LNAME             VARCHAR2(20)  
-INSTR_FNAME             VARCHAR2(20)  
-INSTR_ZIPCODE           VARCHAR2(10)  
+Name             Null?      Type            
+INSTR_NUM        NOT NULL   NUMBER(38)      
+INSTR_ADDRESS               VARCHAR2(100)   
+INSTR_PHONENUM              VARCHAR2(20)    
+SECTION_NUM      NOT NULL   NUMBER(38)      
+INSTR_LNAME                 VARCHAR2(20)    
+INSTR_FNAME                 VARCHAR2(20)    
+INSTR_ZIPCODE               VARCHAR2(10)    
+
 SQL> 
 SQL> 
 SQL> CREATE TABLE Course_List
@@ -186,14 +297,14 @@ Table COURSE_LIST created.
 
 SQL> 
 SQL> DESCRIBE Course_List;
-Name         Null?    Type           
------------- -------- -------------- 
-COURSE_NUM   NOT NULL NUMBER(38)     
-COURSE_NAME           VARCHAR2(100)  
-ADMIN_NUM    NOT NULL NUMBER(38)     
-COURSE_DESC           VARCHAR2(1000) 
-COURSE_HOURS          NUMBER(38)     
-SECTION_NUM  NOT NULL NUMBER(38)     
+Name           Null?      Type             
+COURSE_NUM     NOT NULL   NUMBER(38)       
+COURSE_NAME               VARCHAR2(100)    
+ADMIN_NUM      NOT NULL   NUMBER(38)       
+COURSE_DESC               VARCHAR2(1000)   
+COURSE_HOURS              NUMBER(38)       
+SECTION_NUM    NOT NULL   NUMBER(38)       
+
 SQL> 
 SQL> 
 SQL> CREATE TABLE Class_Sched
@@ -210,13 +321,13 @@ Table CLASS_SCHED created.
 
 SQL> 
 SQL> DESCRIBE Class_Sched;
-Name          Null?    Type           
-------------- -------- -------------- 
-SCHED_NUM     NOT NULL NUMBER(38)     
-SCHED_DAY              VARCHAR2(100)  
-SCHED_TIME             VARCHAR2(10)   
-SCHED_DAY_OFF          VARCHAR2(100)  
-SCHED_NOTES            VARCHAR2(1000) 
+Name            Null?      Type             
+SCHED_NUM       NOT NULL   NUMBER(38)       
+SCHED_DAY                  VARCHAR2(100)    
+SCHED_TIME                 VARCHAR2(10)     
+SCHED_DAY_OFF              VARCHAR2(100)    
+SCHED_NOTES                VARCHAR2(1000)   
+
 SQL> 
 SQL> CREATE TABLE Instr_Classes
   2  (
@@ -242,13 +353,13 @@ Table INSTR_CLASSES created.
 
 SQL> 
 SQL> DESCRIBE Instr_Classes;
-Name        Null?    Type           
------------ -------- -------------- 
-INSTR_NUM   NOT NULL NUMBER(38)     
-SCHED_NUM   NOT NULL NUMBER(38)     
-COURSE_NUM  NOT NULL NUMBER(38)     
-CLASS_NOTES          VARCHAR2(1000) 
-CLASS_ROOM           VARCHAR2(5)    
+Name          Null?      Type             
+INSTR_NUM     NOT NULL   NUMBER(38)       
+SCHED_NUM     NOT NULL   NUMBER(38)       
+COURSE_NUM    NOT NULL   NUMBER(38)       
+CLASS_NOTES              VARCHAR2(1000)   
+CLASS_ROOM               VARCHAR2(5)      
+
 SQL> 
 SQL> 
 SQL> CREATE TABLE Student_Class_Signup
@@ -701,6 +812,16 @@ SQL> INSERT INTO Class_Sched (Sched_Num,           Sched_Day, Sched_Time, Sched_
 
 1 row inserted.
 
+SQL> INSERT INTO Class_Sched (Sched_Num,           Sched_Day, Sched_Time, Sched_Day_Off, Sched_Notes)
+  2      VALUES              (SchedNum_Seq.NEXTVAL,'Mon',     '0900-0930','6 days a week',   'Beta');
+
+1 row inserted.
+
+SQL> INSERT INTO Class_Sched (Sched_Num,           Sched_Day, Sched_Time, Sched_Day_Off, Sched_Notes)
+  2      VALUES              (SchedNum_Seq.NEXTVAL,'Tues',     '1100-1115','6 days a week',   'Beta');
+
+1 row inserted.
+
 SQL> 
 SQL> INSERT INTO Instr_Classes (Instr_Num, Sched_Num, Course_Num, Class_Notes,                        Class_Room)
   2      VALUES                ('1',       '1',       '1',        'Computer one broke','A');
@@ -829,149 +950,147 @@ SQL> commit;
 
 Commit complete.
 
-A class has been added!!
-A class has been added!!
-A class has been added!!
-A class has been added!!
-A class has been added!!
-A class has been added!!
-A class has been added!!
-A class has been added!!
-A class has been added!!
-A class has been added!!
-A class has been added!!
-A class has been added!!
-A class has been added!!
-
 SQL> 
 SQL> /* Verify that each table has 10 or more rows of data */
 SQL> 
-SQL> SELECT /*fixed*/ * FROM Section_Info;
-"SECTION_NUM"                 "SECTION_NAME"                "SECTION_ADDRESS"             "SECTION_FOS"                 "SECTION_ZIPCODE"             
-"1"                           "Computer Science Section"    "110 Finegand Place"          "Computer Science"            "31088"                       
-"2"                           "Art Section"                 "111 Finegand Place"          "Art"                         "31088"                       
-"3"                           "Aircraft Section"            "112 Finegand Place"          "Aircraft"                    "31088"                       
-"4"                           "Robotic Section"             "113 Finegand Place"          "Robotics"                    "31088"                       
-"5"                           "Database Section"            "114 Finegand Place"          "Database Technology"         "31088"                       
-"6"                           "English Section"             "115 Finegand Place"          "English language"            "31088"                       
-"7"                           "Physics Section"             "116 Finegand Place"          "Physics"                     "31088"                       
-"8"                           "Chemistry Section"           "117 Finegand Place"          "Chemistry"                   "31088"                       
-"9"                           "Spanish Section"             "118 Finegand Place"          "Spanish language"            "31088"                       
-"10"                          "Automotive Section"          "119 Finegand Place"          "Automotive Mechanics"        "31088"                       
-"11"                          "Space Travel Section"        "120 Finegand Place"          "Space Travel"                "31088"                       
+SQL> SELECT  * FROM Section_Info;
+SECTION_NUM   SECTION_NAME               SECTION_ADDRESS      SECTION_FOS            SECTION_ZIPCODE   
+            1 Computer Science Section   110 Finegand Place   Computer Science       31088             
+            2 Art Section                111 Finegand Place   Art                    31088             
+            3 Aircraft Section           112 Finegand Place   Aircraft               31088             
+            4 Robotic Section            113 Finegand Place   Robotics               31088             
+            5 Database Section           114 Finegand Place   Database Technology    31088             
+            6 English Section            115 Finegand Place   English language       31088             
+            7 Physics Section            116 Finegand Place   Physics                31088             
+            8 Chemistry Section          117 Finegand Place   Chemistry              31088             
+            9 Spanish Section            118 Finegand Place   Spanish language       31088             
+           10 Automotive Section         119 Finegand Place   Automotive Mechanics   31088             
+           11 Space Travel Section       120 Finegand Place   Space Travel           31088             
+
 
 11 rows selected. 
 
-SQL> SELECT /*fixed*/ * FROM Instr_List;
-"INSTR_NUM"                   "INSTR_ADDRESS"               "INSTR_PHONENUM"              "SECTION_NUM"                 "INSTR_LNAME"                 "INSTR_FNAME"                 "INSTR_ZIPCODE"               
-"1"                           "101 Apple Street"            "111-222-3434"                "1"                           "Roberts"                     "John"                        "31003"                       
-"2"                           "102 Apple Street"            "111-222-3435"                "2"                           "Russell"                     "Brandon"                     "31003"                       
-"3"                           "103 Apple Street"            "111-222-3436"                "3"                           "Lopez"                       "Mike"                        "31003"                       
-"4"                           "104 Apple Street"            "111-222-3437"                "4"                           "Monteor"                     "Jim"                         "31003"                       
-"5"                           "105 Apple Street"            "111-222-3438"                "5"                           "Hamm"                        "Patricia"                    "31003"                       
-"6"                           "106 Apple Street"            "111-222-3439"                "6"                           "Ingle"                       "Tammy"                       "31003"                       
-"7"                           "107 Apple Street"            "111-222-3440"                "7"                           "Jordan"                      "Keith"                       "31003"                       
-"8"                           "108 Apple Street"            "111-222-3441"                "8"                           "Cooper"                      "Adam"                        "31003"                       
-"9"                           "109 Apple Street"            "111-222-3442"                "9"                           "McCoy"                       "Amber"                       "31003"                       
-"10"                          "110 Apple Street"            "111-222-3443"                "10"                          "Fuller"                      "Jana"                        "31003"                       
-"11"                          "111 Apple Street"            "111-222-3444"                "10"                          "Xavier"                      "Mark"                        "31003"                       
+SQL> SELECT  * FROM Instr_List;
+INSTR_NUM   INSTR_ADDRESS      INSTR_PHONENUM   SECTION_NUM   INSTR_LNAME   INSTR_FNAME   INSTR_ZIPCODE   
+          1 101 Apple Street   111-222-3434                 1 Roberts       John          31003           
+          2 102 Apple Street   111-222-3435                 2 Russell       Brandon       31003           
+          3 103 Apple Street   111-222-3436                 3 Lopez         Mike          31003           
+          4 104 Apple Street   111-222-3437                 4 Monteor       Jim           31003           
+          5 105 Apple Street   111-222-3438                 5 Hamm          Patricia      31003           
+          6 106 Apple Street   111-222-3439                 6 Ingle         Tammy         31003           
+          7 107 Apple Street   111-222-3440                 7 Jordan        Keith         31003           
+          8 108 Apple Street   111-222-3441                 8 Cooper        Adam          31003           
+          9 109 Apple Street   111-222-3442                 9 McCoy         Amber         31003           
+         10 110 Apple Street   111-222-3443                10 Fuller        Jana          31003           
+         11 111 Apple Street   111-222-3444                10 Xavier        Mark          31003           
+
 
 11 rows selected. 
 
-SQL> SELECT /*fixed*/ * FROM Admin_List;
-"ADMIN_NUM"                   "ADMIN_ADDRESS"               "ADMIN_PHONENUM"              "SECTION_NUM"                 "ADMIN_LNAME"                 "ADMIN_FNAME"                 "ADMIN_ZIPCODE"               
-"1"                           "501 Orange Park"             "111-333-3434"                "1"                           "Evans"                       "Bob"                         "31004"                       
-"2"                           "502 Orange Park"             "111-333-3435"                "2"                           "Johnson"                     "Mike"                        "31004"                       
-"3"                           "503 Orange Park"             "111-333-3436"                "3"                           "Jenkins"                     "Mary"                        "31004"                       
-"4"                           "504 Orange Park"             "111-333-3437"                "4"                           "Russell"                     "Jim"                         "31004"                       
-"5"                           "505 Orange Park"             "111-333-3438"                "5"                           "Bargueno"                    "Patricia"                    "31004"                       
-"6"                           "506 Orange Park"             "111-333-3439"                "6"                           "Hopkins"                     "John"                        "31004"                       
-"7"                           "507 Orange Park"             "111-333-3440"                "7"                           "Smith"                       "Will"                        "31004"                       
-"8"                           "508 Orange Park"             "111-333-3441"                "8"                           "Brown"                       "Adam"                        "31004"                       
-"9"                           "509 Orange Park"             "111-333-3442"                "9"                           "Williams"                    "Shane"                       "31004"                       
-"10"                          "510 Orange Park"             "111-333-3443"                "10"                          "Robins"                      "Amber"                       "31004"                       
-"11"                          "511 Orange Park"             "111-333-3444"                "4"                           "Hawkins"                     "Tim"                         "31004"                       
+SQL> SELECT  * FROM Admin_List;
+ADMIN_NUM   ADMIN_ADDRESS     ADMIN_PHONENUM   SECTION_NUM   ADMIN_LNAME   ADMIN_FNAME   ADMIN_ZIPCODE   
+          1 501 Orange Park   111-333-3434                 1 Evans         Bob           31004           
+          2 502 Orange Park   111-333-3435                 2 Johnson       Mike          31004           
+          3 503 Orange Park   111-333-3436                 3 Jenkins       Mary          31004           
+          4 504 Orange Park   111-333-3437                 4 Russell       Jim           31004           
+          5 505 Orange Park   111-333-3438                 5 Bargueno      Patricia      31004           
+          6 506 Orange Park   111-333-3439                 6 Hopkins       John          31004           
+          7 507 Orange Park   111-333-3440                 7 Smith         Will          31004           
+          8 508 Orange Park   111-333-3441                 8 Brown         Adam          31004           
+          9 509 Orange Park   111-333-3442                 9 Williams      Shane         31004           
+         10 510 Orange Park   111-333-3443                10 Robins        Amber         31004           
+         11 511 Orange Park   111-333-3444                 4 Hawkins       Tim           31004           
+
 
 11 rows selected. 
 
-SQL> SELECT /*fixed*/ * FROM Student_List;
-"STUDENT_NUM"                 "STUDENT_ADDRESS"             "STUDENT_PHONENUM"            "STUDENT_LNAME"               "STUDENT_FNAME"               "STUDENT_ZIPCODE"             
-"1"                           "Dorm 1"                      "222-333-3434"                "Gilbert"                     "Sarah"                       "31005"                       
-"2"                           "Dorm 2"                      "222-333-3435"                "Myers"                       "James"                       "31005"                       
-"3"                           "Dorm 3"                      "222-333-3436"                "Howard"                      "Rico"                        "31005"                       
-"4"                           "Dorm 4"                      "222-333-3437"                "Bush"                        "Donald"                      "31005"                       
-"5"                           "Dorm 5"                      "222-333-3438"                "Simmons"                     "Bill"                        "31005"                       
-"6"                           "Dorm 6"                      "222-333-3439"                "Aultman"                     "Richard"                     "31005"                       
-"7"                           "Dorm 7"                      "222-333-3440"                "Ruger"                       "Victoria"                    "31005"                       
-"8"                           "Dorm 8"                      "222-333-3441"                "Thomas"                      "Melissa"                     "31005"                       
-"9"                           "Dorm 9"                      "222-333-3442"                "Synder"                      "Jennifer"                    "31005"                       
-"10"                          "Dorm 10"                     "222-333-3443"                "Baker"                       "Elizabeth"                   "31005"                       
-"11"                          "Dorm 11"                     "222-333-3444"                "Pines"                       "Matt"                        "31005"                       
+SQL> SELECT  * FROM Student_List;
+STUDENT_NUM   STUDENT_ADDRESS   STUDENT_PHONENUM   STUDENT_LNAME   STUDENT_FNAME   STUDENT_ZIPCODE   
+            1 Dorm 1            222-333-3434       Gilbert         Sarah           31005             
+            2 Dorm 2            222-333-3435       Myers           James           31005             
+            3 Dorm 3            222-333-3436       Howard          Rico            31005             
+            4 Dorm 4            222-333-3437       Bush            Donald          31005             
+            5 Dorm 5            222-333-3438       Simmons         Bill            31005             
+            6 Dorm 6            222-333-3439       Aultman         Richard         31005             
+            7 Dorm 7            222-333-3440       Ruger           Victoria        31005             
+            8 Dorm 8            222-333-3441       Thomas          Melissa         31005             
+            9 Dorm 9            222-333-3442       Synder          Jennifer        31005             
+           10 Dorm 10           222-333-3443       Baker           Elizabeth       31005             
+           11 Dorm 11           222-333-3444       Pines           Matt            31005             
+
 
 11 rows selected. 
 
-SQL> SELECT /*fixed*/ * FROM Course_List;
-"COURSE_NUM"                  "COURSE_NAME"                 "ADMIN_NUM"                   "COURSE_DESC"                 "COURSE_HOURS"                "SECTION_NUM"                 
-"1"                           "Intro to Computer Science"   "1"                           "Intro to Computer Science"   "3"                           "1"                           
-"2"                           "Intro to Art"                "2"                           "Intro to Art"                "3"                           "2"                           
-"3"                           "Intro to Aircraft mechanics" "3"                           "Intro to Aircraft mechanics" "3"                           "3"                           
-"4"                           "Intro to Robotics"           "4"                           "Intro to Robotics"           "3"                           "4"                           
-"5"                           "Intro to Databases"          "5"                           "Intro to Databases"          "3"                           "5"                           
-"6"                           "Advanced English"            "6"                           "Advanced English"            "3"                           "6"                           
-"7"                           "Intro to Physics"            "7"                           "Intro to Physics"            "3"                           "7"                           
-"8"                           "Intro to Chemistry"          "8"                           "Intro to Chemistry"          "3"                           "8"                           
-"9"                           "Intro to Spanish"            "9"                           "Intro to Spanish"            "3"                           "9"                           
-"10"                          "Automotive mechanics Intro"  "10"                          "Automotive mechanics Intro"  "3"                           "10"                          
-"11"                          "Advanced Robotics"           "11"                          "Advanced Robotics"           "6"                           "4"                           
+SQL> SELECT  * FROM Course_List;
+COURSE_NUM   COURSE_NAME                   ADMIN_NUM   COURSE_DESC                   COURSE_HOURS   SECTION_NUM   
+           1 Intro to Computer Science               1 Intro to Computer Science                  3             1 
+           2 Intro to Art                            2 Intro to Art                               3             2 
+           3 Intro to Aircraft mechanics             3 Intro to Aircraft mechanics                3             3 
+           4 Intro to Robotics                       4 Intro to Robotics                          3             4 
+           5 Intro to Databases                      5 Intro to Databases                         3             5 
+           6 Advanced English                        6 Advanced English                           3             6 
+           7 Intro to Physics                        7 Intro to Physics                           3             7 
+           8 Intro to Chemistry                      8 Intro to Chemistry                         3             8 
+           9 Intro to Spanish                        9 Intro to Spanish                           3             9 
+          10 Automotive mechanics Intro             10 Automotive mechanics Intro                 3            10 
+          11 Advanced Robotics                      11 Advanced Robotics                          6             4 
+
 
 11 rows selected. 
 
-SQL> SELECT /*fixed*/ * FROM Class_Sched;
-"SCHED_NUM"                   "SCHED_DAY"                   "SCHED_TIME"                  "SCHED_DAY_OFF"               "SCHED_NOTES"                 
-"1"                           "Mon-Tues-Wed"                "0900-1100"                   "Oct. 13th"                   "This is the one of the main schedules"
-"2"                           "Mon-Tues-Thur"               "0900-1100"                   "Oct. 13th"                   "This is the one of the main schedules"
-"3"                           "Mon-Wed"                     "1000-1200"                   "Oct. 14th"                   "This is the one of the main schedules"
-"4"                           "Mon-Wed-Fri"                 "1000-1200"                   "Oct. 15th"                   "This a alternative schedules"
-"5"                           "Mon-Tues"                    "0800-0900"                   "Oct. 16th"                   "This a alternative schedules"
-"6"                           "Tues-Wed"                    "1300-1500"                   "Oct. 17th"                   "This a alternative schedules"
-"7"                           "Thur-Fri"                    "1300-1500"                   "Oct. 18th"                   "This a alternative schedules"
-"8"                           "Wed-Fri"                     "1600-1800"                   "Oct. 19th"                   "This a alternative schedules"
-"9"                           "Sat"                         "0900-1100"                   "Oct. 20th"                   "Weekend Schedule"            
-"10"                          "Sun"                         "0900-1100"                   "Oct. 21st"                   "Weekend Schedule"            
+SQL> SELECT  * FROM Class_Sched;
+SCHED_NUM   SCHED_DAY       SCHED_TIME   SCHED_DAY_OFF   SCHED_NOTES                             
+          1 Mon-Tues-Wed    0900-1100    Oct. 13th       This is the one of the main schedules   
+          2 Mon-Tues-Thur   0900-1100    Oct. 13th       This is the one of the main schedules   
+          3 Mon-Wed         1000-1200    Oct. 14th       This is the one of the main schedules   
+          4 Mon-Wed-Fri     1000-1200    Oct. 15th       This a alternative schedules            
+          5 Mon-Tues        0800-0900    Oct. 16th       This a alternative schedules            
+          6 Tues-Wed        1300-1500    Oct. 17th       This a alternative schedules            
+          7 Thur-Fri        1300-1500    Oct. 18th       This a alternative schedules            
+          8 Wed-Fri         1600-1800    Oct. 19th       This a alternative schedules            
+          9 Sat             0900-1100    Oct. 20th       Weekend Schedule                        
+         10 Sun             0900-1100    Oct. 21st       Weekend Schedule                        
+         11 Mon             0900-0930    6 days a week   Beta                                    
+         12 Tues            1100-1115    6 days a week   Beta                                    
 
-10 rows selected. 
 
-SQL> SELECT /*fixed*/ * FROM Instr_Classes;
-"INSTR_NUM"                   "SCHED_NUM"                   "COURSE_NUM"                  "CLASS_NOTES"                 "CLASS_ROOM"                  
-"1"                           "1"                           "1"                           "Computer one broke"          "A"                           
-"2"                           "2"                           "2"                           "Room Ready"                  "B"                           
-"3"                           "3"                           "3"                           "Instructor Chair broke"      "C"                           
-"4"                           "4"                           "4"                           "A/C not working"             "D"                           
-"5"                           "5"                           "5"                           "Computer two broke"          "E"                           
-"6"                           "6"                           "6"                           "No whiteboard"               "F"                           
-"7"                           "7"                           "7"                           "station 3 missing keyboard"  "G"                           
-"8"                           "8"                           "8"                           "Room Ready"                  "H"                           
-"9"                           "9"                           "9"                           "Room Ready"                  "I"                           
-"10"                          "10"                          "10"                          "Room Ready"                  "J"                           
-"10"                          "9"                           "10"                          "Room Ready"                  "J"                           
-"9"                           "8"                           "10"                          "Room Ready"                  "X"                           
-"1"                           "2"                           "9"                           "Room Ready"                  "Z"                           
+12 rows selected. 
+
+SQL> 
+SQL> SELECT  * FROM Instr_Classes;
+INSTR_NUM   SCHED_NUM   COURSE_NUM   CLASS_NOTES                  CLASS_ROOM   
+          1           1            1 Computer one broke           A            
+          2           2            2 Room Ready                   B            
+          3           3            3 Instructor Chair broke       C            
+          4           4            4 A/C not working              D            
+          5           5            5 Computer two broke           E            
+          6           6            6 No whiteboard                F            
+          7           7            7 station 3 missing keyboard   G            
+          8           8            8 Room Ready                   H            
+          9           9            9 Room Ready                   I            
+         10          10           10 Room Ready                   J            
+         10           9           10 Room Ready                   J            
+          9           8           10 Room Ready                   X            
+          1           2            9 Room Ready                   Z            
+
 
 13 rows selected. 
 
-SQL> SELECT /*fixed*/ * FROM Student_Class_Signup;
-"STUDENT_NUM"                 "INSTR_NUM"                   "SCHED_NUM"                   "STUDENT_GRADE"               
-"1"                           "1"                           "1"                           "A"                           
-"1"                           "2"                           "2"                           "B"                           
-"2"                           "3"                           "3"                           "A"                           
-"3"                           "3"                           "3"                           "C"                           
-"4"                           "4"                           "4"                           "C"                           
-"5"                           "5"                           "5"                           "B"                           
-"6"                           "6"                           "6"                           "D"                           
-"7"                           "7"                           "7"                           "F"                           
-"8"                           "8"                           "8"                           ""                            
-"9"                           "9"                           "9"                           "A"                           
-"10"                          "10"                          "10"                          "A"                           
+SQL> SELECT  * FROM Student_Class_Signup;
+STUDENT_NUM   INSTR_NUM   SCHED_NUM   STUDENT_GRADE   
+            1           1           1 A               
+            1           2           2 B               
+            2           3           3 A               
+            3           3           3 C               
+            4           4           4 C               
+            5           5           5 B               
+            6           6           6 D               
+            7           7           7 F               
+            8           8           8                 
+            9           9           9 A               
+           10          10          10 A               
+
 
 11 rows selected. 
 
+Connection created by CONNECT script command disconnected

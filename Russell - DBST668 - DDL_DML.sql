@@ -1,8 +1,10 @@
 SET echo on;
 SET serveroutput on;
+set sqlformat ansiconsole;
+
+/*Database Administrator Account Procedure*/
 connect sys/brr1wik7 as sysdba;
 show user;
-/*Drop and Create a DBA*/
 DROP USER InstructorDBA cascade;
 Create user InstructorDBA identified by brr1wik7;
 grant create session to InstructorDBA;
@@ -10,8 +12,8 @@ grant dba to InstructorDBA;
 grant execute on dbms_rls to InstructorDBA;
 connect InstructorDBA/brr1wik7;
 show user;
-/* Drop tables, sequence, and other objects you create*/
 
+/* Drop tables, sequence, and other objects you create*/
 DROP TABLE Student_Class_Signup;
 DROP TABLE Instr_Classes;
 DROP TABLE Student_List;
@@ -28,7 +30,6 @@ DROP SEQUENCE SchedNum_Seq;
 DROP SEQUENCE StudentNum_Seq;
 
 /* Create tables */
-
 CREATE TABLE Section_Info
 (
   Section_Num		INTEGER         NOT NULL,
@@ -404,13 +405,14 @@ commit;
 
 /* Verify that each table has 10 or more rows of data */
 
-SELECT /*fixed*/ * FROM Section_Info;
-SELECT /*fixed*/ * FROM Instr_List;
-SELECT /*fixed*/ * FROM Admin_List;
-SELECT /*fixed*/ * FROM Student_List;
-SELECT /*fixed*/ * FROM Course_List;
-SELECT /*fixed*/ * FROM Class_Sched;
-SELECT /*fixed*/ * FROM Instr_Classes;
-SELECT /*fixed*/ * FROM Student_Class_Signup;
+SELECT  * FROM Section_Info;
+SELECT  * FROM Instr_List;
+SELECT  * FROM Admin_List;
+SELECT  * FROM Student_List;
+SELECT  * FROM Course_List;
+SELECT  * FROM Class_Sched;
+
+SELECT  * FROM Instr_Classes;
+SELECT  * FROM Student_Class_Signup;
 
 

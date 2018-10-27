@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<b:Sources xmlns:b="http://schemas.openxmlformats.org/officeDocument/2006/bibliography" xmlns="http://schemas.openxmlformats.org/officeDocument/2006/bibliography" SelectedStyle="">
+<b:Source>
+<b:Year>2010</b:Year>
+<b:BIBTEX_Entry>article</b:BIBTEX_Entry>
+<b:SourceType>JournalArticle</b:SourceType>
+<b:Title>Database Security: A Historical Perspective</b:Title>
+<b:Tag>lesov2010database</b:Tag>
+<b:Author>
+<b:Author>
+<b:NameList>
+<b:Person>
+<b:Last>Lesov</b:Last>
+<b:First>Paul</b:First>
+</b:Person>
+</b:NameList>
+</b:Author>
+</b:Author>
+<b:JournalName>arXiv preprint arXiv:1004.4022</b:JournalName>
+</b:Source>
+</b:Sources>

@@ -1,0 +1,2194 @@
+SQL> SET SERVEROUTPUT ON;
+SQL> set sqlformat ansiconsole;
+SQL> 
+SQL> /*Connect to Instructor DBA*/
+SQL> connect InstructorDBA/brr1wik7;
+Connected.
+SQL> show user;
+USER is "INSTRUCTORDBA"
+SQL> 
+SQL> /* Drop users, roles, policies, and other objects you create*/
+SQL> DROP ROLE student_role;
+
+Role STUDENT_ROLE dropped.
+
+SQL> DROP ROLE instructor_role;
+
+Role INSTRUCTOR_ROLE dropped.
+
+SQL> DROP ROLE admin_role;
+
+Role ADMIN_ROLE dropped.
+
+SQL> 
+SQL> BEGIN
+  2  DBMS_RLS.DROP_POLICY(
+  3      object_schema => 'InstructorDBA',
+  4      object_name   => 'Admin_List',
+  5      policy_name   => 'Hide_Admin_Info'
+  6  );
+  7  END;
+  8  /
+
+PL/SQL procedure successfully completed.
+
+SQL> 
+SQL> CONNECT lbacsys/brr1wik7 
+Connected.
+SQL> show user;
+USER is "LBACSYS"
+SQL> 
+SQL> BEGIN
+  2      SA_SYSDBA.DROP_POLICY(
+  3      policy_name => 'Sched_OLS_POL'
+  4      );
+  5  END;
+  6  /
+
+PL/SQL procedure successfully completed.
+
+SQL> connect InstructorDBA/brr1wik7;
+Connected.
+SQL> show user;
+USER is "INSTRUCTORDBA"
+SQL> 
+SQL> /*Instructor account drop*/
+SQL> BEGIN
+  2    FOR x IN (SELECT User_Name FROM Instr_List)
+  3    LOOP
+  4      EXECUTE IMMEDIATE 'DROP USER '||x.User_Name;
+  5    END LOOP;
+  6  /*Admin account drop*/
+  7    FOR x IN (SELECT User_Name FROM Admin_List)
+  8    LOOP
+  9      EXECUTE IMMEDIATE 'DROP USER '||x.User_Name;
+ 10    END LOOP;
+ 11  /*Student account drop*/
+ 12    FOR x IN (SELECT User_Name FROM Student_List)
+ 13    LOOP
+ 14      EXECUTE IMMEDIATE 'DROP USER '||x.User_Name;
+ 15    END LOOP;
+ 16  END;
+ 17  /
+
+PL/SQL procedure successfully completed.
+
+SQL> 
+SQL> ALTER TABLE Admin_List DROP COLUMN User_Name;
+
+Table ADMIN_LIST altered.
+
+SQL> ALTER TABLE Instr_List DROP COLUMN User_Name;
+
+Table INSTR_LIST altered.
+
+SQL> ALTER TABLE Student_List DROP COLUMN User_Name;
+
+Table STUDENT_LIST altered.
+
+SQL> 
+SQL> 
+SQL> /*Username Procedure - Create user names for every user*/
+SQL> ALTER TABLE Admin_List ADD User_Name VARCHAR2(45);
+
+Table ADMIN_LIST altered.
+
+SQL> ALTER TABLE Instr_List ADD User_Name VARCHAR2(45);
+
+Table INSTR_LIST altered.
+
+SQL> ALTER TABLE Student_List ADD User_Name VARCHAR2(45);
+
+Table STUDENT_LIST altered.
+
+SQL> 
+SQL> UPDATE Admin_List a SET User_Name =
+  2      (SELECT CONCAT(UPPER(CONCAT(SUBSTR(Admin_FName,1,1),Admin_LName)), Admin_Num) 
+  3          FROM Admin_List b WHERE a.Admin_Num = b.Admin_Num);
+
+11 rows updated.
+
+SQL> 
+SQL> UPDATE Instr_List a SET User_Name =
+  2      (SELECT CONCAT(UPPER(CONCAT(SUBSTR(Instr_FName,1,1),Instr_LName)), Instr_Num) 
+  3          FROM Instr_List b WHERE a.Instr_Num = b.Instr_Num);
+
+11 rows updated.
+
+SQL> 
+SQL> UPDATE Student_List a SET User_Name =
+  2      (SELECT CONCAT(UPPER(CONCAT(SUBSTR(Student_FName,1,1),Student_LName)), Student_Num) 
+  3          FROM Student_List b WHERE a.Student_Num = b.Student_Num);
+
+11 rows updated.
+
+SQL> 
+SQL> 
+SQL> /*Password Procedure - Create Instructor user accounts*/
+SQL> DECLARE
+  2  s_num INTEGER;
+  3  begin
+  4  s_num :=0;
+  5    for x in (SELECT User_Name FROM Instr_List)
+  6    loop
+  7      execute immediate 'CREATE USER '||x.User_Name||' IDENTIFIED BY TheSecPass'||s_num;
+  8      s_num := s_num +1;
+  9    end loop;
+ 10  /*Create Admin user accounts*/
+ 11  s_num :=0;
+ 12    for x in (SELECT User_Name FROM Admin_List)
+ 13    loop
+ 14      execute immediate 'CREATE USER '||x.User_Name||' IDENTIFIED BY TheSecPass'||s_num;
+ 15      s_num := s_num +1;
+ 16    end loop;
+ 17  /*Create Student user accounts*/
+ 18  s_num :=0;
+ 19    for x in (SELECT User_Name FROM Student_List)
+ 20    loop
+ 21      execute immediate 'CREATE USER '||x.User_Name||' IDENTIFIED BY TheSecPass'||s_num;
+ 22      s_num := s_num +1;
+ 23    end loop;
+ 24  /*Connection Prodcedure - grant create session*/
+ 25  /*Instructor account*/
+ 26  for x in (SELECT User_Name FROM Instr_List)
+ 27    loop
+ 28      execute immediate 'GRANT CREATE SESSION TO '||x.User_Name;
+ 29    end loop;
+ 30  /*Admin account*/
+ 31    for x in (SELECT User_Name FROM Admin_List)
+ 32    loop
+ 33      execute immediate 'GRANT CREATE SESSION TO '||x.User_Name;
+ 34    end loop;
+ 35  /*Student account*/
+ 36    for x in (SELECT User_Name FROM Student_List)
+ 37    loop
+ 38      execute immediate 'GRANT CREATE SESSION TO '||x.User_Name;
+ 39    end loop;
+ 40  end;
+ 41  /
+
+PL/SQL procedure successfully completed.
+
+SQL> /*Role Assignment Procedure*/
+SQL> /*Create roles*/
+SQL> CREATE ROLE admin_role;
+
+Role ADMIN_ROLE created.
+
+SQL> CREATE ROLE instructor_role;
+
+Role INSTRUCTOR_ROLE created.
+
+SQL> CREATE ROLE student_role;
+
+Role STUDENT_ROLE created.
+
+SQL> /*Assign roles*/
+SQL> begin
+  2    for x in (SELECT User_Name FROM Admin_List)
+  3    loop
+  4      execute immediate 'GRANT admin_role TO '||x.User_Name;
+  5    end loop;
+  6    for x in (SELECT User_Name FROM Instr_List)
+  7    loop
+  8      execute immediate 'GRANT instructor_role TO '||x.User_Name;
+  9    end loop;
+ 10    for x in (SELECT User_Name FROM Student_List)
+ 11    loop
+ 12      execute immediate 'GRANT student_role TO '||x.User_Name;
+ 13    end loop;
+ 14  end;
+ 15  /
+
+PL/SQL procedure successfully completed.
+
+SQL> /*Account Modify Procedure - Admins have full rights to the instructor and student tables.*/
+SQL> GRANT SELECT, INSERT, DELETE, UPDATE ON Instr_List TO admin_role;
+
+Grant succeeded.
+
+SQL> GRANT SELECT, INSERT, DELETE, UPDATE ON Student_List TO admin_role;
+
+Grant succeeded.
+
+SQL> 
+SQL> /*Test Account Modify Procedure*/
+SQL> /*Test admin access*/
+SQL> CONNECT bevans1/TheSecPass0;
+Connected.
+SQL> show user;
+USER is "BEVANS1"
+SQL> SAVEPOINT Admin_Account_Modify_Procedure;
+
+Savepoint created.
+
+SQL> SELECT * FROM InstructorDBA.Instr_List;
+INSTR_NUM   INSTR_ADDRESS      INSTR_PHONENUM   SECTION_NUM   INSTR_LNAME   INSTR_FNAME   INSTR_ZIPCODE   USER_NAME   
+          1 101 Apple Street   111-222-3434                 1 Roberts       John          31003           JROBERTS1   
+          2 102 Apple Street   111-222-3435                 2 Russell       Brandon       31003           BRUSSELL2   
+          3 103 Apple Street   111-222-3436                 3 Lopez         Mike          31003           MLOPEZ3     
+          4 104 Apple Street   111-222-3437                 4 Monteor       Jim           31003           JMONTEOR4   
+          5 105 Apple Street   111-222-3438                 5 Hamm          Patricia      31003           PHAMM5      
+          6 106 Apple Street   111-222-3439                 6 Ingle         Tammy         31003           TINGLE6     
+          7 107 Apple Street   111-222-3440                 7 Jordan        Keith         31003           KJORDAN7    
+          8 108 Apple Street   111-222-3441                 8 Cooper        Adam          31003           ACOOPER8    
+          9 109 Apple Street   111-222-3442                 9 McCoy         Amber         31003           AMCCOY9     
+         10 110 Apple Street   111-222-3443                10 Fuller        Jana          31003           JFULLER10   
+         11 111 Apple Street   111-222-3444                10 Xavier        Mark          31003           MXAVIER11   
+
+
+11 rows selected. 
+
+SQL> SELECT * FROM InstructorDBA.Student_List;
+STUDENT_NUM   STUDENT_ADDRESS   STUDENT_PHONENUM   STUDENT_LNAME   STUDENT_FNAME   STUDENT_ZIPCODE   USER_NAME   
+            1 Dorm 1            222-333-3434       Gilbert         Sarah           31005             SGILBERT1   
+            2 Dorm 2            222-333-3435       Myers           James           31005             JMYERS2     
+            3 Dorm 3            222-333-3436       Howard          Rico            31005             RHOWARD3    
+            4 Dorm 4            222-333-3437       Bush            Donald          31005             DBUSH4      
+            5 Dorm 5            222-333-3438       Simmons         Bill            31005             BSIMMONS5   
+            6 Dorm 6            222-333-3439       Aultman         Richard         31005             RAULTMAN6   
+            7 Dorm 7            222-333-3440       Ruger           Victoria        31005             VRUGER7     
+            8 Dorm 8            222-333-3441       Thomas          Melissa         31005             MTHOMAS8    
+            9 Dorm 9            222-333-3442       Synder          Jennifer        31005             JSYNDER9    
+           10 Dorm 10           222-333-3443       Baker           Elizabeth       31005             EBAKER10    
+           11 Dorm 11           222-333-3444       Pines           Matt            31005             MPINES11    
+
+
+11 rows selected. 
+
+SQL> UPDATE InstructorDBA.Instr_List SET Instr_LName = 'test';
+
+11 rows updated.
+
+SQL> UPDATE InstructorDBA.Student_List SET Student_LName = 'test';
+
+11 rows updated.
+
+SQL> INSERT INTO InstructorDBA.Student_List  (Student_Num,           Student_Address,     Student_PhoneNum, Student_LName, Student_FName, Student_ZipCode)
+  2      VALUES              (999,'Dorm 11','222-333-3444',         'Pines',    'Matt',      '31005');
+
+1 row inserted.
+
+SQL> INSERT INTO InstructorDBA.Instr_List  (Instr_Num,           Instr_Address,     Instr_PhoneNum, Section_Num, Instr_LName, Instr_FName, Instr_ZipCode)
+  2      VALUES              (888,'101 Apple Street','111-222-3434', '1',         'Roberts',   'John',      '31003');
+
+1 row inserted.
+
+SQL> SELECT * FROM InstructorDBA.Instr_List;
+INSTR_NUM   INSTR_ADDRESS      INSTR_PHONENUM   SECTION_NUM   INSTR_LNAME   INSTR_FNAME   INSTR_ZIPCODE   USER_NAME   
+          1 101 Apple Street   111-222-3434                 1 test          John          31003           JROBERTS1   
+          2 102 Apple Street   111-222-3435                 2 test          Brandon       31003           BRUSSELL2   
+          3 103 Apple Street   111-222-3436                 3 test          Mike          31003           MLOPEZ3     
+          4 104 Apple Street   111-222-3437                 4 test          Jim           31003           JMONTEOR4   
+          5 105 Apple Street   111-222-3438                 5 test          Patricia      31003           PHAMM5      
+          6 106 Apple Street   111-222-3439                 6 test          Tammy         31003           TINGLE6     
+          7 107 Apple Street   111-222-3440                 7 test          Keith         31003           KJORDAN7    
+          8 108 Apple Street   111-222-3441                 8 test          Adam          31003           ACOOPER8    
+          9 109 Apple Street   111-222-3442                 9 test          Amber         31003           AMCCOY9     
+         10 110 Apple Street   111-222-3443                10 test          Jana          31003           JFULLER10   
+         11 111 Apple Street   111-222-3444                10 test          Mark          31003           MXAVIER11   
+        888 101 Apple Street   111-222-3434                 1 Roberts       John          31003                       
+
+
+12 rows selected. 
+
+SQL> SELECT * FROM InstructorDBA.Student_List;
+STUDENT_NUM   STUDENT_ADDRESS   STUDENT_PHONENUM   STUDENT_LNAME   STUDENT_FNAME   STUDENT_ZIPCODE   USER_NAME   
+            1 Dorm 1            222-333-3434       test            Sarah           31005             SGILBERT1   
+            2 Dorm 2            222-333-3435       test            James           31005             JMYERS2     
+            3 Dorm 3            222-333-3436       test            Rico            31005             RHOWARD3    
+            4 Dorm 4            222-333-3437       test            Donald          31005             DBUSH4      
+            5 Dorm 5            222-333-3438       test            Bill            31005             BSIMMONS5   
+            6 Dorm 6            222-333-3439       test            Richard         31005             RAULTMAN6   
+            7 Dorm 7            222-333-3440       test            Victoria        31005             VRUGER7     
+            8 Dorm 8            222-333-3441       test            Melissa         31005             MTHOMAS8    
+            9 Dorm 9            222-333-3442       test            Jennifer        31005             JSYNDER9    
+           10 Dorm 10           222-333-3443       test            Elizabeth       31005             EBAKER10    
+           11 Dorm 11           222-333-3444       test            Matt            31005             MPINES11    
+          999 Dorm 11           222-333-3444       Pines           Matt            31005                         
+
+
+12 rows selected. 
+
+SQL> DELETE FROM InstructorDBA.Instr_List;
+
+12 rows deleted.
+
+SQL> DELETE FROM InstructorDBA.Student_List;
+
+12 rows deleted.
+
+SQL> ROLLBACK TO Admin_Account_Modify_Procedure;
+
+Rollback complete.
+
+SQL> /*Test student access*/
+SQL> CONNECT sgilbert1/TheSecPass0;
+Connected.
+SQL> show user;
+USER is "SGILBERT1"
+SQL> SELECT * FROM InstructorDBA.Instr_List;
+
+Error starting at line : 165 in command -
+SELECT * FROM InstructorDBA.Instr_List
+Error at Command Line : 165 Column : 29
+Error report -
+SQL Error: ORA-00942: table or view does not exist
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+SQL> SELECT * FROM InstructorDBA.Student_List;
+
+Error starting at line : 166 in command -
+SELECT * FROM InstructorDBA.Student_List
+Error at Command Line : 166 Column : 29
+Error report -
+SQL Error: ORA-00942: table or view does not exist
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+SQL> /*Test instructor access*/
+SQL> CONNECT mlopez3/TheSecPass2;
+Connected.
+SQL> show user;
+USER is "MLOPEZ3"
+SQL> SELECT * FROM InstructorDBA.Instr_List;
+
+Error starting at line : 170 in command -
+SELECT * FROM InstructorDBA.Instr_List
+Error at Command Line : 170 Column : 29
+Error report -
+SQL Error: ORA-00942: table or view does not exist
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+SQL> SELECT * FROM InstructorDBA.Student_List;
+
+Error starting at line : 171 in command -
+SELECT * FROM InstructorDBA.Student_List
+Error at Command Line : 171 Column : 29
+Error report -
+SQL Error: ORA-00942: table or view does not exist
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+SQL> 
+SQL> CONNECT InstructorDBA/brr1wik7;
+Connected.
+SQL> show user;
+USER is "INSTRUCTORDBA"
+SQL> 
+SQL> /*Course Management Procedure - Admin have full rights to course information*/
+SQL> GRANT SELECT, INSERT, DELETE, UPDATE ON Course_List TO admin_role;
+
+Grant succeeded.
+
+SQL> 
+SQL> /*Test Course Management Procedure*/
+SQL> /*Test admin access*/
+SQL> CONNECT bevans1/TheSecPass0;
+Connected.
+SQL> show user;
+USER is "BEVANS1"
+SQL> SAVEPOINT Course_Account_Modify_Procedure;
+
+Savepoint created.
+
+SQL> SELECT * FROM InstructorDBA.Course_List;
+COURSE_NUM   COURSE_NAME                   ADMIN_NUM   COURSE_DESC                   COURSE_HOURS   SECTION_NUM   
+           1 Intro to Computer Science               1 Intro to Computer Science                  3             1 
+           2 Intro to Art                            2 Intro to Art                               3             2 
+           3 Intro to Aircraft mechanics             3 Intro to Aircraft mechanics                3             3 
+           4 Intro to Robotics                       4 Intro to Robotics                          3             4 
+           5 Intro to Databases                      5 Intro to Databases                         3             5 
+           6 Advanced English                        6 Advanced English                           3             6 
+           7 Intro to Physics                        7 Intro to Physics                           3             7 
+           8 Intro to Chemistry                      8 Intro to Chemistry                         3             8 
+           9 Intro to Spanish                        9 Intro to Spanish                           3             9 
+          10 Automotive mechanics Intro             10 Automotive mechanics Intro                 3            10 
+          11 Advanced Robotics                      11 Advanced Robotics                          6             4 
+
+
+11 rows selected. 
+
+SQL> UPDATE InstructorDBA.Course_List SET Course_Name = 'test';
+
+11 rows updated.
+
+SQL> INSERT INTO InstructorDBA.Course_List (Course_Num,            Course_Name,                Admin_Num , Course_Desc,                       Course_Hours, Section_Num)
+  2      VALUES              (8888, 'Intro to Computer Science',1,             'Intro to Computer Science','3',          '1');
+
+1 row inserted.
+
+SQL> SELECT * FROM InstructorDBA.Course_List;
+COURSE_NUM   COURSE_NAME                 ADMIN_NUM   COURSE_DESC                   COURSE_HOURS   SECTION_NUM   
+           1 test                                  1 Intro to Computer Science                  3             1 
+           2 test                                  2 Intro to Art                               3             2 
+           3 test                                  3 Intro to Aircraft mechanics                3             3 
+           4 test                                  4 Intro to Robotics                          3             4 
+           5 test                                  5 Intro to Databases                         3             5 
+           6 test                                  6 Advanced English                           3             6 
+           7 test                                  7 Intro to Physics                           3             7 
+           8 test                                  8 Intro to Chemistry                         3             8 
+           9 test                                  9 Intro to Spanish                           3             9 
+          10 test                                 10 Automotive mechanics Intro                 3            10 
+          11 test                                 11 Advanced Robotics                          6             4 
+        8888 Intro to Computer Science             1 Intro to Computer Science                  3             1 
+
+
+12 rows selected. 
+
+SQL> DELETE FROM InstructorDBA.Course_List;
+
+12 rows deleted.
+
+SQL> ROLLBACK TO Course_Account_Modify_Procedure;
+
+Rollback complete.
+
+SQL> 
+SQL> /*Test instructor access*/
+SQL> CONNECT mlopez3/TheSecPass2;
+Connected.
+SQL> show user;
+USER is "MLOPEZ3"
+SQL> SELECT * FROM InstructorDBA.Course_List;
+
+Error starting at line : 195 in command -
+SELECT * FROM InstructorDBA.Course_List
+Error at Command Line : 195 Column : 29
+Error report -
+SQL Error: ORA-00942: table or view does not exist
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+SQL> 
+SQL> /*Test student access*/
+SQL> CONNECT sgilbert1/TheSecPass0;
+Connected.
+SQL> show user;
+USER is "SGILBERT1"
+SQL> SELECT * FROM InstructorDBA.Course_List;
+
+Error starting at line : 200 in command -
+SELECT * FROM InstructorDBA.Course_List
+Error at Command Line : 200 Column : 29
+Error report -
+SQL Error: ORA-00942: table or view does not exist
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+SQL> 
+SQL> CONNECT InstructorDBA/brr1wik7;
+Connected.
+SQL> show user;
+USER is "INSTRUCTORDBA"
+SQL> 
+SQL> 
+SQL> /*Section Management Procedure - Admins have full rights to section information*/
+SQL> GRANT SELECT, INSERT, DELETE, UPDATE ON Section_Info TO admin_role;
+
+Grant succeeded.
+
+SQL> 
+SQL> /*Test Section Management Procedure*/
+SQL> /*Test admin access*/
+SQL> CONNECT bevans1/TheSecPass0;
+Connected.
+SQL> show user;
+USER is "BEVANS1"
+SQL> SAVEPOINT Section_Account_Modify_Procedure;
+
+Savepoint created.
+
+SQL> SELECT * FROM InstructorDBA.Section_Info;
+SECTION_NUM   SECTION_NAME               SECTION_ADDRESS      SECTION_FOS            SECTION_ZIPCODE   
+            1 Computer Science Section   110 Finegand Place   Computer Science       31088             
+            2 Art Section                111 Finegand Place   Art                    31088             
+            3 Aircraft Section           112 Finegand Place   Aircraft               31088             
+            4 Robotic Section            113 Finegand Place   Robotics               31088             
+            5 Database Section           114 Finegand Place   Database Technology    31088             
+            6 English Section            115 Finegand Place   English language       31088             
+            7 Physics Section            116 Finegand Place   Physics                31088             
+            8 Chemistry Section          117 Finegand Place   Chemistry              31088             
+            9 Spanish Section            118 Finegand Place   Spanish language       31088             
+           10 Automotive Section         119 Finegand Place   Automotive Mechanics   31088             
+           11 Space Travel Section       120 Finegand Place   Space Travel           31088             
+
+
+11 rows selected. 
+
+SQL> UPDATE InstructorDBA.Section_Info SET Section_Name = 'test';
+
+11 rows updated.
+
+SQL> INSERT INTO InstructorDBA.Section_Info (Section_Num,            Section_Name,           Section_Address,     Section_FoS,   Section_ZipCode)
+  2      VALUES               (9999, 'Space Travel Section', '120 Finegand Place','Space Travel','31088');
+
+1 row inserted.
+
+SQL> SELECT * FROM InstructorDBA.Section_Info;
+SECTION_NUM   SECTION_NAME           SECTION_ADDRESS      SECTION_FOS            SECTION_ZIPCODE   
+            1 test                   110 Finegand Place   Computer Science       31088             
+            2 test                   111 Finegand Place   Art                    31088             
+            3 test                   112 Finegand Place   Aircraft               31088             
+            4 test                   113 Finegand Place   Robotics               31088             
+            5 test                   114 Finegand Place   Database Technology    31088             
+            6 test                   115 Finegand Place   English language       31088             
+            7 test                   116 Finegand Place   Physics                31088             
+            8 test                   117 Finegand Place   Chemistry              31088             
+            9 test                   118 Finegand Place   Spanish language       31088             
+           10 test                   119 Finegand Place   Automotive Mechanics   31088             
+           11 test                   120 Finegand Place   Space Travel           31088             
+         9999 Space Travel Section   120 Finegand Place   Space Travel           31088             
+
+
+12 rows selected. 
+
+SQL> DELETE FROM InstructorDBA.Section_Info WHERE Section_Num = 9999;
+
+1 row deleted.
+
+SQL> ROLLBACK TO Section_Account_Modify_Procedure;
+
+Rollback complete.
+
+SQL> /*Test student access*/
+SQL> CONNECT sgilbert1/TheSecPass0;
+Connected.
+SQL> show user;
+USER is "SGILBERT1"
+SQL> SELECT * FROM InstructorDBA.Section_Info;
+
+Error starting at line : 224 in command -
+SELECT * FROM InstructorDBA.Section_Info
+Error at Command Line : 224 Column : 29
+Error report -
+SQL Error: ORA-00942: table or view does not exist
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+SQL> /*Test instructor access*/
+SQL> CONNECT mlopez3/TheSecPass2;
+Connected.
+SQL> show user;
+USER is "MLOPEZ3"
+SQL> SELECT * FROM InstructorDBA.Section_Info;
+
+Error starting at line : 228 in command -
+SELECT * FROM InstructorDBA.Section_Info
+Error at Command Line : 228 Column : 29
+Error report -
+SQL Error: ORA-00942: table or view does not exist
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+SQL> 
+SQL> CONNECT InstructorDBA/brr1wik7;
+Connected.
+SQL> show user;
+USER is "INSTRUCTORDBA"
+SQL> 
+SQL> /*Class Schedule Modify Procedure - Admins have full rights to the class schedule*/
+SQL> GRANT SELECT, INSERT, DELETE, UPDATE ON Class_Sched TO admin_role;
+
+Grant succeeded.
+
+SQL> 
+SQL> /*Test Class Schedule Management Procedure*/
+SQL> /*Test admin access*/
+SQL> CONNECT bevans1/TheSecPass0;
+Connected.
+SQL> show user;
+USER is "BEVANS1"
+SQL> SAVEPOINT Schedule_Account_Modify_Procedure;
+
+Savepoint created.
+
+SQL> SELECT * FROM InstructorDBA.Class_Sched;
+SCHED_NUM   SCHED_DAY       SCHED_TIME   SCHED_DAY_OFF   SCHED_NOTES                             OLS_COL   
+          1 Mon-Tues-Wed    0900-1100    Oct. 13th       This is the one of the main schedules          30 
+          2 Mon-Tues-Thur   0900-1100    Oct. 13th       This is the one of the main schedules          30 
+          3 Mon-Wed         1000-1200    Oct. 14th       This is the one of the main schedules          30 
+          4 Mon-Wed-Fri     1000-1200    Oct. 15th       This a alternative schedules                   30 
+          5 Mon-Tues        0800-0900    Oct. 16th       This a alternative schedules                   30 
+          6 Tues-Wed        1300-1500    Oct. 17th       This a alternative schedules                   30 
+          7 Thur-Fri        1300-1500    Oct. 18th       This a alternative schedules                   30 
+          8 Wed-Fri         1600-1800    Oct. 19th       This a alternative schedules                   30 
+          9 Sat             0900-1100    Oct. 20th       Weekend Schedule                               30 
+         10 Sun             0900-1100    Oct. 21st       Weekend Schedule                               30 
+         11 Mon             0900-0930    6 days a week   Beta                                           40 
+         12 Tues            1100-1115    6 days a week   Beta                                           40 
+
+
+12 rows selected. 
+
+SQL> UPDATE InstructorDBA.Class_Sched SET Sched_Notes = 'test';
+
+12 rows updated.
+
+SQL> INSERT INTO InstructorDBA.Class_Sched (Sched_Num,           Sched_Day, Sched_Time, Sched_Day_Off, Sched_Notes)
+  2      VALUES              (9999,'Sun',     '0900-1100','Oct. 21st',   'Weekend Schedule');
+
+1 row inserted.
+
+SQL> SELECT * FROM InstructorDBA.Class_Sched;
+SCHED_NUM   SCHED_DAY       SCHED_TIME   SCHED_DAY_OFF   SCHED_NOTES        OLS_COL   
+          1 Mon-Tues-Wed    0900-1100    Oct. 13th       test                      30 
+          2 Mon-Tues-Thur   0900-1100    Oct. 13th       test                      30 
+          3 Mon-Wed         1000-1200    Oct. 14th       test                      30 
+          4 Mon-Wed-Fri     1000-1200    Oct. 15th       test                      30 
+          5 Mon-Tues        0800-0900    Oct. 16th       test                      30 
+          6 Tues-Wed        1300-1500    Oct. 17th       test                      30 
+          7 Thur-Fri        1300-1500    Oct. 18th       test                      30 
+          8 Wed-Fri         1600-1800    Oct. 19th       test                      30 
+          9 Sat             0900-1100    Oct. 20th       test                      30 
+         10 Sun             0900-1100    Oct. 21st       test                      30 
+         11 Mon             0900-0930    6 days a week   test                      40 
+         12 Tues            1100-1115    6 days a week   test                      40 
+       9999 Sun             0900-1100    Oct. 21st       Weekend Schedule             
+
+
+13 rows selected. 
+
+SQL> DELETE FROM InstructorDBA.Class_Sched WHERE Sched_Num = 9999;
+
+1 row deleted.
+
+SQL> ROLLBACK TO Schedule_Account_Modify_Procedure;
+
+Rollback complete.
+
+SQL> 
+SQL> /*Test instructor access*/
+SQL> CONNECT mlopez3/TheSecPass2;
+Connected.
+SQL> show user;
+USER is "MLOPEZ3"
+SQL> SELECT * FROM InstructorDBA.Class_Sched;
+
+Error starting at line : 252 in command -
+SELECT * FROM InstructorDBA.Class_Sched
+Error at Command Line : 252 Column : 29
+Error report -
+SQL Error: ORA-00942: table or view does not exist
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+SQL> 
+SQL> /*Test student access*/
+SQL> CONNECT sgilbert1/TheSecPass0;
+Connected.
+SQL> show user;
+USER is "SGILBERT1"
+SQL> SELECT * FROM InstructorDBA.Class_Sched;
+
+Error starting at line : 257 in command -
+SELECT * FROM InstructorDBA.Class_Sched
+Error at Command Line : 257 Column : 29
+Error report -
+SQL Error: ORA-00942: table or view does not exist
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+SQL> 
+SQL> CONNECT InstructorDBA/brr1wik7;
+Connected.
+SQL> show user;
+USER is "INSTRUCTORDBA"
+SQL> 
+SQL> /*Admin Support Procedure - Admins have the ability to assist with adding classes for instructors or signing up students
+SQL>  for classes if necessary.*/
+SQL> GRANT SELECT, INSERT, DELETE, UPDATE ON Instr_Classes TO admin_role;
+
+Grant succeeded.
+
+SQL> GRANT SELECT, INSERT, DELETE, UPDATE ON Student_Class_Signup TO admin_role;
+
+Grant succeeded.
+
+SQL> 
+SQL> /*Test Admin Support Schedule Management Procedure*/
+SQL> /*Test admin access*/
+SQL> CONNECT bevans1/TheSecPass0;
+Connected.
+SQL> show user;
+USER is "BEVANS1"
+SQL> SAVEPOINT Admin_Support_Account_Modify_Procedure;
+
+Savepoint created.
+
+SQL> SELECT * FROM InstructorDBA.Instr_Classes;
+INSTR_NUM   SCHED_NUM   COURSE_NUM   CLASS_NOTES                  CLASS_ROOM   
+          1           1            1 Computer one broke           A            
+          2           2            2 Room Ready                   B            
+          3           3            3 Instructor Chair broke       C            
+          4           4            4 A/C not working              D            
+          5           5            5 Computer two broke           E            
+          6           6            6 No whiteboard                F            
+          7           7            7 station 3 missing keyboard   G            
+          8           8            8 Room Ready                   H            
+          9           9            9 Room Ready                   I            
+         10          10           10 Room Ready                   J            
+         10           9           10 Room Ready                   J            
+          9           8           10 Room Ready                   X            
+          1           2            9 Room Ready                   Z            
+
+
+13 rows selected. 
+
+SQL> SELECT * FROM InstructorDBA.Student_Class_Signup;
+STUDENT_NUM   INSTR_NUM   SCHED_NUM   STUDENT_GRADE   
+            1           1           1 A               
+            1           2           2 B               
+            2           3           3 A               
+            3           3           3 C               
+            4           4           4 C               
+            5           5           5 B               
+            6           6           6 D               
+            7           7           7 F               
+            8           8           8                 
+            9           9           9 A               
+           10          10          10 A               
+
+
+11 rows selected. 
+
+SQL> UPDATE InstructorDBA.Instr_Classes SET Class_Notes = 'test';
+
+13 rows updated.
+
+SQL> UPDATE InstructorDBA.Student_Class_Signup SET Student_Grade = 'test';
+
+11 rows updated.
+
+SQL> 
+SQL> INSERT INTO InstructorDBA.Instr_Classes (Instr_Num, Sched_Num, Course_Num, Class_Notes, Class_Room)
+  2      VALUES                ('8',       '9',       '9',        'Room Ready','Z');
+
+1 row inserted.
+
+SQL> 
+SQL> 
+SQL> INSERT INTO InstructorDBA.Student_Class_Signup (Student_Num, Instr_Num, Sched_Num,  Student_Grade)
+  2      VALUES                (10, 9, 9,  'A');
+
+1 row inserted.
+
+SQL> 
+SQL> SELECT * FROM InstructorDBA.Instr_Classes;
+INSTR_NUM   SCHED_NUM   COURSE_NUM   CLASS_NOTES   CLASS_ROOM   
+          1           1            1 test          A            
+          2           2            2 test          B            
+          3           3            3 test          C            
+          4           4            4 test          D            
+          5           5            5 test          E            
+          6           6            6 test          F            
+          7           7            7 test          G            
+          8           8            8 test          H            
+          9           9            9 test          I            
+         10          10           10 test          J            
+         10           9           10 test          J            
+          9           8           10 test          X            
+          1           2            9 test          Z            
+          8           9            9 Room Ready    Z            
+
+
+
+14 rows selected. 
+
+SQL> SELECT * FROM InstructorDBA.Student_Class_Signup;
+STUDENT_NUM   INSTR_NUM   SCHED_NUM   STUDENT_GRADE   
+            1           1           1 test            
+            1           2           2 test            
+            2           3           3 test            
+            3           3           3 test            
+            4           4           4 test            
+            5           5           5 test            
+            6           6           6 test            
+            7           7           7 test            
+            8           8           8 test            
+            9           9           9 test            
+           10          10          10 test            
+           10           9           9 A               
+
+
+12 rows selected. 
+
+SQL> 
+SQL> DELETE FROM InstructorDBA.Instr_Classes WHERE Instr_Num = 8 AND Sched_Num = 9;
+
+1 row deleted.
+
+SQL> DELETE FROM InstructorDBA.Student_Class_Signup WHERE Student_Num = 10 AND Instr_Num = 9 AND Sched_Num = 9;
+
+1 row deleted.
+
+SQL> ROLLBACK TO Admin_Support_Account_Modify_Procedure;
+
+Rollback complete.
+
+SQL> 
+SQL> /*Test instructor access*/
+SQL> CONNECT mlopez3/TheSecPass2;
+Connected.
+SQL> show user;
+USER is "MLOPEZ3"
+SQL> 
+SQL> INSERT INTO InstructorDBA.Instr_Classes (Instr_Num, Sched_Num, Course_Num, Class_Notes, Class_Room)
+  2      VALUES                ('8',       '9',       '9',        'Room Ready','Z');
+
+Error starting at line : 295 in command -
+INSERT INTO InstructorDBA.Instr_Classes (Instr_Num, Sched_Num, Course_Num, Class_Notes, Class_Room)
+    VALUES                ('8',       '9',       '9',        'Room Ready','Z')
+Error at Command Line : 295 Column : 27
+Error report -
+SQL Error: ORA-00942: table or view does not exist
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+SQL> 
+SQL> /*Test student access*/
+SQL> CONNECT sgilbert1/TheSecPass0;
+Connected.
+SQL> show user;
+USER is "SGILBERT1"
+SQL> DELETE FROM InstructorDBA.Student_Class_Signup WHERE Student_Num = 1 AND Instr_Num = 1 AND Sched_Num = 1;
+
+Error starting at line : 301 in command -
+DELETE FROM InstructorDBA.Student_Class_Signup WHERE Student_Num = 1 AND Instr_Num = 1 AND Sched_Num = 1
+Error at Command Line : 301 Column : 27
+Error report -
+SQL Error: ORA-00942: table or view does not exist
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+SQL> 
+SQL> CONNECT InstructorDBA/brr1wik7;
+Connected.
+SQL> show user;
+USER is "INSTRUCTORDBA"
+SQL> 
+SQL> 
+SQL> /*Admin Account Restriction Procedure - Admins can only select & update the Admin_List table.*/
+SQL> GRANT SELECT, UPDATE (Admin_Address, Admin_PhoneNum, Admin_LName, Admin_FName, Admin_ZipCode) ON Admin_List TO admin_role;
+
+Grant succeeded.
+
+SQL> /*Use VPD to create policy restricting admin to only be able to view and update their information. Only the InstructorDBA user 
+SQL>  can update this table.*/
+SQL> CREATE OR REPLACE FUNCTION Get_Admin_Name (
+  2   schema_v IN VARCHAR2, 
+  3   tbl_v IN VARCHAR2)
+  4  
+  5  RETURN VARCHAR2 IS
+  6  BEGIN
+  7   RETURN ('User_Name = USER OR USER = ''InstructorDBA''') ;
+  8  END Get_Admin_Name;
+  9  /
+
+Function GET_ADMIN_NAME compiled
+
+SQL> BEGIN
+  2   DBMS_RLS.ADD_POLICY (
+  3    object_schema     => 'InstructorDBA', 
+  4    object_name       => 'Admin_List',
+  5    policy_name       => 'Hide_Admin_Info', 
+  6    policy_function   => 'Get_Admin_Name',
+  7    statement_types   => 'update',
+  8    update_check     =>  TRUE);
+  9  END;
+ 10  /
+
+PL/SQL procedure successfully completed.
+
+SQL> 
+SQL> /*Test Admin restriction policy*/
+SQL> /*Test admin account*/
+SQL> CONNECT bevans1/TheSecPass0;
+Connected.
+SQL> show user;
+USER is "BEVANS1"
+SQL> SAVEPOINT Admin_Restriction_Procedure;
+
+Savepoint created.
+
+SQL> SELECT * FROM InstructorDBA.Admin_List;
+ADMIN_NUM   ADMIN_ADDRESS     ADMIN_PHONENUM   SECTION_NUM   ADMIN_LNAME   ADMIN_FNAME   ADMIN_ZIPCODE   USER_NAME    
+          1 501 Orange Park   111-333-3434                 1 Evans         Bob           31004           BEVANS1      
+          2 502 Orange Park   111-333-3435                 2 Johnson       Mike          31004           MJOHNSON2    
+          3 503 Orange Park   111-333-3436                 3 Jenkins       Mary          31004           MJENKINS3    
+          4 504 Orange Park   111-333-3437                 4 Russell       Jim           31004           JRUSSELL4    
+          5 505 Orange Park   111-333-3438                 5 Bargueno      Patricia      31004           PBARGUENO5   
+          6 506 Orange Park   111-333-3439                 6 Hopkins       John          31004           JHOPKINS6    
+          7 507 Orange Park   111-333-3440                 7 Smith         Will          31004           WSMITH7      
+          8 508 Orange Park   111-333-3441                 8 Brown         Adam          31004           ABROWN8      
+          9 509 Orange Park   111-333-3442                 9 Williams      Shane         31004           SWILLIAMS9   
+         10 510 Orange Park   111-333-3443                10 Robins        Amber         31004           AROBINS10    
+         11 511 Orange Park   111-333-3444                 4 Hawkins       Tim           31004           THAWKINS11   
+
+
+11 rows selected. 
+
+SQL> UPDATE InstructorDBA.Admin_List SET Admin_Address = 'Changeit!';
+
+1 row updated.
+
+SQL> UPDATE InstructorDBA.Admin_List SET Admin_Num = 1234555;
+
+Error starting at line : 338 in command -
+UPDATE InstructorDBA.Admin_List SET Admin_Num = 1234555
+Error at Command Line : 338 Column : 22
+Error report -
+SQL Error: ORA-01031: insufficient privileges
+01031. 00000 -  "insufficient privileges"
+*Cause:    An attempt was made to perform a database operation without
+           the necessary privileges.
+*Action:   Ask your database administrator or designated security
+           administrator to grant you the necessary privileges
+SQL> SELECT * FROM InstructorDBA.Admin_List;
+ADMIN_NUM   ADMIN_ADDRESS     ADMIN_PHONENUM   SECTION_NUM   ADMIN_LNAME   ADMIN_FNAME   ADMIN_ZIPCODE   USER_NAME    
+          1 Changeit!         111-333-3434                 1 Evans         Bob           31004           BEVANS1      
+          2 502 Orange Park   111-333-3435                 2 Johnson       Mike          31004           MJOHNSON2    
+          3 503 Orange Park   111-333-3436                 3 Jenkins       Mary          31004           MJENKINS3    
+          4 504 Orange Park   111-333-3437                 4 Russell       Jim           31004           JRUSSELL4    
+          5 505 Orange Park   111-333-3438                 5 Bargueno      Patricia      31004           PBARGUENO5   
+          6 506 Orange Park   111-333-3439                 6 Hopkins       John          31004           JHOPKINS6    
+          7 507 Orange Park   111-333-3440                 7 Smith         Will          31004           WSMITH7      
+          8 508 Orange Park   111-333-3441                 8 Brown         Adam          31004           ABROWN8      
+          9 509 Orange Park   111-333-3442                 9 Williams      Shane         31004           SWILLIAMS9   
+         10 510 Orange Park   111-333-3443                10 Robins        Amber         31004           AROBINS10    
+         11 511 Orange Park   111-333-3444                 4 Hawkins       Tim           31004           THAWKINS11   
+
+
+11 rows selected. 
+
+SQL> ROLLBACK TO Admin_Restriction_Procedure;
+
+Rollback complete.
+
+SQL> /*Test instructor account*/
+SQL> CONNECT mlopez3/TheSecPass2;
+Connected.
+SQL> show user;
+USER is "MLOPEZ3"
+SQL> SELECT * FROM InstructorDBA.Admin_List;
+
+Error starting at line : 344 in command -
+SELECT * FROM InstructorDBA.Admin_List
+Error at Command Line : 344 Column : 29
+Error report -
+SQL Error: ORA-00942: table or view does not exist
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+SQL> 
+SQL> /*Test student access*/
+SQL> CONNECT sgilbert1/TheSecPass0;
+Connected.
+SQL> show user;
+USER is "SGILBERT1"
+SQL> SELECT * FROM Admin_List;
+
+Error starting at line : 349 in command -
+SELECT * FROM Admin_List
+Error at Command Line : 349 Column : 15
+Error report -
+SQL Error: ORA-00942: table or view does not exist
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+SQL> 
+SQL> /*Test InstructorDBA account*/
+SQL> CONNECT InstructorDBA/brr1wik7 
+Connected.
+SQL> show user;
+USER is "INSTRUCTORDBA"
+SQL> SELECT * FROM Admin_List;
+ADMIN_NUM   ADMIN_ADDRESS     ADMIN_PHONENUM   SECTION_NUM   ADMIN_LNAME   ADMIN_FNAME   ADMIN_ZIPCODE   USER_NAME    
+          1 501 Orange Park   111-333-3434                 1 Evans         Bob           31004           BEVANS1      
+          2 502 Orange Park   111-333-3435                 2 Johnson       Mike          31004           MJOHNSON2    
+          3 503 Orange Park   111-333-3436                 3 Jenkins       Mary          31004           MJENKINS3    
+          4 504 Orange Park   111-333-3437                 4 Russell       Jim           31004           JRUSSELL4    
+          5 505 Orange Park   111-333-3438                 5 Bargueno      Patricia      31004           PBARGUENO5   
+          6 506 Orange Park   111-333-3439                 6 Hopkins       John          31004           JHOPKINS6    
+          7 507 Orange Park   111-333-3440                 7 Smith         Will          31004           WSMITH7      
+          8 508 Orange Park   111-333-3441                 8 Brown         Adam          31004           ABROWN8      
+          9 509 Orange Park   111-333-3442                 9 Williams      Shane         31004           SWILLIAMS9   
+         10 510 Orange Park   111-333-3443                10 Robins        Amber         31004           AROBINS10    
+         11 511 Orange Park   111-333-3444                 4 Hawkins       Tim           31004           THAWKINS11   
+
+
+11 rows selected. 
+
+SQL> 
+SQL> /*Instructor View Procedure - Personal info, section info, class schedule with course info, name and student number enrolled in classes.
+SQL>Also, complete class schedule without student names.*/
+SQL> /*Show personal info*/
+SQL> CREATE OR REPLACE VIEW Instr_Personal_Info AS
+  2  SELECT * FROM Instr_List 
+  3      WHERE Instr_List.User_Name = USER WITH CHECK OPTION;
+
+View INSTR_PERSONAL_INFO created.
+
+SQL> GRANT SELECT ON Instr_Personal_Info TO instructor_role;
+
+Grant succeeded.
+
+SQL> 
+SQL> /*Show section info*/
+SQL> CREATE OR REPLACE VIEW Instr_Section_Info AS
+  2      SELECT * FROM Section_Info
+  3          INNER JOIN Instr_List USING (Section_Num)
+  4              WHERE Instr_List.User_Name = USER WITH CHECK OPTION;
+
+View INSTR_SECTION_INFO created.
+
+SQL> GRANT SELECT ON Instr_Section_Info TO instructor_role;
+
+Grant succeeded.
+
+SQL> 
+SQL> /*Show class schedules info*/
+SQL> GRANT SELECT ON Class_Sched TO instructor_role;
+
+Grant succeeded.
+
+SQL> 
+SQL> /*Show course info*/
+SQL> GRANT SELECT ON Course_List TO instructor_role;
+
+Grant succeeded.
+
+SQL> 
+SQL> /*Show class schedule and course info*/
+SQL> CREATE OR REPLACE VIEW Instr_Class_Course_Info AS
+  2  SELECT Course_Name, Course_Desc, Course_Hours, Admin_LName, Admin_FName,
+  3      Sched_Day, Sched_Time, Sched_Day_Off, Sched_Notes, 
+  4          Class_Notes, Class_Room FROM Instr_List INNER JOIN Instr_Classes USING (Instr_Num)
+  5              INNER JOIN Class_Sched USING (Sched_Num)
+  6              INNER JOIN Course_List USING (Course_Num)
+  7              INNER JOIN Admin_List USING (Admin_Num)
+  8                  WHERE Instr_List.User_Name = USER WITH CHECK OPTION;
+
+View INSTR_CLASS_COURSE_INFO created.
+
+SQL> GRANT SELECT ON Instr_Class_Course_Info TO instructor_role;
+
+Grant succeeded.
+
+SQL> 
+SQL> /*Show students enrolled in classes*/
+SQL> CREATE OR REPLACE VIEW Instr_Student_Class AS
+  2      SELECT Course_Name, Sched_Day, Sched_Time, Sched_Day_Off, Class_Room, 
+  3              Student_Num, Student_LName, Student_FName, Student_Grade FROM Instr_List INNER JOIN Instr_Classes USING (Instr_Num)
+  4                  INNER JOIN Class_Sched USING (Sched_Num)
+  5                  INNER JOIN Course_List USING (Course_Num)
+  6                  INNER JOIN Student_Class_Signup USING (Instr_Num, Sched_Num)
+  7                  INNER JOIN Student_List USING (Student_Num)
+  8                      WHERE Instr_List.User_Name = USER WITH CHECK OPTION;
+
+View INSTR_STUDENT_CLASS created.
+
+SQL> GRANT SELECT ON Instr_Student_Class TO instructor_role;
+
+Grant succeeded.
+
+SQL> 
+SQL> /*Show entire class schedule*/
+SQL> CREATE OR REPLACE VIEW Instr_All_Class AS
+  2  SELECT Instr_LName, Instr_FName, Course_Name, Course_Desc, Course_Hours, Admin_LName, Admin_FName,
+  3      Sched_Day, Sched_Time, Sched_Day_Off, Sched_Notes, 
+  4          Class_Notes, Class_Room FROM Instr_List INNER JOIN Instr_Classes USING (Instr_Num)
+  5              INNER JOIN Class_Sched USING (Sched_Num)
+  6              INNER JOIN Course_List USING (Course_Num)
+  7              INNER JOIN Admin_List USING (Admin_Num);
+
+View INSTR_ALL_CLASS created.
+
+SQL> GRANT SELECT ON Instr_All_Class TO instructor_role;
+
+Grant succeeded.
+
+SQL> 
+SQL> /*Test Instructor View Policy*/
+SQL> CONNECT mlopez3/TheSecPass2;
+Connected.
+SQL> show user;
+USER is "MLOPEZ3"
+SQL> SELECT * FROM InstructorDBA.Instr_Personal_Info;
+INSTR_NUM   INSTR_ADDRESS      INSTR_PHONENUM   SECTION_NUM   INSTR_LNAME   INSTR_FNAME   INSTR_ZIPCODE   USER_NAME   
+          3 103 Apple Street   111-222-3436                 3 Lopez         Mike          31003           MLOPEZ3     
+
+
+SQL> SELECT * FROM InstructorDBA.Instr_Section_Info;
+SECTION_NUM   SECTION_NAME       SECTION_ADDRESS      SECTION_FOS   SECTION_ZIPCODE   INSTR_NUM   INSTR_ADDRESS      INSTR_PHONENUM   INSTR_LNAME   INSTR_FNAME   INSTR_ZIPCODE   USER_NAME   
+            3 Aircraft Section   112 Finegand Place   Aircraft      31088                       3 103 Apple Street   111-222-3436     Lopez         Mike          31003           MLOPEZ3     
+
+
+SQL> SELECT * FROM InstructorDBA.Instr_Class_Course_Info;
+COURSE_NAME                   COURSE_DESC                   COURSE_HOURS   ADMIN_LNAME   ADMIN_FNAME   SCHED_DAY   SCHED_TIME   SCHED_DAY_OFF   SCHED_NOTES                             CLASS_NOTES              CLASS_ROOM   
+Intro to Aircraft mechanics   Intro to Aircraft mechanics                3 Jenkins       Mary          Mon-Wed     1000-1200    Oct. 14th       This is the one of the main schedules   Instructor Chair broke   C            
+
+
+SQL> SELECT * FROM InstructorDBA.Instr_Student_Class;
+COURSE_NAME                   SCHED_DAY   SCHED_TIME   SCHED_DAY_OFF   CLASS_ROOM   STUDENT_NUM   STUDENT_LNAME   STUDENT_FNAME   STUDENT_GRADE   
+Intro to Aircraft mechanics   Mon-Wed     1000-1200    Oct. 14th       C                        2 Myers           James           A               
+Intro to Aircraft mechanics   Mon-Wed     1000-1200    Oct. 14th       C                        3 Howard          Rico            C               
+
+
+SQL> SELECT * FROM InstructorDBA.Instr_All_Class;
+INSTR_LNAME   INSTR_FNAME   COURSE_NAME                   COURSE_DESC                   COURSE_HOURS   ADMIN_LNAME   ADMIN_FNAME   SCHED_DAY       SCHED_TIME   SCHED_DAY_OFF   SCHED_NOTES                             CLASS_NOTES                  CLASS_ROOM   
+Roberts       John          Intro to Computer Science     Intro to Computer Science                  3 Evans         Bob           Mon-Tues-Wed    0900-1100    Oct. 13th       This is the one of the main schedules   Computer one broke           A            
+Russell       Brandon       Intro to Art                  Intro to Art                               3 Johnson       Mike          Mon-Tues-Thur   0900-1100    Oct. 13th       This is the one of the main schedules   Room Ready                   B            
+Lopez         Mike          Intro to Aircraft mechanics   Intro to Aircraft mechanics                3 Jenkins       Mary          Mon-Wed         1000-1200    Oct. 14th       This is the one of the main schedules   Instructor Chair broke       C            
+Monteor       Jim           Intro to Robotics             Intro to Robotics                          3 Russell       Jim           Mon-Wed-Fri     1000-1200    Oct. 15th       This a alternative schedules            A/C not working              D            
+Hamm          Patricia      Intro to Databases            Intro to Databases                         3 Bargueno      Patricia      Mon-Tues        0800-0900    Oct. 16th       This a alternative schedules            Computer two broke           E            
+Ingle         Tammy         Advanced English              Advanced English                           3 Hopkins       John          Tues-Wed        1300-1500    Oct. 17th       This a alternative schedules            No whiteboard                F            
+Jordan        Keith         Intro to Physics              Intro to Physics                           3 Smith         Will          Thur-Fri        1300-1500    Oct. 18th       This a alternative schedules            station 3 missing keyboard   G            
+Cooper        Adam          Intro to Chemistry            Intro to Chemistry                         3 Brown         Adam          Wed-Fri         1600-1800    Oct. 19th       This a alternative schedules            Room Ready                   H            
+McCoy         Amber         Intro to Spanish              Intro to Spanish                           3 Williams      Shane         Sat             0900-1100    Oct. 20th       Weekend Schedule                        Room Ready                   I            
+Roberts       John          Intro to Spanish              Intro to Spanish                           3 Williams      Shane         Mon-Tues-Thur   0900-1100    Oct. 13th       This is the one of the main schedules   Room Ready                   Z            
+Fuller        Jana          Automotive mechanics Intro    Automotive mechanics Intro                 3 Robins        Amber         Sun             0900-1100    Oct. 21st       Weekend Schedule                        Room Ready                   J            
+Fuller        Jana          Automotive mechanics Intro    Automotive mechanics Intro                 3 Robins        Amber         Sat             0900-1100    Oct. 20th       Weekend Schedule                        Room Ready                   J            
+McCoy         Amber         Automotive mechanics Intro    Automotive mechanics Intro                 3 Robins        Amber         Wed-Fri         1600-1800    Oct. 19th       This a alternative schedules            Room Ready                   X            
+
+
+13 rows selected. 
+
+SQL> SELECT * FROM InstructorDBA.Class_Sched;
+SCHED_NUM   SCHED_DAY       SCHED_TIME   SCHED_DAY_OFF   SCHED_NOTES                             OLS_COL   
+          1 Mon-Tues-Wed    0900-1100    Oct. 13th       This is the one of the main schedules          30 
+          2 Mon-Tues-Thur   0900-1100    Oct. 13th       This is the one of the main schedules          30 
+          3 Mon-Wed         1000-1200    Oct. 14th       This is the one of the main schedules          30 
+          4 Mon-Wed-Fri     1000-1200    Oct. 15th       This a alternative schedules                   30 
+          5 Mon-Tues        0800-0900    Oct. 16th       This a alternative schedules                   30 
+          6 Tues-Wed        1300-1500    Oct. 17th       This a alternative schedules                   30 
+          7 Thur-Fri        1300-1500    Oct. 18th       This a alternative schedules                   30 
+          8 Wed-Fri         1600-1800    Oct. 19th       This a alternative schedules                   30 
+          9 Sat             0900-1100    Oct. 20th       Weekend Schedule                               30 
+         10 Sun             0900-1100    Oct. 21st       Weekend Schedule                               30 
+         11 Mon             0900-0930    6 days a week   Beta                                           40 
+         12 Tues            1100-1115    6 days a week   Beta                                           40 
+
+
+12 rows selected. 
+
+SQL> SELECT * FROM InstructorDBA.Course_List;
+COURSE_NUM   COURSE_NAME                   ADMIN_NUM   COURSE_DESC                   COURSE_HOURS   SECTION_NUM   
+           1 Intro to Computer Science               1 Intro to Computer Science                  3             1 
+           2 Intro to Art                            2 Intro to Art                               3             2 
+           3 Intro to Aircraft mechanics             3 Intro to Aircraft mechanics                3             3 
+           4 Intro to Robotics                       4 Intro to Robotics                          3             4 
+           5 Intro to Databases                      5 Intro to Databases                         3             5 
+           6 Advanced English                        6 Advanced English                           3             6 
+           7 Intro to Physics                        7 Intro to Physics                           3             7 
+           8 Intro to Chemistry                      8 Intro to Chemistry                         3             8 
+           9 Intro to Spanish                        9 Intro to Spanish                           3             9 
+          10 Automotive mechanics Intro             10 Automotive mechanics Intro                 3            10 
+          11 Advanced Robotics                      11 Advanced Robotics                          6             4 
+
+
+11 rows selected. 
+
+SQL> 
+SQL> /*Test student ability to view*/
+SQL> CONNECT sgilbert1/TheSecPass0;
+Connected.
+SQL> show user;
+USER is "SGILBERT1"
+SQL> SELECT * FROM InstructorDBA.Instr_Personal_Info;
+
+Error starting at line : 423 in command -
+SELECT * FROM InstructorDBA.Instr_Personal_Info
+Error at Command Line : 423 Column : 29
+Error report -
+SQL Error: ORA-00942: table or view does not exist
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+SQL> SELECT * FROM InstructorDBA.Instr_Section_Info;
+
+Error starting at line : 424 in command -
+SELECT * FROM InstructorDBA.Instr_Section_Info
+Error at Command Line : 424 Column : 29
+Error report -
+SQL Error: ORA-00942: table or view does not exist
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+SQL> SELECT * FROM InstructorDBA.Instr_Class_Course_Info;
+
+Error starting at line : 425 in command -
+SELECT * FROM InstructorDBA.Instr_Class_Course_Info
+Error at Command Line : 425 Column : 29
+Error report -
+SQL Error: ORA-00942: table or view does not exist
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+SQL> SELECT * FROM InstructorDBA.Instr_Student_Class;
+
+Error starting at line : 426 in command -
+SELECT * FROM InstructorDBA.Instr_Student_Class
+Error at Command Line : 426 Column : 29
+Error report -
+SQL Error: ORA-00942: table or view does not exist
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+SQL> SELECT * FROM InstructorDBA.Instr_All_Class;
+
+Error starting at line : 427 in command -
+SELECT * FROM InstructorDBA.Instr_All_Class
+Error at Command Line : 427 Column : 29
+Error report -
+SQL Error: ORA-00942: table or view does not exist
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+SQL> SELECT * FROM InstructorDBA.Class_Sched;
+
+Error starting at line : 428 in command -
+SELECT * FROM InstructorDBA.Class_Sched
+Error at Command Line : 428 Column : 29
+Error report -
+SQL Error: ORA-00942: table or view does not exist
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+SQL> SELECT * FROM InstructorDBA.Course_List;
+
+Error starting at line : 429 in command -
+SELECT * FROM InstructorDBA.Course_List
+Error at Command Line : 429 Column : 29
+Error report -
+SQL Error: ORA-00942: table or view does not exist
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+SQL> 
+SQL> CONNECT InstructorDBA/brr1wik7;
+Connected.
+SQL> show user;
+USER is "INSTRUCTORDBA"
+SQL> 
+SQL> 
+SQL> /*Instructor Modify Procedure*/
+SQL> 
+SQL> /*Update personal info*/
+SQL> GRANT UPDATE (Instr_Address, Instr_PhoneNum, Instr_LName, Instr_FName, Instr_ZipCode) ON Instr_Personal_Info TO instructor_role;
+
+Grant succeeded.
+
+SQL> 
+SQL> /*Update their class schedule*/
+SQL> CREATE OR REPLACE VIEW Instr_Classes_Update AS
+  2      SELECT Instr_Classes.SCHED_NUM SCHED_NUM,
+  3  Instr_Classes.COURSE_NUM COURSE_NUM,
+  4  Instr_Classes.CLASS_NOTES CLASS_NOTES,
+  5  Instr_Classes.CLASS_ROOM CLASS_ROOM FROM Instr_Classes INNER JOIN Instr_List USING (Instr_Num)
+  6          WHERE Instr_List.User_Name = USER WITH CHECK OPTION;
+
+View INSTR_CLASSES_UPDATE created.
+
+SQL> GRANT SELECT, UPDATE (Class_Notes) ON Instr_Classes_Update TO instructor_role;
+
+Grant succeeded.
+
+SQL> 
+SQL> /*Update student grade enrolled in their classes. Remove students from their classes*/
+SQL> CREATE OR REPLACE VIEW Instr_Student_Modify AS
+  2      SELECT Student_Num, Instr_Num, Sched_Num, Student_Grade FROM Instr_List INNER JOIN Instr_Classes USING (Instr_Num)
+  3          INNER JOIN Student_Class_Signup USING (Instr_Num, Sched_Num)
+  4              WHERE Instr_List.User_Name = USER WITH CHECK OPTION;
+
+View INSTR_STUDENT_MODIFY created.
+
+SQL> GRANT SELECT, UPDATE (Student_Grade) , DELETE ON Instr_Student_Modify TO instructor_role;
+
+Grant succeeded.
+
+SQL> 
+SQL> /*Test instructor update on personal info*/
+SQL> CONNECT mlopez3/TheSecPass2;
+Connected.
+SQL> show user;
+USER is "MLOPEZ3"
+SQL> SAVEPOINT Instr_Modify_Personal_Procedure;
+
+Savepoint created.
+
+SQL> SELECT * FROM InstructorDBA.Instr_Personal_Info;
+INSTR_NUM   INSTR_ADDRESS      INSTR_PHONENUM   SECTION_NUM   INSTR_LNAME   INSTR_FNAME   INSTR_ZIPCODE   USER_NAME   
+          3 103 Apple Street   111-222-3436                 3 Lopez         Mike          31003           MLOPEZ3     
+
+
+SQL> UPDATE InstructorDBA.Instr_Personal_Info SET Instr_Address = '867 Orange St';
+
+1 row updated.
+
+SQL> UPDATE InstructorDBA.Instr_Personal_Info SET User_Name = 'BillyBob7';
+
+Error starting at line : 462 in command -
+UPDATE InstructorDBA.Instr_Personal_Info SET User_Name = 'BillyBob7'
+Error at Command Line : 462 Column : 22
+Error report -
+SQL Error: ORA-01031: insufficient privileges
+01031. 00000 -  "insufficient privileges"
+*Cause:    An attempt was made to perform a database operation without
+           the necessary privileges.
+*Action:   Ask your database administrator or designated security
+           administrator to grant you the necessary privileges
+SQL> SELECT * FROM InstructorDBA.Instr_Personal_Info;
+INSTR_NUM   INSTR_ADDRESS   INSTR_PHONENUM   SECTION_NUM   INSTR_LNAME   INSTR_FNAME   INSTR_ZIPCODE   USER_NAME   
+          3 867 Orange St   111-222-3436                 3 Lopez         Mike          31003           MLOPEZ3     
+
+
+SQL> ROLLBACK TO Instr_Modify_Personal_Procedure;
+
+Rollback complete.
+
+SQL> /*Test student account access*/
+SQL> CONNECT sgilbert1/TheSecPass0;
+Connected.
+SQL> show user;
+USER is "SGILBERT1"
+SQL> UPDATE InstructorDBA.Instr_Personal_Info SET Instr_Address = '867 Orange St';
+
+Error starting at line : 468 in command -
+UPDATE InstructorDBA.Instr_Personal_Info SET Instr_Address = '867 Orange St'
+Error at Command Line : 468 Column : 22
+Error report -
+SQL Error: ORA-00942: table or view does not exist
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+SQL> SELECT * FROM InstructorDBA.Instr_Personal_Info;
+
+Error starting at line : 469 in command -
+SELECT * FROM InstructorDBA.Instr_Personal_Info
+Error at Command Line : 469 Column : 29
+Error report -
+SQL Error: ORA-00942: table or view does not exist
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+SQL> 
+SQL> /*Test instructor ability to select and update on their class schedule*/
+SQL> CONNECT mlopez3/TheSecPass2;
+Connected.
+SQL> show user;
+USER is "MLOPEZ3"
+SQL> SAVEPOINT Instr_Modify_Class_Procedure;
+
+Savepoint created.
+
+SQL> SELECT * FROM InstructorDBA.Instr_Classes_Update;
+SCHED_NUM   COURSE_NUM   CLASS_NOTES              CLASS_ROOM   
+          3            3 Instructor Chair broke   C            
+
+
+SQL> UPDATE InstructorDBA.Instr_Classes_Update SET Class_Notes = 'A/C Broke' WHERE Sched_Num = 3;
+
+1 row updated.
+
+SQL> UPDATE InstructorDBA.Instr_Classes_Update SET Class_Room = 'Party_Room' WHERE Sched_Num = 3;
+
+Error starting at line : 477 in command -
+UPDATE InstructorDBA.Instr_Classes_Update SET Class_Room = 'Party_Room' WHERE Sched_Num = 3
+Error at Command Line : 477 Column : 22
+Error report -
+SQL Error: ORA-01031: insufficient privileges
+01031. 00000 -  "insufficient privileges"
+*Cause:    An attempt was made to perform a database operation without
+           the necessary privileges.
+*Action:   Ask your database administrator or designated security
+           administrator to grant you the necessary privileges
+SQL> SELECT * FROM InstructorDBA.Instr_Classes_Update;
+SCHED_NUM   COURSE_NUM   CLASS_NOTES   CLASS_ROOM   
+          3            3 A/C Broke     C            
+
+
+SQL> ROLLBACK TO Instr_Modify_Class_Procedure;
+
+Rollback complete.
+
+SQL> /*Test Select & Update with instructor trying to update another instructor's class*/
+SQL> CONNECT brussell2/TheSecPass1;
+Connected.
+SQL> show user;
+USER is "BRUSSELL2"
+SQL> SELECT * FROM InstructorDBA.Instr_Classes_Update;
+SCHED_NUM   COURSE_NUM   CLASS_NOTES   CLASS_ROOM   
+          2            2 Room Ready    B            
+
+
+SQL> UPDATE InstructorDBA.Instr_Classes_Update SET Class_Notes = 'A/C Broke' WHERE Sched_Num = 3;
+
+0 rows updated.
+
+SQL> UPDATE InstructorDBA.Instr_Classes_Update SET Class_Notes = 'A/C Broke' WHERE Instr_Num = 3 AND Sched_Num = 3;
+
+Error starting at line : 485 in command -
+UPDATE InstructorDBA.Instr_Classes_Update SET Class_Notes = 'A/C Broke' WHERE Instr_Num = 3 AND Sched_Num = 3
+Error at Command Line : 485 Column : 79
+Error report -
+SQL Error: ORA-00904: "INSTR_NUM": invalid identifier
+00904. 00000 -  "%s: invalid identifier"
+*Cause:    
+*Action:
+SQL> SELECT * FROM InstructorDBA.Instr_Classes_Update;
+SCHED_NUM   COURSE_NUM   CLASS_NOTES   CLASS_ROOM   
+          2            2 Room Ready    B            
+
+
+SQL> 
+SQL> /*Test student account access*/
+SQL> CONNECT sgilbert1/TheSecPass0;
+Connected.
+SQL> show user;
+USER is "SGILBERT1"
+SQL> SELECT * FROM InstructorDBA.Instr_Classes_Update;
+
+Error starting at line : 491 in command -
+SELECT * FROM InstructorDBA.Instr_Classes_Update
+Error at Command Line : 491 Column : 29
+Error report -
+SQL Error: ORA-00942: table or view does not exist
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+SQL> UPDATE InstructorDBA.Instr_Classes_Update SET Class_Notes = 'A/C Broke' WHERE Sched_Num = 3;
+
+Error starting at line : 492 in command -
+UPDATE InstructorDBA.Instr_Classes_Update SET Class_Notes = 'A/C Broke' WHERE Sched_Num = 3
+Error at Command Line : 492 Column : 22
+Error report -
+SQL Error: ORA-00942: table or view does not exist
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+SQL> 
+SQL> /*Test instructor ability to select, update, and delete students from their class*/
+SQL> CONNECT mlopez3/TheSecPass2;
+Connected.
+SQL> show user;
+USER is "MLOPEZ3"
+SQL> SAVEPOINT Instr_Modify_Delete_Point;
+
+Savepoint created.
+
+SQL> SELECT * FROM InstructorDBA.Instr_Student_Modify;
+STUDENT_NUM   INSTR_NUM   SCHED_NUM   STUDENT_GRADE   
+            2           3           3 A               
+            3           3           3 C               
+
+
+SQL> UPDATE InstructorDBA.Instr_Student_Modify SET Student_Grade = 'F' WHERE Student_Num = 2;
+
+1 row updated.
+
+SQL> UPDATE InstructorDBA.Instr_Student_Modify SET Student_Grade = 'F' WHERE Student_Num = 3;
+
+1 row updated.
+
+SQL> UPDATE InstructorDBA.Instr_Student_Modify SET Student_Num = 4 WHERE Student_Num = 3;
+
+Error starting at line : 501 in command -
+UPDATE InstructorDBA.Instr_Student_Modify SET Student_Num = 4 WHERE Student_Num = 3
+Error at Command Line : 501 Column : 22
+Error report -
+SQL Error: ORA-01031: insufficient privileges
+01031. 00000 -  "insufficient privileges"
+*Cause:    An attempt was made to perform a database operation without
+           the necessary privileges.
+*Action:   Ask your database administrator or designated security
+           administrator to grant you the necessary privileges
+SQL> SELECT * FROM InstructorDBA.Instr_Student_Modify;
+STUDENT_NUM   INSTR_NUM   SCHED_NUM   STUDENT_GRADE   
+            2           3           3 F               
+            3           3           3 F               
+
+
+SQL> DELETE FROM InstructorDBA.Instr_Student_Modify WHERE Student_Num = 3;
+
+1 row deleted.
+
+SQL> SELECT * FROM InstructorDBA.Instr_Student_Modify;
+STUDENT_NUM   INSTR_NUM   SCHED_NUM   STUDENT_GRADE   
+            2           3           3 F               
+
+
+SQL> ROLLBACK TO Instr_Modify_Delete_Point;
+
+Rollback complete.
+
+SQL> 
+SQL> /*Test student access*/
+SQL> CONNECT sgilbert1/TheSecPass0;
+Connected.
+SQL> show user;
+USER is "SGILBERT1"
+SQL> SELECT * FROM InstructorDBA.Instr_Student_Modify;
+
+Error starting at line : 510 in command -
+SELECT * FROM InstructorDBA.Instr_Student_Modify
+Error at Command Line : 510 Column : 29
+Error report -
+SQL Error: ORA-00942: table or view does not exist
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+SQL> UPDATE InstructorDBA.Instr_Student_Modify SET Student_Grade = 'F' WHERE Student_Num = 2;
+
+Error starting at line : 511 in command -
+UPDATE InstructorDBA.Instr_Student_Modify SET Student_Grade = 'F' WHERE Student_Num = 2
+Error at Command Line : 511 Column : 22
+Error report -
+SQL Error: ORA-00942: table or view does not exist
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+SQL> DELETE FROM InstructorDBA.Instr_Student_Modify WHERE Student_Num = 2;
+
+Error starting at line : 512 in command -
+DELETE FROM InstructorDBA.Instr_Student_Modify WHERE Student_Num = 2
+Error at Command Line : 512 Column : 27
+Error report -
+SQL Error: ORA-00942: table or view does not exist
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+SQL> SELECT * FROM InstructorDBA.Instr_Student_Modify;
+
+Error starting at line : 513 in command -
+SELECT * FROM InstructorDBA.Instr_Student_Modify
+Error at Command Line : 513 Column : 29
+Error report -
+SQL Error: ORA-00942: table or view does not exist
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+SQL> 
+SQL> CONNECT InstructorDBA/brr1wik7;
+Connected.
+SQL> show user;
+USER is "INSTRUCTORDBA"
+SQL> 
+SQL> 
+SQL> /*Student View Procedure*/
+SQL> /*Show personal info*/
+SQL> CREATE OR REPLACE VIEW Student_Personal_Info AS
+  2  SELECT * FROM Student_List 
+  3      WHERE Student_List.User_Name = USER WITH CHECK OPTION;
+
+View STUDENT_PERSONAL_INFO created.
+
+SQL> GRANT SELECT ON Student_Personal_Info TO student_role;
+
+Grant succeeded.
+
+SQL> 
+SQL> /*View the instructor class schedule*/
+SQL> GRANT SELECT ON Instr_All_Class TO student_role;
+
+Grant succeeded.
+
+SQL> 
+SQL> 
+SQL> /*See what classes they are enrolled in and their grade*/
+SQL> CREATE OR REPLACE VIEW Student_Class_Grade_View AS
+  2      SELECT Student_LName, Student_FName, Course_Name, Student_Grade,
+  3                  Instr_LName, Instr_FName, Sched_Day, Sched_Time, Sched_Day_Off, Class_Room 
+  4                      FROM Student_List INNER JOIN Student_Class_Signup USING (Student_Num)
+  5                          INNER JOIN Instr_Classes USING (Instr_Num, Sched_Num)
+  6                          INNER JOIN Class_Sched USING (Sched_Num)
+  7                          INNER JOIN Course_List USING (Course_Num)
+  8                          INNER JOIN Instr_List USING (Instr_Num)
+  9                              WHERE Student_List.User_Name = USER WITH CHECK OPTION;
+
+View STUDENT_CLASS_GRADE_VIEW created.
+
+SQL> GRANT SELECT ON Student_Class_Grade_View TO student_role;
+
+Grant succeeded.
+
+SQL> 
+SQL> 
+SQL> /*Test Student View personal info*/
+SQL> CONNECT sgilbert1/TheSecPass0;
+Connected.
+SQL> show user;
+USER is "SGILBERT1"
+SQL> SELECT * FROM InstructorDBA.Student_Personal_Info;
+STUDENT_NUM   STUDENT_ADDRESS   STUDENT_PHONENUM   STUDENT_LNAME   STUDENT_FNAME   STUDENT_ZIPCODE   USER_NAME   
+            1 Dorm 1            222-333-3434       Gilbert         Sarah           31005             SGILBERT1   
+
+
+SQL> 
+SQL> /*Test instructor access*/
+SQL> CONNECT mlopez3/TheSecPass2;
+Connected.
+SQL> show user;
+USER is "MLOPEZ3"
+SQL> SELECT * FROM InstructorDBA.Student_Personal_Info;
+
+Error starting at line : 551 in command -
+SELECT * FROM InstructorDBA.Student_Personal_Info
+Error at Command Line : 551 Column : 29
+Error report -
+SQL Error: ORA-00942: table or view does not exist
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+SQL> 
+SQL> /*Test Student View instructor clas schedule*/
+SQL> CONNECT sgilbert1/TheSecPass0;
+Connected.
+SQL> show user;
+USER is "SGILBERT1"
+SQL> SELECT * FROM InstructorDBA.Instr_All_Class;
+INSTR_LNAME   INSTR_FNAME   COURSE_NAME                   COURSE_DESC                   COURSE_HOURS   ADMIN_LNAME   ADMIN_FNAME   SCHED_DAY       SCHED_TIME   SCHED_DAY_OFF   SCHED_NOTES                             CLASS_NOTES                  CLASS_ROOM   
+Roberts       John          Intro to Computer Science     Intro to Computer Science                  3 Evans         Bob           Mon-Tues-Wed    0900-1100    Oct. 13th       This is the one of the main schedules   Computer one broke           A            
+Russell       Brandon       Intro to Art                  Intro to Art                               3 Johnson       Mike          Mon-Tues-Thur   0900-1100    Oct. 13th       This is the one of the main schedules   Room Ready                   B            
+Lopez         Mike          Intro to Aircraft mechanics   Intro to Aircraft mechanics                3 Jenkins       Mary          Mon-Wed         1000-1200    Oct. 14th       This is the one of the main schedules   Instructor Chair broke       C            
+Monteor       Jim           Intro to Robotics             Intro to Robotics                          3 Russell       Jim           Mon-Wed-Fri     1000-1200    Oct. 15th       This a alternative schedules            A/C not working              D            
+Hamm          Patricia      Intro to Databases            Intro to Databases                         3 Bargueno      Patricia      Mon-Tues        0800-0900    Oct. 16th       This a alternative schedules            Computer two broke           E            
+Ingle         Tammy         Advanced English              Advanced English                           3 Hopkins       John          Tues-Wed        1300-1500    Oct. 17th       This a alternative schedules            No whiteboard                F            
+Jordan        Keith         Intro to Physics              Intro to Physics                           3 Smith         Will          Thur-Fri        1300-1500    Oct. 18th       This a alternative schedules            station 3 missing keyboard   G            
+Cooper        Adam          Intro to Chemistry            Intro to Chemistry                         3 Brown         Adam          Wed-Fri         1600-1800    Oct. 19th       This a alternative schedules            Room Ready                   H            
+McCoy         Amber         Intro to Spanish              Intro to Spanish                           3 Williams      Shane         Sat             0900-1100    Oct. 20th       Weekend Schedule                        Room Ready                   I            
+Roberts       John          Intro to Spanish              Intro to Spanish                           3 Williams      Shane         Mon-Tues-Thur   0900-1100    Oct. 13th       This is the one of the main schedules   Room Ready                   Z            
+Fuller        Jana          Automotive mechanics Intro    Automotive mechanics Intro                 3 Robins        Amber         Sun             0900-1100    Oct. 21st       Weekend Schedule                        Room Ready                   J            
+Fuller        Jana          Automotive mechanics Intro    Automotive mechanics Intro                 3 Robins        Amber         Sat             0900-1100    Oct. 20th       Weekend Schedule                        Room Ready                   J            
+McCoy         Amber         Automotive mechanics Intro    Automotive mechanics Intro                 3 Robins        Amber         Wed-Fri         1600-1800    Oct. 19th       This a alternative schedules            Room Ready                   X            
+
+
+13 rows selected. 
+
+SQL> 
+SQL> /*Test Student View classes enrolled in and grade*/
+SQL> CONNECT sgilbert1/TheSecPass0;
+Connected.
+SQL> show user;
+USER is "SGILBERT1"
+SQL> SELECT * FROM InstructorDBA.Student_Class_Grade_View;
+STUDENT_LNAME   STUDENT_FNAME   COURSE_NAME                 STUDENT_GRADE   INSTR_LNAME   INSTR_FNAME   SCHED_DAY       SCHED_TIME   SCHED_DAY_OFF   CLASS_ROOM   
+Gilbert         Sarah           Intro to Computer Science   A               Roberts       John          Mon-Tues-Wed    0900-1100    Oct. 13th       A            
+Gilbert         Sarah           Intro to Art                B               Russell       Brandon       Mon-Tues-Thur   0900-1100    Oct. 13th       B            
+
+
+SQL> /*Test instructor access*/
+SQL> CONNECT mlopez3/TheSecPass2;
+Connected.
+SQL> show user;
+USER is "MLOPEZ3"
+SQL> SELECT * FROM InstructorDBA.Student_Class_Grade_View;
+
+Error starting at line : 565 in command -
+SELECT * FROM InstructorDBA.Student_Class_Grade_View
+Error at Command Line : 565 Column : 29
+Error report -
+SQL Error: ORA-00942: table or view does not exist
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+SQL> 
+SQL> CONNECT InstructorDBA/brr1wik7;
+Connected.
+SQL> show user;
+USER is "INSTRUCTORDBA"
+SQL> /*Student Modify Procedure*/
+SQL> 
+SQL> /*Student update personal information*/
+SQL> GRANT UPDATE (Student_Address, Student_PhoneNum, Student_LName, Student_FName, Student_Zipcode) ON Student_Personal_Info TO student_role;
+
+Grant succeeded.
+
+SQL> /*Student enroll in classes*/
+SQL> /*Trigger for Student class enrollment - Prevent students from signing other students up for class.*/
+SQL> CREATE OR REPLACE TRIGGER Student_Class_Signup_Trigger
+  2  BEFORE INSERT
+  3     ON Student_Class_Signup
+  4     FOR EACH ROW
+  5  
+  6  DECLARE
+  7     Tmp_Counter INTEGER;
+  8     Tmp_Student_Num INTEGER;
+  9  BEGIN
+ 10      /*Only run code for Student users*/
+ 11      SELECT count(*) into Tmp_Counter FROM Student_List WHERE Student_List.User_Name = USER;
+ 12      IF Tmp_Counter > 0 THEN
+ 13          SELECT Student_Num INTO Tmp_Student_Num FROM Student_List WHERE Student_List.User_Name = USER;
+ 14              :new.Student_Num := Tmp_Student_Num;
+ 15              :new.Student_Grade := '';
+ 16      END IF;
+ 17  END;
+ 18  /
+
+Trigger STUDENT_CLASS_SIGNUP_TRIGGER compiled
+
+SQL> GRANT INSERT  ON Student_Class_Signup TO student_role;
+
+Grant succeeded.
+
+SQL> 
+SQL> /*Test update personal info*/
+SQL> CONNECT sgilbert1/TheSecPass0;
+Connected.
+SQL> show user;
+USER is "SGILBERT1"
+SQL> SAVEPOINT Student_Modify_Personal_Point;
+
+Savepoint created.
+
+SQL> SELECT * FROM InstructorDBA.Student_Personal_Info;
+STUDENT_NUM   STUDENT_ADDRESS   STUDENT_PHONENUM   STUDENT_LNAME   STUDENT_FNAME   STUDENT_ZIPCODE   USER_NAME   
+            1 Dorm 1            222-333-3434       Gilbert         Sarah           31005             SGILBERT1   
+
+
+SQL> UPDATE InstructorDBA.Student_Personal_Info SET Student_ZipCode = '90210';
+
+1 row updated.
+
+SQL> UPDATE InstructorDBA.Student_Personal_Info SET User_Name = 'HackerMode';
+
+Error starting at line : 601 in command -
+UPDATE InstructorDBA.Student_Personal_Info SET User_Name = 'HackerMode'
+Error at Command Line : 601 Column : 22
+Error report -
+SQL Error: ORA-01031: insufficient privileges
+01031. 00000 -  "insufficient privileges"
+*Cause:    An attempt was made to perform a database operation without
+           the necessary privileges.
+*Action:   Ask your database administrator or designated security
+           administrator to grant you the necessary privileges
+SQL> SELECT * FROM InstructorDBA.Student_Personal_Info;
+STUDENT_NUM   STUDENT_ADDRESS   STUDENT_PHONENUM   STUDENT_LNAME   STUDENT_FNAME   STUDENT_ZIPCODE   USER_NAME   
+            1 Dorm 1            222-333-3434       Gilbert         Sarah           90210             SGILBERT1   
+
+
+SQL> ROLLBACK TO Student_Modify_Personal_Point;
+
+Rollback complete.
+
+SQL> /*Test instructor access*/
+SQL> CONNECT mlopez3/TheSecPass2;
+Connected.
+SQL> show user;
+USER is "MLOPEZ3"
+SQL> UPDATE InstructorDBA.Student_Personal_Info SET Student_ZipCode = '90210';
+
+Error starting at line : 607 in command -
+UPDATE InstructorDBA.Student_Personal_Info SET Student_ZipCode = '90210'
+Error at Command Line : 607 Column : 22
+Error report -
+SQL Error: ORA-00942: table or view does not exist
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+SQL> 
+SQL> 
+SQL> /*Test enroll in class*/
+SQL> CONNECT sgilbert1/TheSecPass0;
+Connected.
+SQL> show user;
+USER is "SGILBERT1"
+SQL> SAVEPOINT Student_Class_Signup_Point;
+
+Savepoint created.
+
+SQL> SELECT * FROM InstructorDBA.Student_Class_Grade_View;
+STUDENT_LNAME   STUDENT_FNAME   COURSE_NAME                 STUDENT_GRADE   INSTR_LNAME   INSTR_FNAME   SCHED_DAY       SCHED_TIME   SCHED_DAY_OFF   CLASS_ROOM   
+Gilbert         Sarah           Intro to Computer Science   A               Roberts       John          Mon-Tues-Wed    0900-1100    Oct. 13th       A            
+Gilbert         Sarah           Intro to Art                B               Russell       Brandon       Mon-Tues-Thur   0900-1100    Oct. 13th       B            
+
+
+SQL> INSERT INTO InstructorDBA.Student_Class_Signup (Student_Num, Instr_Num, Sched_Num,  Student_Grade)
+  2          VALUES                ( 3,6, 6,  'A');
+
+1 row inserted.
+
+SQL> 
+SQL> INSERT INTO InstructorDBA.Student_Class_Signup (Student_Num, Instr_Num, Sched_Num,  Student_Grade)
+  2          VALUES                ( 1,3, 3,  'A');
+
+1 row inserted.
+
+SQL> 
+SQL> SELECT * FROM InstructorDBA.Student_Class_Grade_View;
+STUDENT_LNAME   STUDENT_FNAME   COURSE_NAME                   STUDENT_GRADE   INSTR_LNAME   INSTR_FNAME   SCHED_DAY       SCHED_TIME   SCHED_DAY_OFF   CLASS_ROOM   
+Gilbert         Sarah           Intro to Computer Science     A               Roberts       John          Mon-Tues-Wed    0900-1100    Oct. 13th       A            
+Gilbert         Sarah           Intro to Art                  B               Russell       Brandon       Mon-Tues-Thur   0900-1100    Oct. 13th       B            
+Gilbert         Sarah           Advanced English                              Ingle         Tammy         Tues-Wed        1300-1500    Oct. 17th       F            
+Gilbert         Sarah           Intro to Aircraft mechanics                   Lopez         Mike          Mon-Wed         1000-1200    Oct. 14th       C            
+
+
+SQL> ROLLBACK TO Student_Class_Signup_Point;
+
+Rollback complete.
+
+SQL> 
+SQL> /*Test instructor access*/
+SQL> CONNECT mlopez3/TheSecPass2;
+Connected.
+SQL> show user;
+USER is "MLOPEZ3"
+SQL> INSERT INTO InstructorDBA.Student_Class_Signup (Student_Num, Instr_Num, Sched_Num,  Student_Grade)
+  2          VALUES                ( 3,6, 6,  'A');
+
+Error starting at line : 627 in command -
+INSERT INTO InstructorDBA.Student_Class_Signup (Student_Num, Instr_Num, Sched_Num,  Student_Grade)
+        VALUES                ( 3,6, 6,  'A')
+Error at Command Line : 627 Column : 27
+Error report -
+SQL Error: ORA-00942: table or view does not exist
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+SQL> 
+SQL> /*Test admin access*/
+SQL> CONNECT bevans1/TheSecPass0;
+Connected.
+SQL> show user;
+USER is "BEVANS1"
+SQL> SAVEPOINT Admin_Student_Class_Signup_Point;
+
+Savepoint created.
+
+SQL> INSERT INTO InstructorDBA.Student_Class_Signup (Student_Num, Instr_Num, Sched_Num,  Student_Grade)
+  2          VALUES                ( 3,6, 6,  'A');
+
+1 row inserted.
+
+SQL> SELECT  * FROM InstructorDBA.Student_Class_Signup;
+STUDENT_NUM   INSTR_NUM   SCHED_NUM   STUDENT_GRADE   
+            1           1           1 A               
+            1           2           2 B               
+            2           3           3 A               
+            3           3           3 C               
+            4           4           4 C               
+            5           5           5 B               
+            6           6           6 D               
+            7           7           7 F               
+            8           8           8                 
+            9           9           9 A               
+           10          10          10 A               
+            3           6           6 A               
+
+
+12 rows selected. 
+
+SQL> ROLLBACK TO Admin_Student_Class_Signup_Point;
+
+Rollback complete.
+
+SQL> CONNECT InstructorDBA/brr1wik7;
+Connected.
+SQL> show user;
+USER is "INSTRUCTORDBA"
+SQL> 
+SQL> /*Class Tentative Schedule Procedure*/
+SQL> connect sys/brr1wik7 as sysdba;
+Connected.
+SQL> show user;
+USER is "SYS"
+SQL> GRANT SELECT ON InstructorDBA.Student_List TO lbacsys;
+
+Grant succeeded.
+
+SQL> GRANT SELECT ON InstructorDBA.Instr_List TO lbacsys;
+
+Grant succeeded.
+
+SQL> GRANT SELECT ON InstructorDBA.Admin_List TO lbacsys;
+
+Grant succeeded.
+
+SQL> 
+SQL> CONNECT lbacsys/brr1wik7;
+Connected.
+SQL> show user;
+USER is "LBACSYS"
+SQL> 
+SQL> BEGIN
+  2   SA_SYSDBA.CREATE_POLICY (
+  3    policy_name      => 'Sched_OLS_POL',
+  4    column_name      => 'ols_col',
+  5    default_options  => 'read_control');
+  6  
+  7   SA_COMPONENTS.CREATE_LEVEL (
+  8     policy_name   => 'Sched_OLS_POL',
+  9     level_num     => 4,
+ 10     short_name    => 'HS',
+ 11     long_name     => 'HIGHLY_SENSITIVE');
+ 12   SA_COMPONENTS.CREATE_LEVEL (
+ 13     policy_name   => 'Sched_OLS_POL',
+ 14     level_num     => 3,
+ 15     short_name    => 'S',
+ 16     long_name     => 'SENSITIVE');
+ 17  
+ 18   SA_LABEL_ADMIN.CREATE_LABEL  (
+ 19    policy_name     => 'Sched_OLS_POL',
+ 20    label_tag       => '40',
+ 21    label_value     => 'HS',
+ 22    data_label      => TRUE);
+ 23   SA_LABEL_ADMIN.CREATE_LABEL  (
+ 24    policy_name     => 'Sched_OLS_POL',
+ 25    label_tag       => '30',
+ 26    label_value     => 'S',
+ 27    data_label      => TRUE);  
+ 28  
+ 29   SA_USER_ADMIN.SET_LEVELS (
+ 30    policy_name   => 'Sched_OLS_POL',
+ 31    user_name     => 'InstructorDBA', 
+ 32    max_level     => 'HS',
+ 33    min_level     => 'S',
+ 34    def_level     => 'HS',
+ 35    row_level     => 'HS');
+ 36  
+ 37  /*Student account update classification level*/
+ 38    FOR x IN (SELECT User_Name FROM InstructorDBA.Student_List)
+ 39    LOOP
+ 40    SA_USER_ADMIN.SET_LEVELS (
+ 41    policy_name   => 'Sched_OLS_POL',
+ 42    user_name     => ''||x.User_Name||'', 
+ 43    max_level     => 'S',
+ 44    min_level     => 'S',
+ 45    def_level     => 'S',
+ 46    row_level     => 'S');
+ 47    END LOOP;  
+ 48  
+ 49  /*Instructor account update classification level*/
+ 50    FOR x IN (SELECT User_Name FROM InstructorDBA.Instr_List)
+ 51    LOOP
+ 52    SA_USER_ADMIN.SET_LEVELS (
+ 53    policy_name   => 'Sched_OLS_POL',
+ 54    user_name     => ''||x.User_Name||'', 
+ 55    max_level     => 'HS',
+ 56    min_level     => 'S',
+ 57    def_level     => 'HS',
+ 58    row_level     => 'HS');
+ 59    END LOOP; 
+ 60  
+ 61  /*Admin account update classification level*/
+ 62    FOR x IN (SELECT User_Name FROM InstructorDBA.Admin_List)
+ 63    LOOP
+ 64    SA_USER_ADMIN.SET_LEVELS (
+ 65    policy_name   => 'Sched_OLS_POL',
+ 66    user_name     => ''||x.User_Name||'', 
+ 67    max_level     => 'HS',
+ 68    min_level     => 'S',
+ 69    def_level     => 'HS',
+ 70    row_level     => 'HS');
+ 71    END LOOP;   
+ 72  
+ 73  SA_POLICY_ADMIN.APPLY_TABLE_POLICY (
+ 74    policy_name    => 'Sched_OLS_POL',
+ 75    schema_name    => 'InstructorDBA', 
+ 76    table_name     => 'Class_Sched',
+ 77    table_options  =>  'READ_CONTROL');
+ 78  END;
+ 79  /
+
+PL/SQL procedure successfully completed.
+
+SQL> 
+SQL> /*Update classification column and test access*/
+SQL> connect sys/brr1wik7 as sysdba;
+Connected.
+SQL> show user;
+USER is "SYS"
+SQL> UPDATE InstructorDBA.Class_Sched SET ols_col = CHAR_TO_LABEL('Sched_OLS_POL','S');
+
+12 rows updated.
+
+SQL> UPDATE InstructorDBA.Class_Sched SET ols_col = CHAR_TO_LABEL('Sched_OLS_POL','HS') WHERE Sched_Notes = 'Beta';
+
+2 rows updated.
+
+SQL> SELECT * FROM InstructorDBA.Class_Sched;
+SCHED_NUM   SCHED_DAY       SCHED_TIME   SCHED_DAY_OFF   SCHED_NOTES                             OLS_COL   
+          1 Mon-Tues-Wed    0900-1100    Oct. 13th       This is the one of the main schedules          30 
+          2 Mon-Tues-Thur   0900-1100    Oct. 13th       This is the one of the main schedules          30 
+          3 Mon-Wed         1000-1200    Oct. 14th       This is the one of the main schedules          30 
+          4 Mon-Wed-Fri     1000-1200    Oct. 15th       This a alternative schedules                   30 
+          5 Mon-Tues        0800-0900    Oct. 16th       This a alternative schedules                   30 
+          6 Tues-Wed        1300-1500    Oct. 17th       This a alternative schedules                   30 
+          7 Thur-Fri        1300-1500    Oct. 18th       This a alternative schedules                   30 
+          8 Wed-Fri         1600-1800    Oct. 19th       This a alternative schedules                   30 
+          9 Sat             0900-1100    Oct. 20th       Weekend Schedule                               30 
+         10 Sun             0900-1100    Oct. 21st       Weekend Schedule                               30 
+         11 Mon             0900-0930    6 days a week   Beta                                           40 
+         12 Tues            1100-1115    6 days a week   Beta                                           40 
+
+
+12 rows selected. 
+
+SQL> GRANT SELECT ON InstructorDBA.Class_Sched TO student_role;
+
+Grant succeeded.
+
+SQL> 
+SQL> /*Test InstructorDBA access*/
+SQL> CONNECT InstructorDBA/brr1wik7;
+Connected.
+SQL> show user;
+USER is "INSTRUCTORDBA"
+SQL> SELECT * FROM Class_Sched;
+SCHED_NUM   SCHED_DAY       SCHED_TIME   SCHED_DAY_OFF   SCHED_NOTES                             OLS_COL   
+          1 Mon-Tues-Wed    0900-1100    Oct. 13th       This is the one of the main schedules          30 
+          2 Mon-Tues-Thur   0900-1100    Oct. 13th       This is the one of the main schedules          30 
+          3 Mon-Wed         1000-1200    Oct. 14th       This is the one of the main schedules          30 
+          4 Mon-Wed-Fri     1000-1200    Oct. 15th       This a alternative schedules                   30 
+          5 Mon-Tues        0800-0900    Oct. 16th       This a alternative schedules                   30 
+          6 Tues-Wed        1300-1500    Oct. 17th       This a alternative schedules                   30 
+          7 Thur-Fri        1300-1500    Oct. 18th       This a alternative schedules                   30 
+          8 Wed-Fri         1600-1800    Oct. 19th       This a alternative schedules                   30 
+          9 Sat             0900-1100    Oct. 20th       Weekend Schedule                               30 
+         10 Sun             0900-1100    Oct. 21st       Weekend Schedule                               30 
+         11 Mon             0900-0930    6 days a week   Beta                                           40 
+         12 Tues            1100-1115    6 days a week   Beta                                           40 
+
+
+12 rows selected. 
+
+SQL> SAVEPOINT InstructorDBA_Student_Class_Sched_Insert;
+
+Savepoint created.
+
+SQL> INSERT INTO Class_Sched (Sched_Num,           Sched_Day, Sched_Time, Sched_Day_Off, Sched_Notes, ols_col)
+  2      VALUES              (12345,'All',     '24 Hours','7 days a week',   'Alpha', CHAR_TO_LABEL('Sched_OLS_POL','HS'));
+
+1 row inserted.
+
+SQL> SELECT * FROM Class_Sched;
+SCHED_NUM   SCHED_DAY       SCHED_TIME   SCHED_DAY_OFF   SCHED_NOTES                             OLS_COL   
+          1 Mon-Tues-Wed    0900-1100    Oct. 13th       This is the one of the main schedules          30 
+          2 Mon-Tues-Thur   0900-1100    Oct. 13th       This is the one of the main schedules          30 
+          3 Mon-Wed         1000-1200    Oct. 14th       This is the one of the main schedules          30 
+          4 Mon-Wed-Fri     1000-1200    Oct. 15th       This a alternative schedules                   30 
+          5 Mon-Tues        0800-0900    Oct. 16th       This a alternative schedules                   30 
+          6 Tues-Wed        1300-1500    Oct. 17th       This a alternative schedules                   30 
+          7 Thur-Fri        1300-1500    Oct. 18th       This a alternative schedules                   30 
+          8 Wed-Fri         1600-1800    Oct. 19th       This a alternative schedules                   30 
+          9 Sat             0900-1100    Oct. 20th       Weekend Schedule                               30 
+         10 Sun             0900-1100    Oct. 21st       Weekend Schedule                               30 
+         11 Mon             0900-0930    6 days a week   Beta                                           40 
+         12 Tues            1100-1115    6 days a week   Beta                                           40 
+      12345 All             24 Hours     7 days a week   Alpha                                          40 
+
+
+13 rows selected. 
+
+SQL> ROLLBACK TO InstructorDBA_Student_Class_Sched_Insert;
+
+Rollback complete.
+
+SQL> 
+SQL> 
+SQL> /*Test admin access*/
+SQL> CONNECT bevans1/TheSecPass0;
+Connected.
+SQL> show user;
+USER is "BEVANS1"
+SQL> SELECT * FROM InstructorDBA.Class_Sched;
+SCHED_NUM   SCHED_DAY       SCHED_TIME   SCHED_DAY_OFF   SCHED_NOTES                             OLS_COL   
+          1 Mon-Tues-Wed    0900-1100    Oct. 13th       This is the one of the main schedules          30 
+          2 Mon-Tues-Thur   0900-1100    Oct. 13th       This is the one of the main schedules          30 
+          3 Mon-Wed         1000-1200    Oct. 14th       This is the one of the main schedules          30 
+          4 Mon-Wed-Fri     1000-1200    Oct. 15th       This a alternative schedules                   30 
+          5 Mon-Tues        0800-0900    Oct. 16th       This a alternative schedules                   30 
+          6 Tues-Wed        1300-1500    Oct. 17th       This a alternative schedules                   30 
+          7 Thur-Fri        1300-1500    Oct. 18th       This a alternative schedules                   30 
+          8 Wed-Fri         1600-1800    Oct. 19th       This a alternative schedules                   30 
+          9 Sat             0900-1100    Oct. 20th       Weekend Schedule                               30 
+         10 Sun             0900-1100    Oct. 21st       Weekend Schedule                               30 
+         11 Mon             0900-0930    6 days a week   Beta                                           40 
+         12 Tues            1100-1115    6 days a week   Beta                                           40 
+
+
+12 rows selected. 
+
+SQL> SAVEPOINT Admin_Student_Class_Sched_Insert;
+
+Savepoint created.
+
+SQL> INSERT INTO InstructorDBA.Class_Sched (Sched_Num,           Sched_Day, Sched_Time, Sched_Day_Off, Sched_Notes, ols_col)
+  2      VALUES              (12345,'All',     '24 Hours','7 days a week',   'Alpha', CHAR_TO_LABEL('Sched_OLS_POL','HS'));
+
+1 row inserted.
+
+SQL> SELECT * FROM InstructorDBA.Class_Sched;
+SCHED_NUM   SCHED_DAY       SCHED_TIME   SCHED_DAY_OFF   SCHED_NOTES                             OLS_COL   
+          1 Mon-Tues-Wed    0900-1100    Oct. 13th       This is the one of the main schedules          30 
+          2 Mon-Tues-Thur   0900-1100    Oct. 13th       This is the one of the main schedules          30 
+          3 Mon-Wed         1000-1200    Oct. 14th       This is the one of the main schedules          30 
+          4 Mon-Wed-Fri     1000-1200    Oct. 15th       This a alternative schedules                   30 
+          5 Mon-Tues        0800-0900    Oct. 16th       This a alternative schedules                   30 
+          6 Tues-Wed        1300-1500    Oct. 17th       This a alternative schedules                   30 
+          7 Thur-Fri        1300-1500    Oct. 18th       This a alternative schedules                   30 
+          8 Wed-Fri         1600-1800    Oct. 19th       This a alternative schedules                   30 
+          9 Sat             0900-1100    Oct. 20th       Weekend Schedule                               30 
+         10 Sun             0900-1100    Oct. 21st       Weekend Schedule                               30 
+         11 Mon             0900-0930    6 days a week   Beta                                           40 
+         12 Tues            1100-1115    6 days a week   Beta                                           40 
+      12345 All             24 Hours     7 days a week   Alpha                                          40 
+
+
+13 rows selected. 
+
+SQL> ROLLBACK TO Admin_Student_Class_Sched_Insert;
+
+Rollback complete.
+
+SQL> 
+SQL> 
+SQL> /*Test instructor access*/
+SQL> CONNECT mlopez3/TheSecPass2;
+Connected.
+SQL> show user;
+USER is "MLOPEZ3"
+SQL> SELECT * FROM InstructorDBA.Class_Sched;
+SCHED_NUM   SCHED_DAY       SCHED_TIME   SCHED_DAY_OFF   SCHED_NOTES                             OLS_COL   
+          1 Mon-Tues-Wed    0900-1100    Oct. 13th       This is the one of the main schedules          30 
+          2 Mon-Tues-Thur   0900-1100    Oct. 13th       This is the one of the main schedules          30 
+          3 Mon-Wed         1000-1200    Oct. 14th       This is the one of the main schedules          30 
+          4 Mon-Wed-Fri     1000-1200    Oct. 15th       This a alternative schedules                   30 
+          5 Mon-Tues        0800-0900    Oct. 16th       This a alternative schedules                   30 
+          6 Tues-Wed        1300-1500    Oct. 17th       This a alternative schedules                   30 
+          7 Thur-Fri        1300-1500    Oct. 18th       This a alternative schedules                   30 
+          8 Wed-Fri         1600-1800    Oct. 19th       This a alternative schedules                   30 
+          9 Sat             0900-1100    Oct. 20th       Weekend Schedule                               30 
+         10 Sun             0900-1100    Oct. 21st       Weekend Schedule                               30 
+         11 Mon             0900-0930    6 days a week   Beta                                           40 
+         12 Tues            1100-1115    6 days a week   Beta                                           40 
+
+
+12 rows selected. 
+
+SQL> 
+SQL> 
+SQL> /*Test student access*/
+SQL> CONNECT sgilbert1/TheSecPass0;
+Connected.
+SQL> show user;
+USER is "SGILBERT1"
+SQL> SELECT * FROM InstructorDBA.Class_Sched;
+SCHED_NUM   SCHED_DAY       SCHED_TIME   SCHED_DAY_OFF   SCHED_NOTES                             OLS_COL   
+          1 Mon-Tues-Wed    0900-1100    Oct. 13th       This is the one of the main schedules          30 
+          2 Mon-Tues-Thur   0900-1100    Oct. 13th       This is the one of the main schedules          30 
+          3 Mon-Wed         1000-1200    Oct. 14th       This is the one of the main schedules          30 
+          4 Mon-Wed-Fri     1000-1200    Oct. 15th       This a alternative schedules                   30 
+          5 Mon-Tues        0800-0900    Oct. 16th       This a alternative schedules                   30 
+          6 Tues-Wed        1300-1500    Oct. 17th       This a alternative schedules                   30 
+          7 Thur-Fri        1300-1500    Oct. 18th       This a alternative schedules                   30 
+          8 Wed-Fri         1600-1800    Oct. 19th       This a alternative schedules                   30 
+          9 Sat             0900-1100    Oct. 20th       Weekend Schedule                               30 
+         10 Sun             0900-1100    Oct. 21st       Weekend Schedule                               30 
+
+
+10 rows selected. 
+
+Connection created by CONNECT script command disconnected
