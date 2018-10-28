@@ -18,4 +18,27 @@
 </b:Author>
 <b:JournalName>arXiv preprint arXiv:1004.4022</b:JournalName>
 </b:Source>
+<b:Source>
+<b:Year>2003</b:Year>
+<b:Volume>149</b:Volume>
+<b:BIBTEX_Entry>article</b:BIBTEX_Entry>
+<b:SourceType>JournalArticle</b:SourceType>
+<b:Title>Gantt charts: A centenary appreciation</b:Title>
+<b:Tag>wilson2003gantt</b:Tag>
+<b:Publisher>Elsevier</b:Publisher>
+<b:Author>
+<b:Author>
+<b:NameList>
+<b:Person>
+<b:Last>Wilson</b:Last>
+<b:Middle>M.</b:Middle>
+<b:First>James</b:First>
+</b:Person>
+</b:NameList>
+</b:Author>
+</b:Author>
+<b:Pages>430-437</b:Pages>
+<b:JournalName>European Journal of Operational Research</b:JournalName>
+<b:Number>2</b:Number>
+</b:Source>
 </b:Sources>

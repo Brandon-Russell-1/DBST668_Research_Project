@@ -432,7 +432,7 @@ CONNECT InstructorDBA/brr1wik7;
 show user;
 
 
-/*Instructor Modify Procedure*/
+/*Instructor Modify Procedure - update personal info, class notes, student grades enrolled in class, remove students*/
 
 /*Update personal info*/
 GRANT UPDATE (Instr_Address, Instr_PhoneNum, Instr_LName, Instr_FName, Instr_ZipCode) ON Instr_Personal_Info TO instructor_role;
@@ -516,7 +516,7 @@ CONNECT InstructorDBA/brr1wik7;
 show user;
 
 
-/*Student View Procedure*/
+/*Student View Procedure - personal info, instructor class schedule, classes enrolled in, grades for classes*/
 /*Show personal info*/
 CREATE OR REPLACE VIEW Student_Personal_Info AS
 SELECT * FROM Student_List 
@@ -566,7 +566,7 @@ SELECT * FROM InstructorDBA.Student_Class_Grade_View;
 
 CONNECT InstructorDBA/brr1wik7;    
 show user;
-/*Student Modify Procedure*/
+/*Student Modify Procedure - update personal info and enroll in class*/
   
 /*Student update personal information*/
 GRANT UPDATE (Student_Address, Student_PhoneNum, Student_LName, Student_FName, Student_Zipcode) ON Student_Personal_Info TO student_role;
@@ -638,7 +638,9 @@ ROLLBACK TO Admin_Student_Class_Signup_Point;
 CONNECT InstructorDBA/brr1wik7;
 show user;        
 
-/*Class Tentative Schedule Procedure*/
+/*Class Tentative Schedule Procedure - InstructorDBA and admins can view/create tentative schedules, instructors can view
+tentative schedules, and students can view approved schedules.*/
+
 connect sys/brr1wik7 as sysdba;
 show user;
 GRANT SELECT ON InstructorDBA.Student_List TO lbacsys;
@@ -762,11 +764,18 @@ ROLLBACK TO Admin_Student_Class_Sched_Insert;
 CONNECT mlopez3/TheSecPass2;
 show user;
 SELECT * FROM InstructorDBA.Class_Sched;
-
+SAVEPOINT Instructor_Student_Class_Sched_Insert;
+INSERT INTO InstructorDBA.Class_Sched (Sched_Num,           Sched_Day, Sched_Time, Sched_Day_Off, Sched_Notes, ols_col)
+    VALUES              (12345,'All',     '24 Hours','7 days a week',   'Alpha', CHAR_TO_LABEL('Sched_OLS_POL','HS')); 
+SELECT * FROM InstructorDBA.Class_Sched;    
+ROLLBACK TO Instructor_Student_Class_Sched_Insert;
 
 /*Test student access*/
 CONNECT sgilbert1/TheSecPass0;
 show user;
 SELECT * FROM InstructorDBA.Class_Sched;
-
-
+SAVEPOINT Student_Student_Class_Sched_Insert;
+INSERT INTO InstructorDBA.Class_Sched (Sched_Num,           Sched_Day, Sched_Time, Sched_Day_Off, Sched_Notes, ols_col)
+    VALUES              (12345,'All',     '24 Hours','7 days a week',   'Alpha', CHAR_TO_LABEL('Sched_OLS_POL','HS')); 
+SELECT * FROM InstructorDBA.Class_Sched;    
+ROLLBACK TO Student_Student_Class_Sched_Insert;

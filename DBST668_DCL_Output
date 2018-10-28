@@ -1,3 +1,4 @@
+SQL> SET ECHO ON;
 SQL> SET SERVEROUTPUT ON;
 SQL> set sqlformat ansiconsole;
 SQL> 
@@ -1140,6 +1141,7 @@ Intro to Aircraft mechanics   Mon-Wed     1000-1200    Oct. 14th       C        
 SQL> SELECT * FROM InstructorDBA.Instr_All_Class;
 INSTR_LNAME   INSTR_FNAME   COURSE_NAME                   COURSE_DESC                   COURSE_HOURS   ADMIN_LNAME   ADMIN_FNAME   SCHED_DAY       SCHED_TIME   SCHED_DAY_OFF   SCHED_NOTES                             CLASS_NOTES                  CLASS_ROOM   
 Roberts       John          Intro to Computer Science     Intro to Computer Science                  3 Evans         Bob           Mon-Tues-Wed    0900-1100    Oct. 13th       This is the one of the main schedules   Computer one broke           A            
+Roberts       John          Intro to Spanish              Intro to Spanish                           3 Williams      Shane         Mon-Tues-Thur   0900-1100    Oct. 13th       This is the one of the main schedules   Room Ready                   Z            
 Russell       Brandon       Intro to Art                  Intro to Art                               3 Johnson       Mike          Mon-Tues-Thur   0900-1100    Oct. 13th       This is the one of the main schedules   Room Ready                   B            
 Lopez         Mike          Intro to Aircraft mechanics   Intro to Aircraft mechanics                3 Jenkins       Mary          Mon-Wed         1000-1200    Oct. 14th       This is the one of the main schedules   Instructor Chair broke       C            
 Monteor       Jim           Intro to Robotics             Intro to Robotics                          3 Russell       Jim           Mon-Wed-Fri     1000-1200    Oct. 15th       This a alternative schedules            A/C not working              D            
@@ -1147,11 +1149,10 @@ Hamm          Patricia      Intro to Databases            Intro to Databases    
 Ingle         Tammy         Advanced English              Advanced English                           3 Hopkins       John          Tues-Wed        1300-1500    Oct. 17th       This a alternative schedules            No whiteboard                F            
 Jordan        Keith         Intro to Physics              Intro to Physics                           3 Smith         Will          Thur-Fri        1300-1500    Oct. 18th       This a alternative schedules            station 3 missing keyboard   G            
 Cooper        Adam          Intro to Chemistry            Intro to Chemistry                         3 Brown         Adam          Wed-Fri         1600-1800    Oct. 19th       This a alternative schedules            Room Ready                   H            
-McCoy         Amber         Intro to Spanish              Intro to Spanish                           3 Williams      Shane         Sat             0900-1100    Oct. 20th       Weekend Schedule                        Room Ready                   I            
-Roberts       John          Intro to Spanish              Intro to Spanish                           3 Williams      Shane         Mon-Tues-Thur   0900-1100    Oct. 13th       This is the one of the main schedules   Room Ready                   Z            
-Fuller        Jana          Automotive mechanics Intro    Automotive mechanics Intro                 3 Robins        Amber         Sun             0900-1100    Oct. 21st       Weekend Schedule                        Room Ready                   J            
-Fuller        Jana          Automotive mechanics Intro    Automotive mechanics Intro                 3 Robins        Amber         Sat             0900-1100    Oct. 20th       Weekend Schedule                        Room Ready                   J            
 McCoy         Amber         Automotive mechanics Intro    Automotive mechanics Intro                 3 Robins        Amber         Wed-Fri         1600-1800    Oct. 19th       This a alternative schedules            Room Ready                   X            
+McCoy         Amber         Intro to Spanish              Intro to Spanish                           3 Williams      Shane         Sat             0900-1100    Oct. 20th       Weekend Schedule                        Room Ready                   I            
+Fuller        Jana          Automotive mechanics Intro    Automotive mechanics Intro                 3 Robins        Amber         Sat             0900-1100    Oct. 20th       Weekend Schedule                        Room Ready                   J            
+Fuller        Jana          Automotive mechanics Intro    Automotive mechanics Intro                 3 Robins        Amber         Sun             0900-1100    Oct. 21st       Weekend Schedule                        Room Ready                   J            
 
 
 13 rows selected. 
@@ -1274,7 +1275,7 @@ SQL> show user;
 USER is "INSTRUCTORDBA"
 SQL> 
 SQL> 
-SQL> /*Instructor Modify Procedure*/
+SQL> /*Instructor Modify Procedure - update personal info, class notes, student grades enrolled in class, remove students*/
 SQL> 
 SQL> /*Update personal info*/
 SQL> GRANT UPDATE (Instr_Address, Instr_PhoneNum, Instr_LName, Instr_FName, Instr_ZipCode) ON Instr_Personal_Info TO instructor_role;
@@ -1577,7 +1578,7 @@ SQL> show user;
 USER is "INSTRUCTORDBA"
 SQL> 
 SQL> 
-SQL> /*Student View Procedure*/
+SQL> /*Student View Procedure - personal info, instructor class schedule, classes enrolled in, grades for classes*/
 SQL> /*Show personal info*/
 SQL> CREATE OR REPLACE VIEW Student_Personal_Info AS
   2  SELECT * FROM Student_List 
@@ -1651,6 +1652,7 @@ USER is "SGILBERT1"
 SQL> SELECT * FROM InstructorDBA.Instr_All_Class;
 INSTR_LNAME   INSTR_FNAME   COURSE_NAME                   COURSE_DESC                   COURSE_HOURS   ADMIN_LNAME   ADMIN_FNAME   SCHED_DAY       SCHED_TIME   SCHED_DAY_OFF   SCHED_NOTES                             CLASS_NOTES                  CLASS_ROOM   
 Roberts       John          Intro to Computer Science     Intro to Computer Science                  3 Evans         Bob           Mon-Tues-Wed    0900-1100    Oct. 13th       This is the one of the main schedules   Computer one broke           A            
+Roberts       John          Intro to Spanish              Intro to Spanish                           3 Williams      Shane         Mon-Tues-Thur   0900-1100    Oct. 13th       This is the one of the main schedules   Room Ready                   Z            
 Russell       Brandon       Intro to Art                  Intro to Art                               3 Johnson       Mike          Mon-Tues-Thur   0900-1100    Oct. 13th       This is the one of the main schedules   Room Ready                   B            
 Lopez         Mike          Intro to Aircraft mechanics   Intro to Aircraft mechanics                3 Jenkins       Mary          Mon-Wed         1000-1200    Oct. 14th       This is the one of the main schedules   Instructor Chair broke       C            
 Monteor       Jim           Intro to Robotics             Intro to Robotics                          3 Russell       Jim           Mon-Wed-Fri     1000-1200    Oct. 15th       This a alternative schedules            A/C not working              D            
@@ -1658,11 +1660,10 @@ Hamm          Patricia      Intro to Databases            Intro to Databases    
 Ingle         Tammy         Advanced English              Advanced English                           3 Hopkins       John          Tues-Wed        1300-1500    Oct. 17th       This a alternative schedules            No whiteboard                F            
 Jordan        Keith         Intro to Physics              Intro to Physics                           3 Smith         Will          Thur-Fri        1300-1500    Oct. 18th       This a alternative schedules            station 3 missing keyboard   G            
 Cooper        Adam          Intro to Chemistry            Intro to Chemistry                         3 Brown         Adam          Wed-Fri         1600-1800    Oct. 19th       This a alternative schedules            Room Ready                   H            
-McCoy         Amber         Intro to Spanish              Intro to Spanish                           3 Williams      Shane         Sat             0900-1100    Oct. 20th       Weekend Schedule                        Room Ready                   I            
-Roberts       John          Intro to Spanish              Intro to Spanish                           3 Williams      Shane         Mon-Tues-Thur   0900-1100    Oct. 13th       This is the one of the main schedules   Room Ready                   Z            
-Fuller        Jana          Automotive mechanics Intro    Automotive mechanics Intro                 3 Robins        Amber         Sun             0900-1100    Oct. 21st       Weekend Schedule                        Room Ready                   J            
-Fuller        Jana          Automotive mechanics Intro    Automotive mechanics Intro                 3 Robins        Amber         Sat             0900-1100    Oct. 20th       Weekend Schedule                        Room Ready                   J            
 McCoy         Amber         Automotive mechanics Intro    Automotive mechanics Intro                 3 Robins        Amber         Wed-Fri         1600-1800    Oct. 19th       This a alternative schedules            Room Ready                   X            
+McCoy         Amber         Intro to Spanish              Intro to Spanish                           3 Williams      Shane         Sat             0900-1100    Oct. 20th       Weekend Schedule                        Room Ready                   I            
+Fuller        Jana          Automotive mechanics Intro    Automotive mechanics Intro                 3 Robins        Amber         Sat             0900-1100    Oct. 20th       Weekend Schedule                        Room Ready                   J            
+Fuller        Jana          Automotive mechanics Intro    Automotive mechanics Intro                 3 Robins        Amber         Sun             0900-1100    Oct. 21st       Weekend Schedule                        Room Ready                   J            
 
 
 13 rows selected. 
@@ -1699,7 +1700,7 @@ SQL> CONNECT InstructorDBA/brr1wik7;
 Connected.
 SQL> show user;
 USER is "INSTRUCTORDBA"
-SQL> /*Student Modify Procedure*/
+SQL> /*Student Modify Procedure - update personal info and enroll in class*/
 SQL> 
 SQL> /*Student update personal information*/
 SQL> GRANT UPDATE (Student_Address, Student_PhoneNum, Student_LName, Student_FName, Student_Zipcode) ON Student_Personal_Info TO student_role;
@@ -1889,7 +1890,9 @@ Connected.
 SQL> show user;
 USER is "INSTRUCTORDBA"
 SQL> 
-SQL> /*Class Tentative Schedule Procedure*/
+SQL> /*Class Tentative Schedule Procedure - InstructorDBA and admins can view/create tentative schedules, instructors can view
+SQL>tentative schedules, and students can view approved schedules.*/
+SQL> 
 SQL> connect sys/brr1wik7 as sysdba;
 Connected.
 SQL> show user;
@@ -2168,7 +2171,46 @@ SCHED_NUM   SCHED_DAY       SCHED_TIME   SCHED_DAY_OFF   SCHED_NOTES            
 
 12 rows selected. 
 
-SQL> 
+SQL> SAVEPOINT Instructor_Student_Class_Sched_Insert;
+
+Savepoint created.
+
+SQL> INSERT INTO InstructorDBA.Class_Sched (Sched_Num,           Sched_Day, Sched_Time, Sched_Day_Off, Sched_Notes, ols_col)
+  2      VALUES              (12345,'All',     '24 Hours','7 days a week',   'Alpha', CHAR_TO_LABEL('Sched_OLS_POL','HS'));
+
+Error starting at line : 768 in command -
+INSERT INTO InstructorDBA.Class_Sched (Sched_Num,           Sched_Day, Sched_Time, Sched_Day_Off, Sched_Notes, ols_col)
+    VALUES              (12345,'All',     '24 Hours','7 days a week',   'Alpha', CHAR_TO_LABEL('Sched_OLS_POL','HS'))
+Error at Command Line : 768 Column : 27
+Error report -
+SQL Error: ORA-01031: insufficient privileges
+01031. 00000 -  "insufficient privileges"
+*Cause:    An attempt was made to perform a database operation without
+           the necessary privileges.
+*Action:   Ask your database administrator or designated security
+           administrator to grant you the necessary privileges
+SQL> SELECT * FROM InstructorDBA.Class_Sched;
+SCHED_NUM   SCHED_DAY       SCHED_TIME   SCHED_DAY_OFF   SCHED_NOTES                             OLS_COL   
+          1 Mon-Tues-Wed    0900-1100    Oct. 13th       This is the one of the main schedules          30 
+          2 Mon-Tues-Thur   0900-1100    Oct. 13th       This is the one of the main schedules          30 
+          3 Mon-Wed         1000-1200    Oct. 14th       This is the one of the main schedules          30 
+          4 Mon-Wed-Fri     1000-1200    Oct. 15th       This a alternative schedules                   30 
+          5 Mon-Tues        0800-0900    Oct. 16th       This a alternative schedules                   30 
+          6 Tues-Wed        1300-1500    Oct. 17th       This a alternative schedules                   30 
+          7 Thur-Fri        1300-1500    Oct. 18th       This a alternative schedules                   30 
+          8 Wed-Fri         1600-1800    Oct. 19th       This a alternative schedules                   30 
+          9 Sat             0900-1100    Oct. 20th       Weekend Schedule                               30 
+         10 Sun             0900-1100    Oct. 21st       Weekend Schedule                               30 
+         11 Mon             0900-0930    6 days a week   Beta                                           40 
+         12 Tues            1100-1115    6 days a week   Beta                                           40 
+
+
+12 rows selected. 
+
+SQL> ROLLBACK TO Instructor_Student_Class_Sched_Insert;
+
+Rollback complete.
+
 SQL> 
 SQL> /*Test student access*/
 SQL> CONNECT sgilbert1/TheSecPass0;
@@ -2190,5 +2232,43 @@ SCHED_NUM   SCHED_DAY       SCHED_TIME   SCHED_DAY_OFF   SCHED_NOTES            
 
 
 10 rows selected. 
+
+SQL> SAVEPOINT Student_Student_Class_Sched_Insert;
+
+Savepoint created.
+
+SQL> INSERT INTO InstructorDBA.Class_Sched (Sched_Num,           Sched_Day, Sched_Time, Sched_Day_Off, Sched_Notes, ols_col)
+  2      VALUES              (12345,'All',     '24 Hours','7 days a week',   'Alpha', CHAR_TO_LABEL('Sched_OLS_POL','HS'));
+
+Error starting at line : 778 in command -
+INSERT INTO InstructorDBA.Class_Sched (Sched_Num,           Sched_Day, Sched_Time, Sched_Day_Off, Sched_Notes, ols_col)
+    VALUES              (12345,'All',     '24 Hours','7 days a week',   'Alpha', CHAR_TO_LABEL('Sched_OLS_POL','HS'))
+Error at Command Line : 778 Column : 27
+Error report -
+SQL Error: ORA-01031: insufficient privileges
+01031. 00000 -  "insufficient privileges"
+*Cause:    An attempt was made to perform a database operation without
+           the necessary privileges.
+*Action:   Ask your database administrator or designated security
+           administrator to grant you the necessary privileges
+SQL> SELECT * FROM InstructorDBA.Class_Sched;
+SCHED_NUM   SCHED_DAY       SCHED_TIME   SCHED_DAY_OFF   SCHED_NOTES                             OLS_COL   
+          1 Mon-Tues-Wed    0900-1100    Oct. 13th       This is the one of the main schedules          30 
+          2 Mon-Tues-Thur   0900-1100    Oct. 13th       This is the one of the main schedules          30 
+          3 Mon-Wed         1000-1200    Oct. 14th       This is the one of the main schedules          30 
+          4 Mon-Wed-Fri     1000-1200    Oct. 15th       This a alternative schedules                   30 
+          5 Mon-Tues        0800-0900    Oct. 16th       This a alternative schedules                   30 
+          6 Tues-Wed        1300-1500    Oct. 17th       This a alternative schedules                   30 
+          7 Thur-Fri        1300-1500    Oct. 18th       This a alternative schedules                   30 
+          8 Wed-Fri         1600-1800    Oct. 19th       This a alternative schedules                   30 
+          9 Sat             0900-1100    Oct. 20th       Weekend Schedule                               30 
+         10 Sun             0900-1100    Oct. 21st       Weekend Schedule                               30 
+
+
+10 rows selected. 
+
+SQL> ROLLBACK TO Student_Student_Class_Sched_Insert;
+
+Rollback complete.
 
 Connection created by CONNECT script command disconnected
