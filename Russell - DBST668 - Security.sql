@@ -56,7 +56,7 @@ ALTER TABLE Instr_List DROP COLUMN User_Name;
 ALTER TABLE Student_List DROP COLUMN User_Name;
 
 
-/*Username Procedure - Create user names for every user*/
+/*Username Procedure - Create usernames for every user*/
 ALTER TABLE Admin_List ADD User_Name VARCHAR2(45);
 ALTER TABLE Instr_List ADD User_Name VARCHAR2(45);
 ALTER TABLE Student_List ADD User_Name VARCHAR2(45);
@@ -550,7 +550,7 @@ CONNECT mlopez3/TheSecPass2;
 show user;
 SELECT * FROM InstructorDBA.Student_Personal_Info;
 
-/*Test Student View instructor clas schedule*/
+/*Test Student View instructor class schedule*/
 CONNECT sgilbert1/TheSecPass0;
 show user;
 SELECT * FROM InstructorDBA.Instr_All_Class;

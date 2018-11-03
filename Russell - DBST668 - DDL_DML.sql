@@ -326,21 +326,21 @@ INSERT INTO Course_List (Course_Num,            Course_Name,                Admi
     VALUES              (CourseNum_Seq.NEXTVAL, 'Advanced Robotics',11,               'Advanced Robotics','6',          '4');   
 
 INSERT INTO Class_Sched (Sched_Num,           Sched_Day,     Sched_Time, Sched_Day_Off, Sched_Notes)
-    VALUES              (SchedNum_Seq.NEXTVAL,'Mon-Tues-Wed','0900-1100','Oct. 13th',   'This is the one of the main schedules');
+    VALUES              (SchedNum_Seq.NEXTVAL,'Mon-Tues-Wed','0900-1100','Oct. 13th',   'This is one of the main schedules');
 INSERT INTO Class_Sched (Sched_Num,           Sched_Day,      Sched_Time, Sched_Day_Off, Sched_Notes)
-    VALUES              (SchedNum_Seq.NEXTVAL,'Mon-Tues-Thur','0900-1100','Oct. 13th',   'This is the one of the main schedules');
+    VALUES              (SchedNum_Seq.NEXTVAL,'Mon-Tues-Thur','0900-1100','Oct. 13th',   'This is one of the main schedules');
 INSERT INTO Class_Sched (Sched_Num,           Sched_Day, Sched_Time, Sched_Day_Off, Sched_Notes)
-    VALUES              (SchedNum_Seq.NEXTVAL,'Mon-Wed','1000-1200','Oct. 14th',   'This is the one of the main schedules');
+    VALUES              (SchedNum_Seq.NEXTVAL,'Mon-Wed','1000-1200','Oct. 14th',   'This is one of the main schedules');
 INSERT INTO Class_Sched (Sched_Num,           Sched_Day,     Sched_Time, Sched_Day_Off, Sched_Notes)
-    VALUES              (SchedNum_Seq.NEXTVAL,'Mon-Wed-Fri','1000-1200','Oct. 15th',   'This a alternative schedules');
+    VALUES              (SchedNum_Seq.NEXTVAL,'Mon-Wed-Fri','1000-1200','Oct. 15th',   'This is an alternative schedule');
 INSERT INTO Class_Sched (Sched_Num,           Sched_Day, Sched_Time, Sched_Day_Off, Sched_Notes)
-    VALUES              (SchedNum_Seq.NEXTVAL,'Mon-Tues','0800-0900','Oct. 16th',   'This a alternative schedules');
+    VALUES              (SchedNum_Seq.NEXTVAL,'Mon-Tues','0800-0900','Oct. 16th',   'This is an alternative schedule');
 INSERT INTO Class_Sched (Sched_Num,           Sched_Day,  Sched_Time, Sched_Day_Off, Sched_Notes)
-    VALUES              (SchedNum_Seq.NEXTVAL,'Tues-Wed','1300-1500','Oct. 17th',   'This a alternative schedules');
+    VALUES              (SchedNum_Seq.NEXTVAL,'Tues-Wed','1300-1500','Oct. 17th',   'This is an alternative schedule');
 INSERT INTO Class_Sched (Sched_Num,           Sched_Day,  Sched_Time, Sched_Day_Off, Sched_Notes)
-    VALUES              (SchedNum_Seq.NEXTVAL,'Thur-Fri','1300-1500','Oct. 18th',   'This a alternative schedules');
+    VALUES              (SchedNum_Seq.NEXTVAL,'Thur-Fri','1300-1500','Oct. 18th',   'This is an alternative schedule');
 INSERT INTO Class_Sched (Sched_Num,           Sched_Day, Sched_Time, Sched_Day_Off, Sched_Notes)
-    VALUES              (SchedNum_Seq.NEXTVAL,'Wed-Fri','1600-1800','Oct. 19th',   'This a alternative schedules');
+    VALUES              (SchedNum_Seq.NEXTVAL,'Wed-Fri','1600-1800','Oct. 19th',   'This is an alternative schedule');
 INSERT INTO Class_Sched (Sched_Num,           Sched_Day, Sched_Time, Sched_Day_Off, Sched_Notes)
     VALUES              (SchedNum_Seq.NEXTVAL,'Sat',     '0900-1100','Oct. 20th',   'Weekend Schedule');
 INSERT INTO Class_Sched (Sched_Num,           Sched_Day, Sched_Time, Sched_Day_Off, Sched_Notes)
