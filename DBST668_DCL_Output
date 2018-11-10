@@ -89,7 +89,7 @@ Table STUDENT_LIST altered.
 
 SQL> 
 SQL> 
-SQL> /*Username Procedure - Create user names for every user*/
+SQL> /*Username Procedure - Create usernames for every user*/
 SQL> ALTER TABLE Admin_List ADD User_Name VARCHAR2(45);
 
 Table ADMIN_LIST altered.
@@ -277,6 +277,7 @@ SQL> INSERT INTO InstructorDBA.Instr_List  (Instr_Num,           Instr_Address, 
 
 SQL> SELECT * FROM InstructorDBA.Instr_List;
 INSTR_NUM   INSTR_ADDRESS      INSTR_PHONENUM   SECTION_NUM   INSTR_LNAME   INSTR_FNAME   INSTR_ZIPCODE   USER_NAME   
+        888 101 Apple Street   111-222-3434                 1 Roberts       John          31003                       
           1 101 Apple Street   111-222-3434                 1 test          John          31003           JROBERTS1   
           2 102 Apple Street   111-222-3435                 2 test          Brandon       31003           BRUSSELL2   
           3 103 Apple Street   111-222-3436                 3 test          Mike          31003           MLOPEZ3     
@@ -288,13 +289,13 @@ INSTR_NUM   INSTR_ADDRESS      INSTR_PHONENUM   SECTION_NUM   INSTR_LNAME   INST
           9 109 Apple Street   111-222-3442                 9 test          Amber         31003           AMCCOY9     
          10 110 Apple Street   111-222-3443                10 test          Jana          31003           JFULLER10   
          11 111 Apple Street   111-222-3444                10 test          Mark          31003           MXAVIER11   
-        888 101 Apple Street   111-222-3434                 1 Roberts       John          31003                       
 
 
 12 rows selected. 
 
 SQL> SELECT * FROM InstructorDBA.Student_List;
 STUDENT_NUM   STUDENT_ADDRESS   STUDENT_PHONENUM   STUDENT_LNAME   STUDENT_FNAME   STUDENT_ZIPCODE   USER_NAME   
+          999 Dorm 11           222-333-3444       Pines           Matt            31005                         
             1 Dorm 1            222-333-3434       test            Sarah           31005             SGILBERT1   
             2 Dorm 2            222-333-3435       test            James           31005             JMYERS2     
             3 Dorm 3            222-333-3436       test            Rico            31005             RHOWARD3    
@@ -306,7 +307,6 @@ STUDENT_NUM   STUDENT_ADDRESS   STUDENT_PHONENUM   STUDENT_LNAME   STUDENT_FNAME
             9 Dorm 9            222-333-3442       test            Jennifer        31005             JSYNDER9    
            10 Dorm 10           222-333-3443       test            Elizabeth       31005             EBAKER10    
            11 Dorm 11           222-333-3444       test            Matt            31005             MPINES11    
-          999 Dorm 11           222-333-3444       Pines           Matt            31005                         
 
 
 12 rows selected. 
@@ -423,6 +423,7 @@ SQL> INSERT INTO InstructorDBA.Course_List (Course_Num,            Course_Name, 
 
 SQL> SELECT * FROM InstructorDBA.Course_List;
 COURSE_NUM   COURSE_NAME                 ADMIN_NUM   COURSE_DESC                   COURSE_HOURS   SECTION_NUM   
+        8888 Intro to Computer Science             1 Intro to Computer Science                  3             1 
            1 test                                  1 Intro to Computer Science                  3             1 
            2 test                                  2 Intro to Art                               3             2 
            3 test                                  3 Intro to Aircraft mechanics                3             3 
@@ -434,7 +435,6 @@ COURSE_NUM   COURSE_NAME                 ADMIN_NUM   COURSE_DESC                
            9 test                                  9 Intro to Spanish                           3             9 
           10 test                                 10 Automotive mechanics Intro                 3            10 
           11 test                                 11 Advanced Robotics                          6             4 
-        8888 Intro to Computer Science             1 Intro to Computer Science                  3             1 
 
 
 12 rows selected. 
@@ -530,6 +530,7 @@ SQL> INSERT INTO InstructorDBA.Section_Info (Section_Num,            Section_Nam
 
 SQL> SELECT * FROM InstructorDBA.Section_Info;
 SECTION_NUM   SECTION_NAME           SECTION_ADDRESS      SECTION_FOS            SECTION_ZIPCODE   
+         9999 Space Travel Section   120 Finegand Place   Space Travel           31088             
             1 test                   110 Finegand Place   Computer Science       31088             
             2 test                   111 Finegand Place   Art                    31088             
             3 test                   112 Finegand Place   Aircraft               31088             
@@ -541,7 +542,6 @@ SECTION_NUM   SECTION_NAME           SECTION_ADDRESS      SECTION_FOS           
             9 test                   118 Finegand Place   Spanish language       31088             
            10 test                   119 Finegand Place   Automotive Mechanics   31088             
            11 test                   120 Finegand Place   Space Travel           31088             
-         9999 Space Travel Section   120 Finegand Place   Space Travel           31088             
 
 
 12 rows selected. 
@@ -607,19 +607,19 @@ SQL> SAVEPOINT Schedule_Account_Modify_Procedure;
 Savepoint created.
 
 SQL> SELECT * FROM InstructorDBA.Class_Sched;
-SCHED_NUM   SCHED_DAY       SCHED_TIME   SCHED_DAY_OFF   SCHED_NOTES                             OLS_COL   
-          1 Mon-Tues-Wed    0900-1100    Oct. 13th       This is the one of the main schedules          30 
-          2 Mon-Tues-Thur   0900-1100    Oct. 13th       This is the one of the main schedules          30 
-          3 Mon-Wed         1000-1200    Oct. 14th       This is the one of the main schedules          30 
-          4 Mon-Wed-Fri     1000-1200    Oct. 15th       This a alternative schedules                   30 
-          5 Mon-Tues        0800-0900    Oct. 16th       This a alternative schedules                   30 
-          6 Tues-Wed        1300-1500    Oct. 17th       This a alternative schedules                   30 
-          7 Thur-Fri        1300-1500    Oct. 18th       This a alternative schedules                   30 
-          8 Wed-Fri         1600-1800    Oct. 19th       This a alternative schedules                   30 
-          9 Sat             0900-1100    Oct. 20th       Weekend Schedule                               30 
-         10 Sun             0900-1100    Oct. 21st       Weekend Schedule                               30 
-         11 Mon             0900-0930    6 days a week   Beta                                           40 
-         12 Tues            1100-1115    6 days a week   Beta                                           40 
+SCHED_NUM   SCHED_DAY       SCHED_TIME   SCHED_DAY_OFF   SCHED_NOTES                         OLS_COL   
+          1 Mon-Tues-Wed    0900-1100    Oct. 13th       This is one of the main schedules          30 
+          2 Mon-Tues-Thur   0900-1100    Oct. 13th       This is one of the main schedules          30 
+          3 Mon-Wed         1000-1200    Oct. 14th       This is one of the main schedules          30 
+          4 Mon-Wed-Fri     1000-1200    Oct. 15th       This is an alternative schedule            30 
+          5 Mon-Tues        0800-0900    Oct. 16th       This is an alternative schedule            30 
+          6 Tues-Wed        1300-1500    Oct. 17th       This is an alternative schedule            30 
+          7 Thur-Fri        1300-1500    Oct. 18th       This is an alternative schedule            30 
+          8 Wed-Fri         1600-1800    Oct. 19th       This is an alternative schedule            30 
+          9 Sat             0900-1100    Oct. 20th       Weekend Schedule                           30 
+         10 Sun             0900-1100    Oct. 21st       Weekend Schedule                           30 
+         11 Mon             0900-0930    6 days a week   Beta                                       40 
+         12 Tues            1100-1115    6 days a week   Beta                                       40 
 
 
 12 rows selected. 
@@ -635,6 +635,7 @@ SQL> INSERT INTO InstructorDBA.Class_Sched (Sched_Num,           Sched_Day, Sche
 
 SQL> SELECT * FROM InstructorDBA.Class_Sched;
 SCHED_NUM   SCHED_DAY       SCHED_TIME   SCHED_DAY_OFF   SCHED_NOTES        OLS_COL   
+       9999 Sun             0900-1100    Oct. 21st       Weekend Schedule             
           1 Mon-Tues-Wed    0900-1100    Oct. 13th       test                      30 
           2 Mon-Tues-Thur   0900-1100    Oct. 13th       test                      30 
           3 Mon-Wed         1000-1200    Oct. 14th       test                      30 
@@ -647,7 +648,6 @@ SCHED_NUM   SCHED_DAY       SCHED_TIME   SCHED_DAY_OFF   SCHED_NOTES        OLS_
          10 Sun             0900-1100    Oct. 21st       test                      30 
          11 Mon             0900-0930    6 days a week   test                      40 
          12 Tues            1100-1115    6 days a week   test                      40 
-       9999 Sun             0900-1100    Oct. 21st       Weekend Schedule             
 
 
 13 rows selected. 
@@ -779,6 +779,7 @@ SQL> INSERT INTO InstructorDBA.Student_Class_Signup (Student_Num, Instr_Num, Sch
 SQL> 
 SQL> SELECT * FROM InstructorDBA.Instr_Classes;
 INSTR_NUM   SCHED_NUM   COURSE_NUM   CLASS_NOTES   CLASS_ROOM   
+          8           9            9 Room Ready    Z            
           1           1            1 test          A            
           2           2            2 test          B            
           3           3            3 test          C            
@@ -792,7 +793,6 @@ INSTR_NUM   SCHED_NUM   COURSE_NUM   CLASS_NOTES   CLASS_ROOM
          10           9           10 test          J            
           9           8           10 test          X            
           1           2            9 test          Z            
-          8           9            9 Room Ready    Z            
 
 
 
@@ -800,6 +800,7 @@ INSTR_NUM   SCHED_NUM   COURSE_NUM   CLASS_NOTES   CLASS_ROOM
 
 SQL> SELECT * FROM InstructorDBA.Student_Class_Signup;
 STUDENT_NUM   INSTR_NUM   SCHED_NUM   STUDENT_GRADE   
+           10           9           9 A               
             1           1           1 test            
             1           2           2 test            
             2           3           3 test            
@@ -811,7 +812,6 @@ STUDENT_NUM   INSTR_NUM   SCHED_NUM   STUDENT_GRADE
             8           8           8 test            
             9           9           9 test            
            10          10          10 test            
-           10           9           9 A               
 
 
 12 rows selected. 
@@ -1128,8 +1128,8 @@ SECTION_NUM   SECTION_NAME       SECTION_ADDRESS      SECTION_FOS   SECTION_ZIPC
 
 
 SQL> SELECT * FROM InstructorDBA.Instr_Class_Course_Info;
-COURSE_NAME                   COURSE_DESC                   COURSE_HOURS   ADMIN_LNAME   ADMIN_FNAME   SCHED_DAY   SCHED_TIME   SCHED_DAY_OFF   SCHED_NOTES                             CLASS_NOTES              CLASS_ROOM   
-Intro to Aircraft mechanics   Intro to Aircraft mechanics                3 Jenkins       Mary          Mon-Wed     1000-1200    Oct. 14th       This is the one of the main schedules   Instructor Chair broke   C            
+COURSE_NAME                   COURSE_DESC                   COURSE_HOURS   ADMIN_LNAME   ADMIN_FNAME   SCHED_DAY   SCHED_TIME   SCHED_DAY_OFF   SCHED_NOTES                         CLASS_NOTES              CLASS_ROOM   
+Intro to Aircraft mechanics   Intro to Aircraft mechanics                3 Jenkins       Mary          Mon-Wed     1000-1200    Oct. 14th       This is one of the main schedules   Instructor Chair broke   C            
 
 
 SQL> SELECT * FROM InstructorDBA.Instr_Student_Class;
@@ -1139,38 +1139,38 @@ Intro to Aircraft mechanics   Mon-Wed     1000-1200    Oct. 14th       C        
 
 
 SQL> SELECT * FROM InstructorDBA.Instr_All_Class;
-INSTR_LNAME   INSTR_FNAME   COURSE_NAME                   COURSE_DESC                   COURSE_HOURS   ADMIN_LNAME   ADMIN_FNAME   SCHED_DAY       SCHED_TIME   SCHED_DAY_OFF   SCHED_NOTES                             CLASS_NOTES                  CLASS_ROOM   
-Roberts       John          Intro to Computer Science     Intro to Computer Science                  3 Evans         Bob           Mon-Tues-Wed    0900-1100    Oct. 13th       This is the one of the main schedules   Computer one broke           A            
-Roberts       John          Intro to Spanish              Intro to Spanish                           3 Williams      Shane         Mon-Tues-Thur   0900-1100    Oct. 13th       This is the one of the main schedules   Room Ready                   Z            
-Russell       Brandon       Intro to Art                  Intro to Art                               3 Johnson       Mike          Mon-Tues-Thur   0900-1100    Oct. 13th       This is the one of the main schedules   Room Ready                   B            
-Lopez         Mike          Intro to Aircraft mechanics   Intro to Aircraft mechanics                3 Jenkins       Mary          Mon-Wed         1000-1200    Oct. 14th       This is the one of the main schedules   Instructor Chair broke       C            
-Monteor       Jim           Intro to Robotics             Intro to Robotics                          3 Russell       Jim           Mon-Wed-Fri     1000-1200    Oct. 15th       This a alternative schedules            A/C not working              D            
-Hamm          Patricia      Intro to Databases            Intro to Databases                         3 Bargueno      Patricia      Mon-Tues        0800-0900    Oct. 16th       This a alternative schedules            Computer two broke           E            
-Ingle         Tammy         Advanced English              Advanced English                           3 Hopkins       John          Tues-Wed        1300-1500    Oct. 17th       This a alternative schedules            No whiteboard                F            
-Jordan        Keith         Intro to Physics              Intro to Physics                           3 Smith         Will          Thur-Fri        1300-1500    Oct. 18th       This a alternative schedules            station 3 missing keyboard   G            
-Cooper        Adam          Intro to Chemistry            Intro to Chemistry                         3 Brown         Adam          Wed-Fri         1600-1800    Oct. 19th       This a alternative schedules            Room Ready                   H            
-McCoy         Amber         Automotive mechanics Intro    Automotive mechanics Intro                 3 Robins        Amber         Wed-Fri         1600-1800    Oct. 19th       This a alternative schedules            Room Ready                   X            
-McCoy         Amber         Intro to Spanish              Intro to Spanish                           3 Williams      Shane         Sat             0900-1100    Oct. 20th       Weekend Schedule                        Room Ready                   I            
-Fuller        Jana          Automotive mechanics Intro    Automotive mechanics Intro                 3 Robins        Amber         Sat             0900-1100    Oct. 20th       Weekend Schedule                        Room Ready                   J            
-Fuller        Jana          Automotive mechanics Intro    Automotive mechanics Intro                 3 Robins        Amber         Sun             0900-1100    Oct. 21st       Weekend Schedule                        Room Ready                   J            
+INSTR_LNAME   INSTR_FNAME   COURSE_NAME                   COURSE_DESC                   COURSE_HOURS   ADMIN_LNAME   ADMIN_FNAME   SCHED_DAY       SCHED_TIME   SCHED_DAY_OFF   SCHED_NOTES                         CLASS_NOTES                  CLASS_ROOM   
+Roberts       John          Intro to Computer Science     Intro to Computer Science                  3 Evans         Bob           Mon-Tues-Wed    0900-1100    Oct. 13th       This is one of the main schedules   Computer one broke           A            
+Roberts       John          Intro to Spanish              Intro to Spanish                           3 Williams      Shane         Mon-Tues-Thur   0900-1100    Oct. 13th       This is one of the main schedules   Room Ready                   Z            
+Russell       Brandon       Intro to Art                  Intro to Art                               3 Johnson       Mike          Mon-Tues-Thur   0900-1100    Oct. 13th       This is one of the main schedules   Room Ready                   B            
+Lopez         Mike          Intro to Aircraft mechanics   Intro to Aircraft mechanics                3 Jenkins       Mary          Mon-Wed         1000-1200    Oct. 14th       This is one of the main schedules   Instructor Chair broke       C            
+Monteor       Jim           Intro to Robotics             Intro to Robotics                          3 Russell       Jim           Mon-Wed-Fri     1000-1200    Oct. 15th       This is an alternative schedule     A/C not working              D            
+Hamm          Patricia      Intro to Databases            Intro to Databases                         3 Bargueno      Patricia      Mon-Tues        0800-0900    Oct. 16th       This is an alternative schedule     Computer two broke           E            
+Ingle         Tammy         Advanced English              Advanced English                           3 Hopkins       John          Tues-Wed        1300-1500    Oct. 17th       This is an alternative schedule     No whiteboard                F            
+Jordan        Keith         Intro to Physics              Intro to Physics                           3 Smith         Will          Thur-Fri        1300-1500    Oct. 18th       This is an alternative schedule     station 3 missing keyboard   G            
+Cooper        Adam          Intro to Chemistry            Intro to Chemistry                         3 Brown         Adam          Wed-Fri         1600-1800    Oct. 19th       This is an alternative schedule     Room Ready                   H            
+McCoy         Amber         Automotive mechanics Intro    Automotive mechanics Intro                 3 Robins        Amber         Wed-Fri         1600-1800    Oct. 19th       This is an alternative schedule     Room Ready                   X            
+McCoy         Amber         Intro to Spanish              Intro to Spanish                           3 Williams      Shane         Sat             0900-1100    Oct. 20th       Weekend Schedule                    Room Ready                   I            
+Fuller        Jana          Automotive mechanics Intro    Automotive mechanics Intro                 3 Robins        Amber         Sat             0900-1100    Oct. 20th       Weekend Schedule                    Room Ready                   J            
+Fuller        Jana          Automotive mechanics Intro    Automotive mechanics Intro                 3 Robins        Amber         Sun             0900-1100    Oct. 21st       Weekend Schedule                    Room Ready                   J            
 
 
 13 rows selected. 
 
 SQL> SELECT * FROM InstructorDBA.Class_Sched;
-SCHED_NUM   SCHED_DAY       SCHED_TIME   SCHED_DAY_OFF   SCHED_NOTES                             OLS_COL   
-          1 Mon-Tues-Wed    0900-1100    Oct. 13th       This is the one of the main schedules          30 
-          2 Mon-Tues-Thur   0900-1100    Oct. 13th       This is the one of the main schedules          30 
-          3 Mon-Wed         1000-1200    Oct. 14th       This is the one of the main schedules          30 
-          4 Mon-Wed-Fri     1000-1200    Oct. 15th       This a alternative schedules                   30 
-          5 Mon-Tues        0800-0900    Oct. 16th       This a alternative schedules                   30 
-          6 Tues-Wed        1300-1500    Oct. 17th       This a alternative schedules                   30 
-          7 Thur-Fri        1300-1500    Oct. 18th       This a alternative schedules                   30 
-          8 Wed-Fri         1600-1800    Oct. 19th       This a alternative schedules                   30 
-          9 Sat             0900-1100    Oct. 20th       Weekend Schedule                               30 
-         10 Sun             0900-1100    Oct. 21st       Weekend Schedule                               30 
-         11 Mon             0900-0930    6 days a week   Beta                                           40 
-         12 Tues            1100-1115    6 days a week   Beta                                           40 
+SCHED_NUM   SCHED_DAY       SCHED_TIME   SCHED_DAY_OFF   SCHED_NOTES                         OLS_COL   
+          1 Mon-Tues-Wed    0900-1100    Oct. 13th       This is one of the main schedules          30 
+          2 Mon-Tues-Thur   0900-1100    Oct. 13th       This is one of the main schedules          30 
+          3 Mon-Wed         1000-1200    Oct. 14th       This is one of the main schedules          30 
+          4 Mon-Wed-Fri     1000-1200    Oct. 15th       This is an alternative schedule            30 
+          5 Mon-Tues        0800-0900    Oct. 16th       This is an alternative schedule            30 
+          6 Tues-Wed        1300-1500    Oct. 17th       This is an alternative schedule            30 
+          7 Thur-Fri        1300-1500    Oct. 18th       This is an alternative schedule            30 
+          8 Wed-Fri         1600-1800    Oct. 19th       This is an alternative schedule            30 
+          9 Sat             0900-1100    Oct. 20th       Weekend Schedule                           30 
+         10 Sun             0900-1100    Oct. 21st       Weekend Schedule                           30 
+         11 Mon             0900-0930    6 days a week   Beta                                       40 
+         12 Tues            1100-1115    6 days a week   Beta                                       40 
 
 
 12 rows selected. 
@@ -1644,26 +1644,26 @@ SQL Error: ORA-00942: table or view does not exist
 *Cause:    
 *Action:
 SQL> 
-SQL> /*Test Student View instructor clas schedule*/
+SQL> /*Test Student View instructor class schedule*/
 SQL> CONNECT sgilbert1/TheSecPass0;
 Connected.
 SQL> show user;
 USER is "SGILBERT1"
 SQL> SELECT * FROM InstructorDBA.Instr_All_Class;
-INSTR_LNAME   INSTR_FNAME   COURSE_NAME                   COURSE_DESC                   COURSE_HOURS   ADMIN_LNAME   ADMIN_FNAME   SCHED_DAY       SCHED_TIME   SCHED_DAY_OFF   SCHED_NOTES                             CLASS_NOTES                  CLASS_ROOM   
-Roberts       John          Intro to Computer Science     Intro to Computer Science                  3 Evans         Bob           Mon-Tues-Wed    0900-1100    Oct. 13th       This is the one of the main schedules   Computer one broke           A            
-Roberts       John          Intro to Spanish              Intro to Spanish                           3 Williams      Shane         Mon-Tues-Thur   0900-1100    Oct. 13th       This is the one of the main schedules   Room Ready                   Z            
-Russell       Brandon       Intro to Art                  Intro to Art                               3 Johnson       Mike          Mon-Tues-Thur   0900-1100    Oct. 13th       This is the one of the main schedules   Room Ready                   B            
-Lopez         Mike          Intro to Aircraft mechanics   Intro to Aircraft mechanics                3 Jenkins       Mary          Mon-Wed         1000-1200    Oct. 14th       This is the one of the main schedules   Instructor Chair broke       C            
-Monteor       Jim           Intro to Robotics             Intro to Robotics                          3 Russell       Jim           Mon-Wed-Fri     1000-1200    Oct. 15th       This a alternative schedules            A/C not working              D            
-Hamm          Patricia      Intro to Databases            Intro to Databases                         3 Bargueno      Patricia      Mon-Tues        0800-0900    Oct. 16th       This a alternative schedules            Computer two broke           E            
-Ingle         Tammy         Advanced English              Advanced English                           3 Hopkins       John          Tues-Wed        1300-1500    Oct. 17th       This a alternative schedules            No whiteboard                F            
-Jordan        Keith         Intro to Physics              Intro to Physics                           3 Smith         Will          Thur-Fri        1300-1500    Oct. 18th       This a alternative schedules            station 3 missing keyboard   G            
-Cooper        Adam          Intro to Chemistry            Intro to Chemistry                         3 Brown         Adam          Wed-Fri         1600-1800    Oct. 19th       This a alternative schedules            Room Ready                   H            
-McCoy         Amber         Automotive mechanics Intro    Automotive mechanics Intro                 3 Robins        Amber         Wed-Fri         1600-1800    Oct. 19th       This a alternative schedules            Room Ready                   X            
-McCoy         Amber         Intro to Spanish              Intro to Spanish                           3 Williams      Shane         Sat             0900-1100    Oct. 20th       Weekend Schedule                        Room Ready                   I            
-Fuller        Jana          Automotive mechanics Intro    Automotive mechanics Intro                 3 Robins        Amber         Sat             0900-1100    Oct. 20th       Weekend Schedule                        Room Ready                   J            
-Fuller        Jana          Automotive mechanics Intro    Automotive mechanics Intro                 3 Robins        Amber         Sun             0900-1100    Oct. 21st       Weekend Schedule                        Room Ready                   J            
+INSTR_LNAME   INSTR_FNAME   COURSE_NAME                   COURSE_DESC                   COURSE_HOURS   ADMIN_LNAME   ADMIN_FNAME   SCHED_DAY       SCHED_TIME   SCHED_DAY_OFF   SCHED_NOTES                         CLASS_NOTES                  CLASS_ROOM   
+Roberts       John          Intro to Computer Science     Intro to Computer Science                  3 Evans         Bob           Mon-Tues-Wed    0900-1100    Oct. 13th       This is one of the main schedules   Computer one broke           A            
+Roberts       John          Intro to Spanish              Intro to Spanish                           3 Williams      Shane         Mon-Tues-Thur   0900-1100    Oct. 13th       This is one of the main schedules   Room Ready                   Z            
+Russell       Brandon       Intro to Art                  Intro to Art                               3 Johnson       Mike          Mon-Tues-Thur   0900-1100    Oct. 13th       This is one of the main schedules   Room Ready                   B            
+Lopez         Mike          Intro to Aircraft mechanics   Intro to Aircraft mechanics                3 Jenkins       Mary          Mon-Wed         1000-1200    Oct. 14th       This is one of the main schedules   Instructor Chair broke       C            
+Monteor       Jim           Intro to Robotics             Intro to Robotics                          3 Russell       Jim           Mon-Wed-Fri     1000-1200    Oct. 15th       This is an alternative schedule     A/C not working              D            
+Hamm          Patricia      Intro to Databases            Intro to Databases                         3 Bargueno      Patricia      Mon-Tues        0800-0900    Oct. 16th       This is an alternative schedule     Computer two broke           E            
+Ingle         Tammy         Advanced English              Advanced English                           3 Hopkins       John          Tues-Wed        1300-1500    Oct. 17th       This is an alternative schedule     No whiteboard                F            
+Jordan        Keith         Intro to Physics              Intro to Physics                           3 Smith         Will          Thur-Fri        1300-1500    Oct. 18th       This is an alternative schedule     station 3 missing keyboard   G            
+Cooper        Adam          Intro to Chemistry            Intro to Chemistry                         3 Brown         Adam          Wed-Fri         1600-1800    Oct. 19th       This is an alternative schedule     Room Ready                   H            
+McCoy         Amber         Automotive mechanics Intro    Automotive mechanics Intro                 3 Robins        Amber         Wed-Fri         1600-1800    Oct. 19th       This is an alternative schedule     Room Ready                   X            
+McCoy         Amber         Intro to Spanish              Intro to Spanish                           3 Williams      Shane         Sat             0900-1100    Oct. 20th       Weekend Schedule                    Room Ready                   I            
+Fuller        Jana          Automotive mechanics Intro    Automotive mechanics Intro                 3 Robins        Amber         Sat             0900-1100    Oct. 20th       Weekend Schedule                    Room Ready                   J            
+Fuller        Jana          Automotive mechanics Intro    Automotive mechanics Intro                 3 Robins        Amber         Sun             0900-1100    Oct. 21st       Weekend Schedule                    Room Ready                   J            
 
 
 13 rows selected. 
@@ -1820,10 +1820,10 @@ SQL> INSERT INTO InstructorDBA.Student_Class_Signup (Student_Num, Instr_Num, Sch
 SQL> 
 SQL> SELECT * FROM InstructorDBA.Student_Class_Grade_View;
 STUDENT_LNAME   STUDENT_FNAME   COURSE_NAME                   STUDENT_GRADE   INSTR_LNAME   INSTR_FNAME   SCHED_DAY       SCHED_TIME   SCHED_DAY_OFF   CLASS_ROOM   
-Gilbert         Sarah           Intro to Computer Science     A               Roberts       John          Mon-Tues-Wed    0900-1100    Oct. 13th       A            
-Gilbert         Sarah           Intro to Art                  B               Russell       Brandon       Mon-Tues-Thur   0900-1100    Oct. 13th       B            
 Gilbert         Sarah           Advanced English                              Ingle         Tammy         Tues-Wed        1300-1500    Oct. 17th       F            
 Gilbert         Sarah           Intro to Aircraft mechanics                   Lopez         Mike          Mon-Wed         1000-1200    Oct. 14th       C            
+Gilbert         Sarah           Intro to Computer Science     A               Roberts       John          Mon-Tues-Wed    0900-1100    Oct. 13th       A            
+Gilbert         Sarah           Intro to Art                  B               Russell       Brandon       Mon-Tues-Thur   0900-1100    Oct. 13th       B            
 
 
 SQL> ROLLBACK TO Student_Class_Signup_Point;
@@ -1865,6 +1865,7 @@ SQL> INSERT INTO InstructorDBA.Student_Class_Signup (Student_Num, Instr_Num, Sch
 
 SQL> SELECT  * FROM InstructorDBA.Student_Class_Signup;
 STUDENT_NUM   INSTR_NUM   SCHED_NUM   STUDENT_GRADE   
+            3           6           6 A               
             1           1           1 A               
             1           2           2 B               
             2           3           3 A               
@@ -1876,7 +1877,6 @@ STUDENT_NUM   INSTR_NUM   SCHED_NUM   STUDENT_GRADE
             8           8           8                 
             9           9           9 A               
            10          10          10 A               
-            3           6           6 A               
 
 
 12 rows selected. 
@@ -1916,84 +1916,37 @@ SQL> show user;
 USER is "LBACSYS"
 SQL> 
 SQL> BEGIN
-  2   SA_SYSDBA.CREATE_POLICY (
-  3    policy_name      => 'Sched_OLS_POL',
-  4    column_name      => 'ols_col',
-  5    default_options  => 'read_control');
+  2   SA_SYSDBA.CREATE_POLICY ('Sched_OLS_POL', 'ols_col', 'READ_CONTROL');
+  3  
+  4   SA_COMPONENTS.CREATE_LEVEL ('Sched_OLS_POL',40,'HS','HIGHLY_SENSITIVE');
+  5   SA_COMPONENTS.CREATE_LEVEL ('Sched_OLS_POL',30,'S','SENSITIVE');
   6  
-  7   SA_COMPONENTS.CREATE_LEVEL (
-  8     policy_name   => 'Sched_OLS_POL',
-  9     level_num     => 4,
- 10     short_name    => 'HS',
- 11     long_name     => 'HIGHLY_SENSITIVE');
- 12   SA_COMPONENTS.CREATE_LEVEL (
- 13     policy_name   => 'Sched_OLS_POL',
- 14     level_num     => 3,
- 15     short_name    => 'S',
- 16     long_name     => 'SENSITIVE');
+  7   SA_LABEL_ADMIN.CREATE_LABEL  ('Sched_OLS_POL',40,'HS');
+  8   SA_LABEL_ADMIN.CREATE_LABEL  ('Sched_OLS_POL',30,'S');  
+  9  
+ 10   SA_USER_ADMIN.SET_LEVELS ('Sched_OLS_POL','InstructorDBA', 'HS','S');
+ 11  
+ 12  /*Student account update classification level*/
+ 13    FOR x IN (SELECT User_Name FROM InstructorDBA.Student_List)
+ 14    LOOP
+ 15    SA_USER_ADMIN.SET_LEVELS ('Sched_OLS_POL',''||x.User_Name||'', 'S','S');
+ 16    END LOOP;  
  17  
- 18   SA_LABEL_ADMIN.CREATE_LABEL  (
- 19    policy_name     => 'Sched_OLS_POL',
- 20    label_tag       => '40',
- 21    label_value     => 'HS',
- 22    data_label      => TRUE);
- 23   SA_LABEL_ADMIN.CREATE_LABEL  (
- 24    policy_name     => 'Sched_OLS_POL',
- 25    label_tag       => '30',
- 26    label_value     => 'S',
- 27    data_label      => TRUE);  
- 28  
- 29   SA_USER_ADMIN.SET_LEVELS (
- 30    policy_name   => 'Sched_OLS_POL',
- 31    user_name     => 'InstructorDBA', 
- 32    max_level     => 'HS',
- 33    min_level     => 'S',
- 34    def_level     => 'HS',
- 35    row_level     => 'HS');
- 36  
- 37  /*Student account update classification level*/
- 38    FOR x IN (SELECT User_Name FROM InstructorDBA.Student_List)
- 39    LOOP
- 40    SA_USER_ADMIN.SET_LEVELS (
- 41    policy_name   => 'Sched_OLS_POL',
- 42    user_name     => ''||x.User_Name||'', 
- 43    max_level     => 'S',
- 44    min_level     => 'S',
- 45    def_level     => 'S',
- 46    row_level     => 'S');
- 47    END LOOP;  
- 48  
- 49  /*Instructor account update classification level*/
- 50    FOR x IN (SELECT User_Name FROM InstructorDBA.Instr_List)
- 51    LOOP
- 52    SA_USER_ADMIN.SET_LEVELS (
- 53    policy_name   => 'Sched_OLS_POL',
- 54    user_name     => ''||x.User_Name||'', 
- 55    max_level     => 'HS',
- 56    min_level     => 'S',
- 57    def_level     => 'HS',
- 58    row_level     => 'HS');
- 59    END LOOP; 
- 60  
- 61  /*Admin account update classification level*/
- 62    FOR x IN (SELECT User_Name FROM InstructorDBA.Admin_List)
- 63    LOOP
- 64    SA_USER_ADMIN.SET_LEVELS (
- 65    policy_name   => 'Sched_OLS_POL',
- 66    user_name     => ''||x.User_Name||'', 
- 67    max_level     => 'HS',
- 68    min_level     => 'S',
- 69    def_level     => 'HS',
- 70    row_level     => 'HS');
- 71    END LOOP;   
- 72  
- 73  SA_POLICY_ADMIN.APPLY_TABLE_POLICY (
- 74    policy_name    => 'Sched_OLS_POL',
- 75    schema_name    => 'InstructorDBA', 
- 76    table_name     => 'Class_Sched',
- 77    table_options  =>  'READ_CONTROL');
- 78  END;
- 79  /
+ 18  /*Instructor account update classification level*/
+ 19    FOR x IN (SELECT User_Name FROM InstructorDBA.Instr_List)
+ 20    LOOP
+ 21    SA_USER_ADMIN.SET_LEVELS ('Sched_OLS_POL',''||x.User_Name||'', 'HS','S');
+ 22    END LOOP; 
+ 23  
+ 24  /*Admin account update classification level*/
+ 25    FOR x IN (SELECT User_Name FROM InstructorDBA.Admin_List)
+ 26    LOOP
+ 27    SA_USER_ADMIN.SET_LEVELS ('Sched_OLS_POL',''||x.User_Name||'', 'HS','S');
+ 28    END LOOP;   
+ 29  
+ 30  SA_POLICY_ADMIN.APPLY_TABLE_POLICY ('Sched_OLS_POL','InstructorDBA', 'Class_Sched');
+ 31  END;
+ 32  /
 
 PL/SQL procedure successfully completed.
 
@@ -2012,19 +1965,19 @@ SQL> UPDATE InstructorDBA.Class_Sched SET ols_col = CHAR_TO_LABEL('Sched_OLS_POL
 2 rows updated.
 
 SQL> SELECT * FROM InstructorDBA.Class_Sched;
-SCHED_NUM   SCHED_DAY       SCHED_TIME   SCHED_DAY_OFF   SCHED_NOTES                             OLS_COL   
-          1 Mon-Tues-Wed    0900-1100    Oct. 13th       This is the one of the main schedules          30 
-          2 Mon-Tues-Thur   0900-1100    Oct. 13th       This is the one of the main schedules          30 
-          3 Mon-Wed         1000-1200    Oct. 14th       This is the one of the main schedules          30 
-          4 Mon-Wed-Fri     1000-1200    Oct. 15th       This a alternative schedules                   30 
-          5 Mon-Tues        0800-0900    Oct. 16th       This a alternative schedules                   30 
-          6 Tues-Wed        1300-1500    Oct. 17th       This a alternative schedules                   30 
-          7 Thur-Fri        1300-1500    Oct. 18th       This a alternative schedules                   30 
-          8 Wed-Fri         1600-1800    Oct. 19th       This a alternative schedules                   30 
-          9 Sat             0900-1100    Oct. 20th       Weekend Schedule                               30 
-         10 Sun             0900-1100    Oct. 21st       Weekend Schedule                               30 
-         11 Mon             0900-0930    6 days a week   Beta                                           40 
-         12 Tues            1100-1115    6 days a week   Beta                                           40 
+SCHED_NUM   SCHED_DAY       SCHED_TIME   SCHED_DAY_OFF   SCHED_NOTES                         OLS_COL   
+          1 Mon-Tues-Wed    0900-1100    Oct. 13th       This is one of the main schedules          30 
+          2 Mon-Tues-Thur   0900-1100    Oct. 13th       This is one of the main schedules          30 
+          3 Mon-Wed         1000-1200    Oct. 14th       This is one of the main schedules          30 
+          4 Mon-Wed-Fri     1000-1200    Oct. 15th       This is an alternative schedule            30 
+          5 Mon-Tues        0800-0900    Oct. 16th       This is an alternative schedule            30 
+          6 Tues-Wed        1300-1500    Oct. 17th       This is an alternative schedule            30 
+          7 Thur-Fri        1300-1500    Oct. 18th       This is an alternative schedule            30 
+          8 Wed-Fri         1600-1800    Oct. 19th       This is an alternative schedule            30 
+          9 Sat             0900-1100    Oct. 20th       Weekend Schedule                           30 
+         10 Sun             0900-1100    Oct. 21st       Weekend Schedule                           30 
+         11 Mon             0900-0930    6 days a week   Beta                                       40 
+         12 Tues            1100-1115    6 days a week   Beta                                       40 
 
 
 12 rows selected. 
@@ -2040,19 +1993,19 @@ Connected.
 SQL> show user;
 USER is "INSTRUCTORDBA"
 SQL> SELECT * FROM Class_Sched;
-SCHED_NUM   SCHED_DAY       SCHED_TIME   SCHED_DAY_OFF   SCHED_NOTES                             OLS_COL   
-          1 Mon-Tues-Wed    0900-1100    Oct. 13th       This is the one of the main schedules          30 
-          2 Mon-Tues-Thur   0900-1100    Oct. 13th       This is the one of the main schedules          30 
-          3 Mon-Wed         1000-1200    Oct. 14th       This is the one of the main schedules          30 
-          4 Mon-Wed-Fri     1000-1200    Oct. 15th       This a alternative schedules                   30 
-          5 Mon-Tues        0800-0900    Oct. 16th       This a alternative schedules                   30 
-          6 Tues-Wed        1300-1500    Oct. 17th       This a alternative schedules                   30 
-          7 Thur-Fri        1300-1500    Oct. 18th       This a alternative schedules                   30 
-          8 Wed-Fri         1600-1800    Oct. 19th       This a alternative schedules                   30 
-          9 Sat             0900-1100    Oct. 20th       Weekend Schedule                               30 
-         10 Sun             0900-1100    Oct. 21st       Weekend Schedule                               30 
-         11 Mon             0900-0930    6 days a week   Beta                                           40 
-         12 Tues            1100-1115    6 days a week   Beta                                           40 
+SCHED_NUM   SCHED_DAY       SCHED_TIME   SCHED_DAY_OFF   SCHED_NOTES                         OLS_COL   
+          1 Mon-Tues-Wed    0900-1100    Oct. 13th       This is one of the main schedules          30 
+          2 Mon-Tues-Thur   0900-1100    Oct. 13th       This is one of the main schedules          30 
+          3 Mon-Wed         1000-1200    Oct. 14th       This is one of the main schedules          30 
+          4 Mon-Wed-Fri     1000-1200    Oct. 15th       This is an alternative schedule            30 
+          5 Mon-Tues        0800-0900    Oct. 16th       This is an alternative schedule            30 
+          6 Tues-Wed        1300-1500    Oct. 17th       This is an alternative schedule            30 
+          7 Thur-Fri        1300-1500    Oct. 18th       This is an alternative schedule            30 
+          8 Wed-Fri         1600-1800    Oct. 19th       This is an alternative schedule            30 
+          9 Sat             0900-1100    Oct. 20th       Weekend Schedule                           30 
+         10 Sun             0900-1100    Oct. 21st       Weekend Schedule                           30 
+         11 Mon             0900-0930    6 days a week   Beta                                       40 
+         12 Tues            1100-1115    6 days a week   Beta                                       40 
 
 
 12 rows selected. 
@@ -2067,20 +2020,20 @@ SQL> INSERT INTO Class_Sched (Sched_Num,           Sched_Day, Sched_Time, Sched_
 1 row inserted.
 
 SQL> SELECT * FROM Class_Sched;
-SCHED_NUM   SCHED_DAY       SCHED_TIME   SCHED_DAY_OFF   SCHED_NOTES                             OLS_COL   
-          1 Mon-Tues-Wed    0900-1100    Oct. 13th       This is the one of the main schedules          30 
-          2 Mon-Tues-Thur   0900-1100    Oct. 13th       This is the one of the main schedules          30 
-          3 Mon-Wed         1000-1200    Oct. 14th       This is the one of the main schedules          30 
-          4 Mon-Wed-Fri     1000-1200    Oct. 15th       This a alternative schedules                   30 
-          5 Mon-Tues        0800-0900    Oct. 16th       This a alternative schedules                   30 
-          6 Tues-Wed        1300-1500    Oct. 17th       This a alternative schedules                   30 
-          7 Thur-Fri        1300-1500    Oct. 18th       This a alternative schedules                   30 
-          8 Wed-Fri         1600-1800    Oct. 19th       This a alternative schedules                   30 
-          9 Sat             0900-1100    Oct. 20th       Weekend Schedule                               30 
-         10 Sun             0900-1100    Oct. 21st       Weekend Schedule                               30 
-         11 Mon             0900-0930    6 days a week   Beta                                           40 
-         12 Tues            1100-1115    6 days a week   Beta                                           40 
-      12345 All             24 Hours     7 days a week   Alpha                                          40 
+SCHED_NUM   SCHED_DAY       SCHED_TIME   SCHED_DAY_OFF   SCHED_NOTES                         OLS_COL   
+      12345 All             24 Hours     7 days a week   Alpha                                      40 
+          1 Mon-Tues-Wed    0900-1100    Oct. 13th       This is one of the main schedules          30 
+          2 Mon-Tues-Thur   0900-1100    Oct. 13th       This is one of the main schedules          30 
+          3 Mon-Wed         1000-1200    Oct. 14th       This is one of the main schedules          30 
+          4 Mon-Wed-Fri     1000-1200    Oct. 15th       This is an alternative schedule            30 
+          5 Mon-Tues        0800-0900    Oct. 16th       This is an alternative schedule            30 
+          6 Tues-Wed        1300-1500    Oct. 17th       This is an alternative schedule            30 
+          7 Thur-Fri        1300-1500    Oct. 18th       This is an alternative schedule            30 
+          8 Wed-Fri         1600-1800    Oct. 19th       This is an alternative schedule            30 
+          9 Sat             0900-1100    Oct. 20th       Weekend Schedule                           30 
+         10 Sun             0900-1100    Oct. 21st       Weekend Schedule                           30 
+         11 Mon             0900-0930    6 days a week   Beta                                       40 
+         12 Tues            1100-1115    6 days a week   Beta                                       40 
 
 
 13 rows selected. 
@@ -2097,19 +2050,19 @@ Connected.
 SQL> show user;
 USER is "BEVANS1"
 SQL> SELECT * FROM InstructorDBA.Class_Sched;
-SCHED_NUM   SCHED_DAY       SCHED_TIME   SCHED_DAY_OFF   SCHED_NOTES                             OLS_COL   
-          1 Mon-Tues-Wed    0900-1100    Oct. 13th       This is the one of the main schedules          30 
-          2 Mon-Tues-Thur   0900-1100    Oct. 13th       This is the one of the main schedules          30 
-          3 Mon-Wed         1000-1200    Oct. 14th       This is the one of the main schedules          30 
-          4 Mon-Wed-Fri     1000-1200    Oct. 15th       This a alternative schedules                   30 
-          5 Mon-Tues        0800-0900    Oct. 16th       This a alternative schedules                   30 
-          6 Tues-Wed        1300-1500    Oct. 17th       This a alternative schedules                   30 
-          7 Thur-Fri        1300-1500    Oct. 18th       This a alternative schedules                   30 
-          8 Wed-Fri         1600-1800    Oct. 19th       This a alternative schedules                   30 
-          9 Sat             0900-1100    Oct. 20th       Weekend Schedule                               30 
-         10 Sun             0900-1100    Oct. 21st       Weekend Schedule                               30 
-         11 Mon             0900-0930    6 days a week   Beta                                           40 
-         12 Tues            1100-1115    6 days a week   Beta                                           40 
+SCHED_NUM   SCHED_DAY       SCHED_TIME   SCHED_DAY_OFF   SCHED_NOTES                         OLS_COL   
+          1 Mon-Tues-Wed    0900-1100    Oct. 13th       This is one of the main schedules          30 
+          2 Mon-Tues-Thur   0900-1100    Oct. 13th       This is one of the main schedules          30 
+          3 Mon-Wed         1000-1200    Oct. 14th       This is one of the main schedules          30 
+          4 Mon-Wed-Fri     1000-1200    Oct. 15th       This is an alternative schedule            30 
+          5 Mon-Tues        0800-0900    Oct. 16th       This is an alternative schedule            30 
+          6 Tues-Wed        1300-1500    Oct. 17th       This is an alternative schedule            30 
+          7 Thur-Fri        1300-1500    Oct. 18th       This is an alternative schedule            30 
+          8 Wed-Fri         1600-1800    Oct. 19th       This is an alternative schedule            30 
+          9 Sat             0900-1100    Oct. 20th       Weekend Schedule                           30 
+         10 Sun             0900-1100    Oct. 21st       Weekend Schedule                           30 
+         11 Mon             0900-0930    6 days a week   Beta                                       40 
+         12 Tues            1100-1115    6 days a week   Beta                                       40 
 
 
 12 rows selected. 
@@ -2124,20 +2077,20 @@ SQL> INSERT INTO InstructorDBA.Class_Sched (Sched_Num,           Sched_Day, Sche
 1 row inserted.
 
 SQL> SELECT * FROM InstructorDBA.Class_Sched;
-SCHED_NUM   SCHED_DAY       SCHED_TIME   SCHED_DAY_OFF   SCHED_NOTES                             OLS_COL   
-          1 Mon-Tues-Wed    0900-1100    Oct. 13th       This is the one of the main schedules          30 
-          2 Mon-Tues-Thur   0900-1100    Oct. 13th       This is the one of the main schedules          30 
-          3 Mon-Wed         1000-1200    Oct. 14th       This is the one of the main schedules          30 
-          4 Mon-Wed-Fri     1000-1200    Oct. 15th       This a alternative schedules                   30 
-          5 Mon-Tues        0800-0900    Oct. 16th       This a alternative schedules                   30 
-          6 Tues-Wed        1300-1500    Oct. 17th       This a alternative schedules                   30 
-          7 Thur-Fri        1300-1500    Oct. 18th       This a alternative schedules                   30 
-          8 Wed-Fri         1600-1800    Oct. 19th       This a alternative schedules                   30 
-          9 Sat             0900-1100    Oct. 20th       Weekend Schedule                               30 
-         10 Sun             0900-1100    Oct. 21st       Weekend Schedule                               30 
-         11 Mon             0900-0930    6 days a week   Beta                                           40 
-         12 Tues            1100-1115    6 days a week   Beta                                           40 
-      12345 All             24 Hours     7 days a week   Alpha                                          40 
+SCHED_NUM   SCHED_DAY       SCHED_TIME   SCHED_DAY_OFF   SCHED_NOTES                         OLS_COL   
+      12345 All             24 Hours     7 days a week   Alpha                                      40 
+          1 Mon-Tues-Wed    0900-1100    Oct. 13th       This is one of the main schedules          30 
+          2 Mon-Tues-Thur   0900-1100    Oct. 13th       This is one of the main schedules          30 
+          3 Mon-Wed         1000-1200    Oct. 14th       This is one of the main schedules          30 
+          4 Mon-Wed-Fri     1000-1200    Oct. 15th       This is an alternative schedule            30 
+          5 Mon-Tues        0800-0900    Oct. 16th       This is an alternative schedule            30 
+          6 Tues-Wed        1300-1500    Oct. 17th       This is an alternative schedule            30 
+          7 Thur-Fri        1300-1500    Oct. 18th       This is an alternative schedule            30 
+          8 Wed-Fri         1600-1800    Oct. 19th       This is an alternative schedule            30 
+          9 Sat             0900-1100    Oct. 20th       Weekend Schedule                           30 
+         10 Sun             0900-1100    Oct. 21st       Weekend Schedule                           30 
+         11 Mon             0900-0930    6 days a week   Beta                                       40 
+         12 Tues            1100-1115    6 days a week   Beta                                       40 
 
 
 13 rows selected. 
@@ -2154,19 +2107,19 @@ Connected.
 SQL> show user;
 USER is "MLOPEZ3"
 SQL> SELECT * FROM InstructorDBA.Class_Sched;
-SCHED_NUM   SCHED_DAY       SCHED_TIME   SCHED_DAY_OFF   SCHED_NOTES                             OLS_COL   
-          1 Mon-Tues-Wed    0900-1100    Oct. 13th       This is the one of the main schedules          30 
-          2 Mon-Tues-Thur   0900-1100    Oct. 13th       This is the one of the main schedules          30 
-          3 Mon-Wed         1000-1200    Oct. 14th       This is the one of the main schedules          30 
-          4 Mon-Wed-Fri     1000-1200    Oct. 15th       This a alternative schedules                   30 
-          5 Mon-Tues        0800-0900    Oct. 16th       This a alternative schedules                   30 
-          6 Tues-Wed        1300-1500    Oct. 17th       This a alternative schedules                   30 
-          7 Thur-Fri        1300-1500    Oct. 18th       This a alternative schedules                   30 
-          8 Wed-Fri         1600-1800    Oct. 19th       This a alternative schedules                   30 
-          9 Sat             0900-1100    Oct. 20th       Weekend Schedule                               30 
-         10 Sun             0900-1100    Oct. 21st       Weekend Schedule                               30 
-         11 Mon             0900-0930    6 days a week   Beta                                           40 
-         12 Tues            1100-1115    6 days a week   Beta                                           40 
+SCHED_NUM   SCHED_DAY       SCHED_TIME   SCHED_DAY_OFF   SCHED_NOTES                         OLS_COL   
+          1 Mon-Tues-Wed    0900-1100    Oct. 13th       This is one of the main schedules          30 
+          2 Mon-Tues-Thur   0900-1100    Oct. 13th       This is one of the main schedules          30 
+          3 Mon-Wed         1000-1200    Oct. 14th       This is one of the main schedules          30 
+          4 Mon-Wed-Fri     1000-1200    Oct. 15th       This is an alternative schedule            30 
+          5 Mon-Tues        0800-0900    Oct. 16th       This is an alternative schedule            30 
+          6 Tues-Wed        1300-1500    Oct. 17th       This is an alternative schedule            30 
+          7 Thur-Fri        1300-1500    Oct. 18th       This is an alternative schedule            30 
+          8 Wed-Fri         1600-1800    Oct. 19th       This is an alternative schedule            30 
+          9 Sat             0900-1100    Oct. 20th       Weekend Schedule                           30 
+         10 Sun             0900-1100    Oct. 21st       Weekend Schedule                           30 
+         11 Mon             0900-0930    6 days a week   Beta                                       40 
+         12 Tues            1100-1115    6 days a week   Beta                                       40 
 
 
 12 rows selected. 
@@ -2178,10 +2131,10 @@ Savepoint created.
 SQL> INSERT INTO InstructorDBA.Class_Sched (Sched_Num,           Sched_Day, Sched_Time, Sched_Day_Off, Sched_Notes, ols_col)
   2      VALUES              (12345,'All',     '24 Hours','7 days a week',   'Alpha', CHAR_TO_LABEL('Sched_OLS_POL','HS'));
 
-Error starting at line : 768 in command -
+Error starting at line : 721 in command -
 INSERT INTO InstructorDBA.Class_Sched (Sched_Num,           Sched_Day, Sched_Time, Sched_Day_Off, Sched_Notes, ols_col)
     VALUES              (12345,'All',     '24 Hours','7 days a week',   'Alpha', CHAR_TO_LABEL('Sched_OLS_POL','HS'))
-Error at Command Line : 768 Column : 27
+Error at Command Line : 721 Column : 27
 Error report -
 SQL Error: ORA-01031: insufficient privileges
 01031. 00000 -  "insufficient privileges"
@@ -2190,19 +2143,19 @@ SQL Error: ORA-01031: insufficient privileges
 *Action:   Ask your database administrator or designated security
            administrator to grant you the necessary privileges
 SQL> SELECT * FROM InstructorDBA.Class_Sched;
-SCHED_NUM   SCHED_DAY       SCHED_TIME   SCHED_DAY_OFF   SCHED_NOTES                             OLS_COL   
-          1 Mon-Tues-Wed    0900-1100    Oct. 13th       This is the one of the main schedules          30 
-          2 Mon-Tues-Thur   0900-1100    Oct. 13th       This is the one of the main schedules          30 
-          3 Mon-Wed         1000-1200    Oct. 14th       This is the one of the main schedules          30 
-          4 Mon-Wed-Fri     1000-1200    Oct. 15th       This a alternative schedules                   30 
-          5 Mon-Tues        0800-0900    Oct. 16th       This a alternative schedules                   30 
-          6 Tues-Wed        1300-1500    Oct. 17th       This a alternative schedules                   30 
-          7 Thur-Fri        1300-1500    Oct. 18th       This a alternative schedules                   30 
-          8 Wed-Fri         1600-1800    Oct. 19th       This a alternative schedules                   30 
-          9 Sat             0900-1100    Oct. 20th       Weekend Schedule                               30 
-         10 Sun             0900-1100    Oct. 21st       Weekend Schedule                               30 
-         11 Mon             0900-0930    6 days a week   Beta                                           40 
-         12 Tues            1100-1115    6 days a week   Beta                                           40 
+SCHED_NUM   SCHED_DAY       SCHED_TIME   SCHED_DAY_OFF   SCHED_NOTES                         OLS_COL   
+          1 Mon-Tues-Wed    0900-1100    Oct. 13th       This is one of the main schedules          30 
+          2 Mon-Tues-Thur   0900-1100    Oct. 13th       This is one of the main schedules          30 
+          3 Mon-Wed         1000-1200    Oct. 14th       This is one of the main schedules          30 
+          4 Mon-Wed-Fri     1000-1200    Oct. 15th       This is an alternative schedule            30 
+          5 Mon-Tues        0800-0900    Oct. 16th       This is an alternative schedule            30 
+          6 Tues-Wed        1300-1500    Oct. 17th       This is an alternative schedule            30 
+          7 Thur-Fri        1300-1500    Oct. 18th       This is an alternative schedule            30 
+          8 Wed-Fri         1600-1800    Oct. 19th       This is an alternative schedule            30 
+          9 Sat             0900-1100    Oct. 20th       Weekend Schedule                           30 
+         10 Sun             0900-1100    Oct. 21st       Weekend Schedule                           30 
+         11 Mon             0900-0930    6 days a week   Beta                                       40 
+         12 Tues            1100-1115    6 days a week   Beta                                       40 
 
 
 12 rows selected. 
@@ -2218,17 +2171,17 @@ Connected.
 SQL> show user;
 USER is "SGILBERT1"
 SQL> SELECT * FROM InstructorDBA.Class_Sched;
-SCHED_NUM   SCHED_DAY       SCHED_TIME   SCHED_DAY_OFF   SCHED_NOTES                             OLS_COL   
-          1 Mon-Tues-Wed    0900-1100    Oct. 13th       This is the one of the main schedules          30 
-          2 Mon-Tues-Thur   0900-1100    Oct. 13th       This is the one of the main schedules          30 
-          3 Mon-Wed         1000-1200    Oct. 14th       This is the one of the main schedules          30 
-          4 Mon-Wed-Fri     1000-1200    Oct. 15th       This a alternative schedules                   30 
-          5 Mon-Tues        0800-0900    Oct. 16th       This a alternative schedules                   30 
-          6 Tues-Wed        1300-1500    Oct. 17th       This a alternative schedules                   30 
-          7 Thur-Fri        1300-1500    Oct. 18th       This a alternative schedules                   30 
-          8 Wed-Fri         1600-1800    Oct. 19th       This a alternative schedules                   30 
-          9 Sat             0900-1100    Oct. 20th       Weekend Schedule                               30 
-         10 Sun             0900-1100    Oct. 21st       Weekend Schedule                               30 
+SCHED_NUM   SCHED_DAY       SCHED_TIME   SCHED_DAY_OFF   SCHED_NOTES                         OLS_COL   
+          1 Mon-Tues-Wed    0900-1100    Oct. 13th       This is one of the main schedules          30 
+          2 Mon-Tues-Thur   0900-1100    Oct. 13th       This is one of the main schedules          30 
+          3 Mon-Wed         1000-1200    Oct. 14th       This is one of the main schedules          30 
+          4 Mon-Wed-Fri     1000-1200    Oct. 15th       This is an alternative schedule            30 
+          5 Mon-Tues        0800-0900    Oct. 16th       This is an alternative schedule            30 
+          6 Tues-Wed        1300-1500    Oct. 17th       This is an alternative schedule            30 
+          7 Thur-Fri        1300-1500    Oct. 18th       This is an alternative schedule            30 
+          8 Wed-Fri         1600-1800    Oct. 19th       This is an alternative schedule            30 
+          9 Sat             0900-1100    Oct. 20th       Weekend Schedule                           30 
+         10 Sun             0900-1100    Oct. 21st       Weekend Schedule                           30 
 
 
 10 rows selected. 
@@ -2240,10 +2193,10 @@ Savepoint created.
 SQL> INSERT INTO InstructorDBA.Class_Sched (Sched_Num,           Sched_Day, Sched_Time, Sched_Day_Off, Sched_Notes, ols_col)
   2      VALUES              (12345,'All',     '24 Hours','7 days a week',   'Alpha', CHAR_TO_LABEL('Sched_OLS_POL','HS'));
 
-Error starting at line : 778 in command -
+Error starting at line : 731 in command -
 INSERT INTO InstructorDBA.Class_Sched (Sched_Num,           Sched_Day, Sched_Time, Sched_Day_Off, Sched_Notes, ols_col)
     VALUES              (12345,'All',     '24 Hours','7 days a week',   'Alpha', CHAR_TO_LABEL('Sched_OLS_POL','HS'))
-Error at Command Line : 778 Column : 27
+Error at Command Line : 731 Column : 27
 Error report -
 SQL Error: ORA-01031: insufficient privileges
 01031. 00000 -  "insufficient privileges"
@@ -2252,17 +2205,17 @@ SQL Error: ORA-01031: insufficient privileges
 *Action:   Ask your database administrator or designated security
            administrator to grant you the necessary privileges
 SQL> SELECT * FROM InstructorDBA.Class_Sched;
-SCHED_NUM   SCHED_DAY       SCHED_TIME   SCHED_DAY_OFF   SCHED_NOTES                             OLS_COL   
-          1 Mon-Tues-Wed    0900-1100    Oct. 13th       This is the one of the main schedules          30 
-          2 Mon-Tues-Thur   0900-1100    Oct. 13th       This is the one of the main schedules          30 
-          3 Mon-Wed         1000-1200    Oct. 14th       This is the one of the main schedules          30 
-          4 Mon-Wed-Fri     1000-1200    Oct. 15th       This a alternative schedules                   30 
-          5 Mon-Tues        0800-0900    Oct. 16th       This a alternative schedules                   30 
-          6 Tues-Wed        1300-1500    Oct. 17th       This a alternative schedules                   30 
-          7 Thur-Fri        1300-1500    Oct. 18th       This a alternative schedules                   30 
-          8 Wed-Fri         1600-1800    Oct. 19th       This a alternative schedules                   30 
-          9 Sat             0900-1100    Oct. 20th       Weekend Schedule                               30 
-         10 Sun             0900-1100    Oct. 21st       Weekend Schedule                               30 
+SCHED_NUM   SCHED_DAY       SCHED_TIME   SCHED_DAY_OFF   SCHED_NOTES                         OLS_COL   
+          1 Mon-Tues-Wed    0900-1100    Oct. 13th       This is one of the main schedules          30 
+          2 Mon-Tues-Thur   0900-1100    Oct. 13th       This is one of the main schedules          30 
+          3 Mon-Wed         1000-1200    Oct. 14th       This is one of the main schedules          30 
+          4 Mon-Wed-Fri     1000-1200    Oct. 15th       This is an alternative schedule            30 
+          5 Mon-Tues        0800-0900    Oct. 16th       This is an alternative schedule            30 
+          6 Tues-Wed        1300-1500    Oct. 17th       This is an alternative schedule            30 
+          7 Thur-Fri        1300-1500    Oct. 18th       This is an alternative schedule            30 
+          8 Wed-Fri         1600-1800    Oct. 19th       This is an alternative schedule            30 
+          9 Sat             0900-1100    Oct. 20th       Weekend Schedule                           30 
+         10 Sun             0900-1100    Oct. 21st       Weekend Schedule                           30 
 
 
 10 rows selected. 
